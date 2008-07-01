@@ -3,7 +3,7 @@ Contributors: anukit
 Tags: cycling, graphs, sports, exercise
 Requires at least: 2.5
 Tested up to: 2.5.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
@@ -22,7 +22,7 @@ Options, or when you add new data.
 
 1. Upload the CycloPress folder to the `/wp-content/plugins/` directory.
 1. Make the `/wp-content/plugins/cyclopress/graphs/` directory writable by your web server. (e.g. chmod 775)
-1. Activate the plugin through the 'Plugins' menu in WordPress.
+1. Activate the plugin through the `Plugins` menu in WordPress.
 1. Add your stats through the `Write -> Ride` interface.
 1. Place some CycloPress PHP functions in your templates or in your PHP-enabled pages or posts.
 
@@ -36,21 +36,22 @@ After installing CycloPress, see the CycloPress Options page in Plugins for more
 
 Here are the functions you can insert into your templates or into Pages if you have a plugin that allows PHP in pages and posts.
 
-<pre>string cy_get_brief_stats ( )</pre>
-Returns XHTML code with total miles traveled and average speed. Returns false if no data is available.
+`<?=cy_get_brief_stats()?>`
+Returns XHTML code with total miles traveled and average speed. Returns `false` if no data is available.
 
-<pre>string cy_get_summary ( [ bool $compare, string $year ] )</pre>
-Returns XHTML code with a summary of your stats. Returns false if no data is available.
+`<?=cy_get_summary( [ bool $compare, string $year ] )?`
+Returns XHTML code with a summary of your stats. Returns `false` if no data is available.
 
-<pre>string cy_get_first_ride_date ( )</pre>
+`<?=cy_get_first_ride_date()?>`
 Returns the date of the least recent ride in the database.
 
-<pre>string cy_get_last_ride_date ( )</pre>
+`<?=cy_get_last_ride_date()?>`
 Returns the date of the most recent ride in the database.
 
-<pre>string cy_get_graph_img_tag ( string $type )</pre>
-The parameter 'type' cane take either 'distance' or 'average_speed'.
+`<?=cy_get_graph_img_tag( $type )?>`
+The parameter `type` cane take either `'distance'` or `'average_speed'`.
 
 == Screenshots ==
 
-Check back here later.
+1. The 'Add a Ride' interface found under `Write -> Ride`.
+2. The 'CycloPress Options' page found under `Plugins -> CycloPress Options`.
