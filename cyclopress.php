@@ -633,7 +633,7 @@ function cy_write_page() {
 		  </tr>
 		  <tr valign="top">
 			<th scope="row" style="text-align: right;">*Time:</th>
-			<td><input type="text" name="minutes" id="minutes" size="4" value="<?=htmlentities(stripslashes($minutes))?>" /> minutes</td>
+			<td><input type="text" name="minutes" id="minutes" size="5" value="<?=htmlentities(stripslashes($minutes))?>" /> minutes</td>
 		  </tr>
 		  <tr valign="top">
 			<th scope="row" style="text-align: right;">Average Speed:</th>
