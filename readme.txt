@@ -9,11 +9,11 @@ Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
 == Description ==
 
-CycloPress requires the GD library to be available from your PHP installation. After you activate CycloPress
-you can see what version of GD, if any, you have installed by checking the CycloPress Options page under Plugins.
-
 Take the data from your cyclocomputer after each ride and plug it into CycloPress under the Write menu.
 CycloPress will update your graphs and text statistics accordingly.
+
+CycloPress requires the GD library to be available from your PHP installation. After you activate CycloPress
+you can see what version of GD, if any, you have installed by checking the CycloPress Options page under Plugins.
 
 Graphs are cached after each update made to CycloPress. Graphs are recreated when you update the CycloPress
 Options, or when you add new data.
