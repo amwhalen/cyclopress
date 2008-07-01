@@ -4,7 +4,7 @@ Plugin Name: CycloPress
 Plugin URI: http://amwhalen.com/blog/projects/cyclopress/
 Description: Keep track of your cycling statistics with WordPress and make pretty graphs.
 Version: 1.0
-Author: Andrew M. Whalen
+Author: anukit
 Author URI: http://amwhalen.com
 */
 
