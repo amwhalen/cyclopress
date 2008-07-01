@@ -55,3 +55,4 @@ The parameter `type` cane take either `'distance'` or `'average_speed'`.
 
 1. The 'Add a Ride' interface found under `Write -> Ride`.
 2. The 'CycloPress Options' page found under `Plugins -> CycloPress Options`.
+3. Example output of `cy_get_summary()` and a distance graph.
