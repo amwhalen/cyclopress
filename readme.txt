@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: anukit
-Tags: cycling, graphs, sports, exercise
+Tags: cycling, graphs, sports, exercise, jpgraph, gd
 Requires at least: 2.5
 Tested up to: 2.5.1
 Stable tag: 1.1
