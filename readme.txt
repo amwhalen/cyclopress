@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: awhalen
+Contributors: anukit
 Tags: cycling, graphs, sports, exercise
 Requires at least: 2.5
 Tested up to: 2.5.1
