@@ -1,0 +1,3 @@
+Change this permissions on this directory so your web server can write files here.
+
+Cached versions of graphs will be stored here.
