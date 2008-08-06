@@ -245,23 +245,23 @@ function cy_options_page() {
 		<caption>Requirements Status</caption>
 		<tr>
 			<?PHP if (!cy_check_gd()) { ?>
-			<th class="cy_error"><img src="<?=$cy_dir?>/img/error.gif" alt="Error!" /></th>
+			<th class="cy_error"><img src="<?php echo $cy_dir; ?>/img/error.gif" alt="Error!" /></th>
 			<td class="cy_error">GD library is not installed! You cannot create graphs.</td>
 			<?PHP } else { $GDArray = gd_info (); ?>
-			<th class="cy_ok"><img src="<?=$cy_dir?>/img/ok.gif" alt="OK" /></th>
-			<td class="cy_ok">GD version <?=ereg_replace('[[:alpha:][:space:]()]+', '', $GDArray['GD Version']);?> installed.</td>
+			<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
+			<td class="cy_ok">GD version <?php echo ereg_replace('[[:alpha:][:space:]()]+', '', $GDArray['GD Version']); ?> installed.</td>
 			<?PHP } ?>
 		</tr>
 		<tr>
 			<?PHP if (!cy_is_cache_writable()) { ?>
-			<th class="cy_warning"><img src="<?=$cy_dir?>/img/warning.gif" alt="Warning!" /></th>
+			<th class="cy_warning"><img src="<?php echo $cy_dir; ?>/img/warning.gif" alt="Warning!" /></th>
 			<td class="cy_warning">
 				Graphs directory is not writable for PHP!<br />
-				Please make <?=$cy_graph_dir_full;?> writable.<br />
+				Please make <?php echo $cy_graph_dir_full; ?> writable.<br />
 				You cannot create graphs until this directory can be written to.
 			</td>
 			<?PHP } else { ?>
-			<th class="cy_ok"><img src="<?=$cy_dir?>/img/ok.gif" alt="OK" /></th>
+			<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
 			<td class="cy_ok">Graphs directory is writable.</td>
 			<?PHP } ?>
 		</tr>
@@ -280,8 +280,8 @@ function cy_options_page() {
 				<th scope="row">Graph Type</th>
 				<td>
 					<select name="cy_graph_type">
-						<option value="line"<?=(get_option('cy_graph_type')=='line') ? ' selected="selected"' : '';?>>Line Graph</option>
-						<option value="bar"<?=(get_option('cy_graph_type')=='bar') ? ' selected="selected"' : '';?>>Bar Graph</option>
+						<option value="line"<?php if (get_option('cy_graph_type')=='line') { echo ' selected="selected"'; } ?>>Line Graph</option>
+						<option value="bar"<?php if (get_option('cy_graph_type')=='bar') { echo ' selected="selected"'; } ?>>Bar Graph</option>
 					</select>
 				</td>
 			</tr>
@@ -311,17 +311,17 @@ function cy_options_page() {
 				<th scope="row">Graph Fill</th>
 				<td>
 					<select name="cy_graph_transparency">
-						<option value="0"<?=(get_option('cy_graph_transparency')=='0') ? ' selected="selected"' : '';?>>100% (Solid Fill)</option>
-						<option value="0.1"<?=(get_option('cy_graph_transparency')=='0.1') ? ' selected="selected"' : '';?>>90%</option>
-						<option value="0.2"<?=(get_option('cy_graph_transparency')=='0.2') ? ' selected="selected"' : '';?>>80%</option>
-						<option value="0.3"<?=(get_option('cy_graph_transparency')=='0.3') ? ' selected="selected"' : '';?>>70%</option>
-						<option value="0.4"<?=(get_option('cy_graph_transparency')=='0.4') ? ' selected="selected"' : '';?>>60%</option>
-						<option value="0.5"<?=(get_option('cy_graph_transparency')=='0.5') ? ' selected="selected"' : '';?>>50%</option>
-						<option value="0.6"<?=(get_option('cy_graph_transparency')=='0.6') ? ' selected="selected"' : '';?>>40%</option>
-						<option value="0.7"<?=(get_option('cy_graph_transparency')=='0.7') ? ' selected="selected"' : '';?>>30%</option>
-						<option value="0.8"<?=(get_option('cy_graph_transparency')=='0.8') ? ' selected="selected"' : '';?>>20%</option>
-						<option value="0.9"<?=(get_option('cy_graph_transparency')=='0.9') ? ' selected="selected"' : '';?>>10%</option>
-						<option value="1.0"<?=(get_option('cy_graph_transparency')=='1.0') ? ' selected="selected"' : '';?>>0% (No Fill)</option>
+						<option value="0"<? if (get_option('cy_graph_transparency')=='0') { echo ' selected="selected"'; }?>>100% (Solid Fill)</option>
+						<option value="0.1"<? if (get_option('cy_graph_transparency')=='0.1') { echo ' selected="selected"'; }?>>90%</option>
+						<option value="0.2"<? if (get_option('cy_graph_transparency')=='0.2') { echo ' selected="selected"'; }?>>80%</option>
+						<option value="0.3"<? if (get_option('cy_graph_transparency')=='0.3') { echo ' selected="selected"'; }?>>70%</option>
+						<option value="0.4"<? if (get_option('cy_graph_transparency')=='0.4') { echo ' selected="selected"'; }?>>60%</option>
+						<option value="0.5"<? if (get_option('cy_graph_transparency')=='0.5') { echo ' selected="selected"'; }?>>50%</option>
+						<option value="0.6"<? if (get_option('cy_graph_transparency')=='0.6') { echo ' selected="selected"'; }?>>40%</option>
+						<option value="0.7"<? if (get_option('cy_graph_transparency')=='0.7') { echo ' selected="selected"'; }?>>30%</option>
+						<option value="0.8"<? if (get_option('cy_graph_transparency')=='0.8') { echo ' selected="selected"'; }?>>20%</option>
+						<option value="0.9"<? if (get_option('cy_graph_transparency')=='0.9') { echo ' selected="selected"'; }?>>10%</option>
+						<option value="1.0"<? if (get_option('cy_graph_transparency')=='1.0') { echo ' selected="selected"'; }?>>0% (No Fill)</option>
 					</select>
 				</td>
 			</tr>
@@ -553,7 +553,7 @@ function cy_write_page() {
 							} else {
 								$m = $i;
 							}
-							?><option value="<?=$m?>"<?=$sel?>><?=$i.' - '.cy_get_month($i)?></option><?PHP
+							?><option value="<?php echo $m; ?>"<?php echo $sel; ?>><?php echo $i.' - '.cy_get_month($i); ?></option><?PHP
 						}
 					?>
 				</select>
@@ -570,7 +570,7 @@ function cy_write_page() {
 							} else {
 								$d = $i;
 							}
-							?><option value="<?=$d?>"<?=$sel?>><?=$i?></option><?PHP
+							?><option value="<?php echo $d; ?>"<?php echo $sel; ?>><?php echo $i;?></option><?PHP
 						}
 					?>
 				</select>
@@ -582,7 +582,7 @@ function cy_write_page() {
 							} else {
 								$sel = '';
 							}
-							?><option value="<?=$i?>"<?=$sel?>><?=$i?></option><?PHP
+							?><option value="<?php echo $i; ?>"<?php echo $sel;?>><?php echo $i;?></option><?PHP
 						}
 					?>
 				</select>
@@ -599,7 +599,7 @@ function cy_write_page() {
 							} else {
 								$sel = '';
 							}
-							?><option value="<?=$i?>"<?=$sel?>><?=$i?></option><?PHP
+							?><option value="<?php echo $i; ?>"<?php echo $sel; ?>><?php echo $i; ?></option><?PHP
 						}
 					?>
 				</select>
@@ -617,39 +617,39 @@ function cy_write_page() {
 							} else {
 								$sel = '';
 							}
-							?><option value="<?=$t?>"<?=$sel?>><?=$t?></option><?PHP
+							?><option value="<?php echo $t; ?>"<?php echo $sel; ?>><?php echo $t; ?></option><?PHP
 						}
 					?>
 				</select>
 				<select name="ampm">
-					<option value="am"<?=($ampm=='am') ? ' selected="selected"' : '';?>>am</option>
-					<option value="pm"<?=($ampm=='pm') ? ' selected="selected"' : '';?>>pm</option>
+					<option value="am"<?php if ($ampm=='am') { echo ' selected="selected"'; } ?>>am</option>
+					<option value="pm"<?php if ($ampm=='pm') { echo ' selected="selected"'; } ?>>pm</option>
 				</select>
 			</td>
 		  </tr>
 		  <tr valign="top">
 			<th scope="row" style="text-align: right;">*Distance:</th>
-			<td><input type="text" name="miles" id="miles" size="5" value="<?=htmlentities(stripslashes($miles))?>" /> miles</td>
+			<td><input type="text" name="miles" id="miles" size="5" value="<?php echo htmlentities(stripslashes($miles)); ?>" /> miles</td>
 		  </tr>
 		  <tr valign="top">
 			<th scope="row" style="text-align: right;">*Time:</th>
-			<td><input type="text" name="minutes" id="minutes" size="5" value="<?=htmlentities(stripslashes($minutes))?>" /> minutes</td>
+			<td><input type="text" name="minutes" id="minutes" size="5" value="<?php echo htmlentities(stripslashes($minutes)); ?>" /> minutes</td>
 		  </tr>
 		  <tr valign="top">
 			<th scope="row" style="text-align: right;">Average Speed:</th>
-			<td><input type="text" name="avg_speed" id="avg_speed" size="5" value="<?=htmlentities(stripslashes($as))?>" /> mph</td>
+			<td><input type="text" name="avg_speed" id="avg_speed" size="5" value="<?php echo htmlentities(stripslashes($as)); ?>" /> mph</td>
 		  </tr>
 		  <tr valign="top">
 			<th scope="row" style="text-align: right;">Maximum Speed:</th>
-			<td><input type="text" name="max_speed" id="max_speed" size="5" value="<?=htmlentities(stripslashes($ms))?>" /> mph</td>
+			<td><input type="text" name="max_speed" id="max_speed" size="5" value="<?php echo htmlentities(stripslashes($ms)); ?>" /> mph</td>
 		  </tr>
 		  <tr valign="top">
 		  	<th scope="row" style="text-align: right;">Cadence:</th>
-			<td><input type="text" name="cadence" id="cadence" size="5" value="<?=htmlentities(stripslashes($cad))?>" /> rpm</td>
+			<td><input type="text" name="cadence" id="cadence" size="5" value="<?php echo htmlentities(stripslashes($cad)); ?>" /> rpm</td>
 		  </tr>
 		  <tr valign="top">
 			<th scope="row" style="text-align: right;">Notes:</th>
-			<td><textarea name="notes" rows="10" cols="50"><?=htmlentities(stripslashes($notes))?></textarea></td>
+			<td><textarea name="notes" rows="10" cols="50"><?php echo htmlentities(stripslashes($notes)); ?></textarea></td>
 		  </tr>
 		</table>
 		<p class="submit"><input type="submit" name="Submit" value="Save" style="font-weight: bold;" /></p>
