@@ -3,7 +3,7 @@
 Plugin Name: CycloPress
 Plugin URI: http://amwhalen.com/blog/projects/cyclopress/
 Description: Keep track of your cycling statistics with WordPress and make pretty graphs.
-Version: 1.2.2
+Version: 1.2.3
 Author: Andrew M. Whalen
 Author URI: http://amwhalen.com
 */
@@ -26,7 +26,7 @@ Author URI: http://amwhalen.com
 */
 
 
-$cy_version = '1.2.2';
+$cy_version = '1.2.3';
 $cy_db_version = '1.0';
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
@@ -311,17 +311,17 @@ function cy_options_page() {
 				<th scope="row">Graph Fill</th>
 				<td>
 					<select name="cy_graph_transparency">
-						<option value="0"<? if (get_option('cy_graph_transparency')=='0') { echo ' selected="selected"'; }?>>100% (Solid Fill)</option>
-						<option value="0.1"<? if (get_option('cy_graph_transparency')=='0.1') { echo ' selected="selected"'; }?>>90%</option>
-						<option value="0.2"<? if (get_option('cy_graph_transparency')=='0.2') { echo ' selected="selected"'; }?>>80%</option>
-						<option value="0.3"<? if (get_option('cy_graph_transparency')=='0.3') { echo ' selected="selected"'; }?>>70%</option>
-						<option value="0.4"<? if (get_option('cy_graph_transparency')=='0.4') { echo ' selected="selected"'; }?>>60%</option>
-						<option value="0.5"<? if (get_option('cy_graph_transparency')=='0.5') { echo ' selected="selected"'; }?>>50%</option>
-						<option value="0.6"<? if (get_option('cy_graph_transparency')=='0.6') { echo ' selected="selected"'; }?>>40%</option>
-						<option value="0.7"<? if (get_option('cy_graph_transparency')=='0.7') { echo ' selected="selected"'; }?>>30%</option>
-						<option value="0.8"<? if (get_option('cy_graph_transparency')=='0.8') { echo ' selected="selected"'; }?>>20%</option>
-						<option value="0.9"<? if (get_option('cy_graph_transparency')=='0.9') { echo ' selected="selected"'; }?>>10%</option>
-						<option value="1.0"<? if (get_option('cy_graph_transparency')=='1.0') { echo ' selected="selected"'; }?>>0% (No Fill)</option>
+						<option value="0"<?php if (get_option('cy_graph_transparency')=='0') { echo ' selected="selected"'; }?>>100% (Solid Fill)</option>
+						<option value="0.1"<?php if (get_option('cy_graph_transparency')=='0.1') { echo ' selected="selected"'; }?>>90%</option>
+						<option value="0.2"<?php if (get_option('cy_graph_transparency')=='0.2') { echo ' selected="selected"'; }?>>80%</option>
+						<option value="0.3"<?php if (get_option('cy_graph_transparency')=='0.3') { echo ' selected="selected"'; }?>>70%</option>
+						<option value="0.4"<?php if (get_option('cy_graph_transparency')=='0.4') { echo ' selected="selected"'; }?>>60%</option>
+						<option value="0.5"<?php if (get_option('cy_graph_transparency')=='0.5') { echo ' selected="selected"'; }?>>50%</option>
+						<option value="0.6"<?php if (get_option('cy_graph_transparency')=='0.6') { echo ' selected="selected"'; }?>>40%</option>
+						<option value="0.7"<?php if (get_option('cy_graph_transparency')=='0.7') { echo ' selected="selected"'; }?>>30%</option>
+						<option value="0.8"<?php if (get_option('cy_graph_transparency')=='0.8') { echo ' selected="selected"'; }?>>20%</option>
+						<option value="0.9"<?php if (get_option('cy_graph_transparency')=='0.9') { echo ' selected="selected"'; }?>>10%</option>
+						<option value="1.0"<?php if (get_option('cy_graph_transparency')=='1.0') { echo ' selected="selected"'; }?>>0% (No Fill)</option>
 					</select>
 				</td>
 			</tr>
@@ -521,7 +521,7 @@ function cy_write_page() {
 		
 		if (!$saved) {
 			?>
-			<div id="message" class="updated fade"><p><?=$e?></p></div>
+			<div id="message" class="updated fade"><p><?php echo $e; ?></p></div>
 			<?PHP
 		} else {
 			?>
@@ -782,6 +782,20 @@ function cy_admin_css() {
 	
 	<?PHP
 
+}
+
+/**
+ * Converts miles to kilometers OR mph to kph
+ */
+function cy_m2k($miles) {
+	return 0.621371192*$miles;
+}
+
+/**
+ * Converts kilometers to miles OR kph to mph
+ */
+function cy_k2m($kilometers) {
+	return 1.609344*$kilometers;
 }
 
 /**
@@ -1149,6 +1163,7 @@ function cy_get_default_options() {
 		'cy_graph_color_top' => 'cccccc',
 		'cy_graph_color_bottom' => '777777',
 		'cy_graph_transparency' => '0.7',
+		'cy_distance_unit' => 'miles',
 	);
 	
 	return $options;

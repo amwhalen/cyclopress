@@ -3,7 +3,7 @@ Contributors: anukit
 Tags: cycling, graphs, sports, exercise, jpgraph, gd
 Requires at least: 2.5
 Tested up to: 2.5.1
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 
 Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
@@ -28,9 +28,11 @@ Options, or when you add new data.
 
 Find more information about CycloPress PHP functions in the Other Notes section.
 
-== Frequently Asked Questions ==
+== To Do ==
 
-No one has asked any yet!
+* Add editing of previously entered statistics.
+* Add option for setting Kilometers/hour instead of Miles/hour.
+* Fix bug that deletes graphs when the plugin is upgraded but then never rebuilds them.
 
 == CycloPress Functions ==
 
