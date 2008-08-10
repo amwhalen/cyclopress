@@ -3,7 +3,7 @@
 Plugin Name: CycloPress
 Plugin URI: http://amwhalen.com/blog/projects/cyclopress/
 Description: Keep track of your cycling statistics with WordPress and make pretty graphs.
-Version: 1.2.3
+Version: 1.2.4
 Author: Andrew M. Whalen
 Author URI: http://amwhalen.com
 */
@@ -26,7 +26,7 @@ Author URI: http://amwhalen.com
 */
 
 
-$cy_version = '1.2.3';
+$cy_version = '1.2.4';
 $cy_db_version = '1.0';
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
@@ -38,6 +38,8 @@ $cy_src_dir = $cy_dir.'/'.$cy_graph_dir;
  * Returns an XHTML string with a brief stats overview.
  */
 function cy_get_brief_stats() {
+
+	cy_check_version();
 
 	$stats = cy_db_stats();
 	
@@ -54,6 +56,8 @@ function cy_get_brief_stats() {
  * Returns an XHTML string with the stats summary.
  */
 function cy_get_summary($compare=false,$year=false) {
+
+	cy_check_version();
 
 	if ($compare) return cy_get_summary_compare($year);
 
@@ -80,6 +84,8 @@ function cy_get_summary($compare=false,$year=false) {
  */
 function cy_get_summary_compare($year=false) {
 
+	cy_check_version();
+
 	$stats = cy_db_stats($year);
 	$stats_now = cy_db_stats(date('Y'));
 	
@@ -104,6 +110,8 @@ function cy_get_summary_compare($year=false) {
  */
 function cy_get_first_ride_date() {
 
+	cy_check_version();
+
 	global $wpdb;
 
 	$table_name = $wpdb->prefix . "cy_rides";
@@ -122,6 +130,8 @@ function cy_get_first_ride_date() {
  */
 function cy_get_last_ride_date() {
 
+	cy_check_version();
+
 	global $wpdb;
 
 	$table_name = $wpdb->prefix . "cy_rides";
@@ -139,6 +149,8 @@ function cy_get_last_ride_date() {
  * Returns the src to a graph
  */
 function cy_get_graph_img_tag($type='distance') {
+
+	cy_check_version();
 
 	global $cy_src_dir;
 	
@@ -264,6 +276,10 @@ function cy_options_page() {
 			<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
 			<td class="cy_ok">Graphs directory is writable.</td>
 			<?PHP } ?>
+		</tr>
+		<tr>
+			<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
+			<td class="cy_ok">CycloPress version <?php echo $cy_version; ?>.</td>
 		</tr>
 	</table>
 	
@@ -1071,6 +1087,18 @@ function cy_check_gd() {
 	$resource = @imagecreate(1, 1);
 	
 	return ($resource === false) ? false : true;
+
+}
+
+/**
+ * Checks the version of CycloPress in the DB versus the CycloPress plugin version.
+ * The cy_install function isn't called when the plugin is 'upgraded automatically'.
+ * This function should be called from any API functions.
+ */
+function cy_check_version() {
+
+	// for now, this just needs to call cy_install
+	cy_install();
 
 }
 
