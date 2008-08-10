@@ -3,7 +3,7 @@ Contributors: anukit
 Tags: cycling, graphs, sports, exercise, jpgraph, gd
 Requires at least: 2.5
 Tested up to: 2.6
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 
 Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
@@ -27,6 +27,7 @@ Options, or when you add new data.
 1. Place some CycloPress PHP functions in your templates or in your PHP-enabled pages or posts to see your stats.
 
 Find more information about CycloPress PHP functions in the Other Notes section.
+You can also check out [more instructions and discussion](http://amwhalen.com/blog/projects/cyclopress/) on my web page.
 
 == To Do ==
 
