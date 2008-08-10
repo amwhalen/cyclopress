@@ -32,7 +32,8 @@ Find more information about CycloPress PHP functions in the Other Notes section.
 
 * Add editing of previously entered statistics.
 * Add option for setting Kilometers/hour instead of Miles/hour.
-* Fix bug that deletes graphs when the plugin is upgraded but then never rebuilds them.
+* Better API documentation for advanced users.
+* Automatic generation of a 'Cycling' page when stats are added. No template modifications required.
 
 == CycloPress Functions ==
 
