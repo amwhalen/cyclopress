@@ -239,7 +239,7 @@ function cy_admin_menu() {
  */
 function cy_options_page() {
 
-	global $cy_graph_dir_full, $cy_dir;
+	global $cy_graph_dir_full, $cy_dir, $cy_version;
 
 	// update the graphs if settings were changed
 	if ($_GET['updated']) {
