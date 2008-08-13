@@ -1087,6 +1087,9 @@ function cyclopress_widget_register() {
 			<?php
 		
 		}
+		
+		register_sidebar_widget('CycloPress', 'cyclopress_widget');
+		register_widget_control('CycloPress', 'cyclopress_widget_control');
 
 	endif;
 	
