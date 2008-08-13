@@ -1044,41 +1044,52 @@ function cy_graph($associative_array, $title, $w, $h, $name='auto', $plot_type=0
 }
 
 /**
- * The CycloPress Widget
+ * The cyclopress widget registration
  */
-function cyclopress_widget($args) {
+function cyclopress_widget_register() {
 
-	extract($args);
-	$options = get_option('widget_cyclopress');
-	?>
-		<?php echo $before_widget; ?>
-			<?php echo $before_title . $options['title'] . $after_title; ?>
-			<?php echo cy_get_brief_stats(); ?>
-		<?php echo $after_widget; ?>
-	<?php
+	if (function_exists('register_sidebar_widget')) :
 
-}
+		/**
+		 * The CycloPress Widget
+		 */
+		function cyclopress_widget($args) {
+		
+			extract($args);
+			$options = get_option('widget_cyclopress');
+			?>
+				<?php echo $before_widget; ?>
+					<?php echo $before_title . $options['title'] . $after_title; ?>
+					<?php echo cy_get_brief_stats(); ?>
+				<?php echo $after_widget; ?>
+			<?php
+		
+		}
+		
+		/**
+		 * The CycloPress Widget Controls
+		 */
+		function cyclopress_widget_control() {
+		
+			$options = $newoptions = get_option('widget_cyclopress');
+			if ( $_POST["cyclopress-submit"] ) {
+				$newoptions['title'] = strip_tags(stripslashes($_POST["cyclopress-title"]));
+				if ( empty($newoptions['title']) ) $newoptions['title'] = 'CycloPress';
+			}
+			if ( $options != $newoptions ) {
+				$options = $newoptions;
+				update_option('widget_cyclopress', $options);
+			}
+			$title = htmlspecialchars($options['title'], ENT_QUOTES);
+			?>
+				<p><label for="cyclopress-title"><?php _e('Title:'); ?> <input style="width: 250px;" id="cyclopress-title" name="cyclopress-title" type="text" value="<?php echo $title; ?>" /></label></p>
+				<input type="hidden" id="cyclopress-submit" name="cyclopress-submit" value="1" />
+			<?php
+		
+		}
 
-/**
- * The CycloPress Widget Controls
- */
-function cyclopress_widget_control() {
-
-	$options = $newoptions = get_option('widget_cyclopress');
-	if ( $_POST["cyclopress-submit"] ) {
-		$newoptions['title'] = strip_tags(stripslashes($_POST["cyclopress-title"]));
-		if ( empty($newoptions['title']) ) $newoptions['title'] = 'CycloPress';
-	}
-	if ( $options != $newoptions ) {
-		$options = $newoptions;
-		update_option('widget_cyclopress', $options);
-	}
-	$title = htmlspecialchars($options['title'], ENT_QUOTES);
-	?>
-		<p><label for="cyclopress-title"><?php _e('Title:'); ?> <input style="width: 250px;" id="cyclopress-title" name="cyclopress-title" type="text" value="<?php echo $title; ?>" /></label></p>
-		<input type="hidden" id="cyclopress-submit" name="cyclopress-submit" value="1" />
-	<?php
-
+	endif;
+	
 }
 
 /**
@@ -1247,10 +1258,7 @@ add_action('wp_head', 'cy_css');
 add_action('admin_head', 'cy_admin_css');
 add_action('admin_menu', 'cy_admin_menu');
 
-// add widget functionality
-if (function_exists('register_sidebar_widget')) {
-	register_sidebar_widget('CycloPress', 'cyclopress_widget');
-	register_widget_control('CycloPress', 'cyclopress_widget_control');
-}
+// initialize widget
+add_action('init', 'cyclopress_widget_register');
 
 ?>
