@@ -1248,7 +1248,9 @@ add_action('admin_head', 'cy_admin_css');
 add_action('admin_menu', 'cy_admin_menu');
 
 // add widget functionality
-register_sidebar_widget('CycloPress', 'cyclopress_widget');
-register_widget_control('CycloPress', 'cyclopress_widget_control');
+if (function_exists('register_sidebar_widget')) {
+	register_sidebar_widget('CycloPress', 'cyclopress_widget');
+	register_widget_control('CycloPress', 'cyclopress_widget_control');
+}
 
 ?>
