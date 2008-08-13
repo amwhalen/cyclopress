@@ -45,8 +45,7 @@ function cy_get_brief_stats() {
 	
 	if (!$stats) return false;
 
-	$str = '<ul><li>Odometer: '.$stats['total_miles'].' miles</li>';
-	$str .= '<li>Avg. Speed: '.round($stats['avg_avg_speed'],1).' mph</li></ul>';
+	$str = '<p>'.$stats['total_miles'].' miles, '.round($stats['avg_avg_speed'],1).' mph average speed</p>';
 
 	return $str;
 
