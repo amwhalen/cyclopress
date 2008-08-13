@@ -3,7 +3,7 @@
 Plugin Name: CycloPress
 Plugin URI: http://amwhalen.com/blog/projects/cyclopress/
 Description: Keep track of your cycling statistics with WordPress and make pretty graphs.
-Version: 1.2.5
+Version: 1.2.6
 Author: Andrew M. Whalen
 Author URI: http://amwhalen.com
 */
@@ -26,7 +26,7 @@ Author URI: http://amwhalen.com
 */
 
 
-$cy_version = '1.2.5';
+$cy_version = '1.2.6';
 $cy_db_version = '1.0';
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
@@ -1043,6 +1043,45 @@ function cy_graph($associative_array, $title, $w, $h, $name='auto', $plot_type=0
 
 }
 
+// Widget stuff
+function cy_widget_register() {
+
+	if ( function_exists('register_sidebar_widget') ) :
+	
+		function cy_widget_cyclopress($args) {
+			extract($args);
+			$options = get_option('widget_cyclopress');
+			?>
+				<?php echo $before_widget; ?>
+					<?php echo $before_title . $options['title'] . $after_title; ?>
+					<?php echo cy_get_brief_stats(); ?>
+				<?php echo $after_widget; ?>
+			<?php
+		}
+	
+		function cy_widget_cyclopress_control() {
+			$options = $newoptions = get_option('widget_cyclopress');
+			if ( $_POST["cyclopress-submit"] ) {
+				$newoptions['title'] = strip_tags(stripslashes($_POST["cyclopress-title"]));
+				if ( empty($newoptions['title']) ) $newoptions['title'] = 'CycloPress';
+			}
+			if ( $options != $newoptions ) {
+				$options = $newoptions;
+				update_option('widget_cyclopress', $options);
+			}
+			$title = htmlspecialchars($options['title'], ENT_QUOTES);
+		?>
+					<p><label for="cyclopress-title"><?php _e('Title:'); ?> <input style="width: 250px;" id="cyclopress-title" name="cyclopress-title" type="text" value="<?php echo $title; ?>" /></label></p>
+					<input type="hidden" id="cyclopress-submit" name="cyclopress-submit" value="1" />
+		<?php
+		}
+	
+		register_sidebar_widget('CycloPress', 'widget_cyclopress', null, 'cyclopress');
+		register_widget_control('CycloPress', 'widget_cyclopress_control', null, 75, 'cyclopress');
+	
+	endif;
+}
+
 /**
  * Is the image cache folder writable?
  */
@@ -1208,5 +1247,6 @@ register_deactivation_hook(__FILE__, 'cy_uninstall');
 add_action('wp_head', 'cy_css');
 add_action('admin_head', 'cy_admin_css');
 add_action('admin_menu', 'cy_admin_menu');
+add_action('init', 'cy_widget_register');
 
 ?>
