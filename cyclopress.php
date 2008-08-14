@@ -825,7 +825,11 @@ function cy_graph($associative_array, $title, $w, $h, $name='auto', $plot_type=0
 	
 	}
 	
-	$jpgraph = 'jpgraph-2.2/';
+	if (phpversion() >= 5) {
+		$jpgraph = 'jpgraph-2.2/';
+	} else {
+		$jpgraph = 'jpgraph-1.26/';
+	}
 	
 	require_once ($jpgraph . "jpgraph.php");
 	
