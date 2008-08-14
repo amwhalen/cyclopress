@@ -264,10 +264,10 @@ function cy_options_page() {
 			<?PHP } ?>
 		</tr>
 		<tr>
-			<?PHP if (!cy_check_gd()) { ?>
+			<?PHP if (!cy_check_gd()) { if (function_exists('gd_info')) { $GDArray = gd_info(); } else { $GDArray = false; } ?>
 			<th class="cy_error"><img src="<?php echo $cy_dir; ?>/img/error.gif" alt="Error!" /></th>
-			<td class="cy_error">GD library is not installed! You cannot create graphs.</td>
-			<?PHP } else { $GDArray = gd_info (); ?>
+			<td class="cy_error"><?php if (is_array($GDArray)) { echo 'GD version '.ereg_replace('[[:alpha:][:space:]()]+', '', $GDArray['GD Version']).' is not supported. GD version 2 or higher is required.'; } else { echo 'GD library is not installed!'; } ?> You cannot create graphs.</td>
+			<?PHP } else { $GDArray = gd_info(); ?>
 			<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
 			<td class="cy_ok">GD version <?php echo ereg_replace('[[:alpha:][:space:]()]+', '', $GDArray['GD Version']); ?> installed.</td>
 			<?PHP } ?>
@@ -1041,9 +1041,16 @@ function cy_empty_cache() {
  */
 function cy_check_gd() {
 
-	$resource = @imagecreate(1, 1);
+	$gd_works = @imagecreate(1, 1);
 	
-	return ($resource === false) ? false : true;
+	$GDArray = gd_info ();
+	$version = ereg_replace('[[:alpha:][:space:]()]+', '', $GDArray['GD Version']);
+	
+	if ($gd_works === false || $version < 2) {
+		return false;
+	} else {
+		return true;
+	}
 
 }
 
