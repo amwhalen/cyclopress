@@ -255,6 +255,15 @@ function cy_options_page() {
 	<table class="cy_status_table">
 		<caption>Requirements Status</caption>
 		<tr>
+			<?PHP if (!cy_check_php()) { ?>
+			<th class="cy_error"><img src="<?php echo $cy_dir; ?>/img/error.gif" alt="Error!" /></th>
+			<td class="cy_error">PHP version <?php echo phpversion(); ?> is not supported! PHP version 5 or higher is required.</td>
+			<?PHP } else { ?>
+			<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
+			<td class="cy_ok">PHP version <?php echo phpversion(); ?> installed.</td>
+			<?PHP } ?>
+		</tr>
+		<tr>
 			<?PHP if (!cy_check_gd()) { ?>
 			<th class="cy_error"><img src="<?php echo $cy_dir; ?>/img/error.gif" alt="Error!" /></th>
 			<td class="cy_error">GD library is not installed! You cannot create graphs.</td>
@@ -1037,6 +1046,15 @@ function cy_check_gd() {
 	$resource = @imagecreate(1, 1);
 	
 	return ($resource === false) ? false : true;
+
+}
+
+/**
+ * Returns true if PHP is version 5 or higher, false otherwise.
+ */
+function cy_check_php() {
+	
+	return (phpversion() < 5) ? false : true;
 
 }
 
