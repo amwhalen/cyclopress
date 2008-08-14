@@ -257,7 +257,7 @@ function cy_options_page() {
 		<tr>
 			<?PHP if (!cy_check_php()) { ?>
 			<th class="cy_error"><img src="<?php echo $cy_dir; ?>/img/error.gif" alt="Error!" /></th>
-			<td class="cy_error">PHP version <?php echo phpversion(); ?> is not supported! PHP version 5 or higher is required.</td>
+			<td class="cy_error">PHP version <?php echo phpversion(); ?> is not supported! PHP version 4 or higher is required.</td>
 			<?PHP } else { ?>
 			<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
 			<td class="cy_ok">PHP version <?php echo phpversion(); ?> installed.</td>
@@ -1063,7 +1063,7 @@ function cy_check_gd() {
  */
 function cy_check_php() {
 	
-	return (phpversion() < 5) ? false : true;
+	return (phpversion() < 4) ? false : true;
 
 }
 
