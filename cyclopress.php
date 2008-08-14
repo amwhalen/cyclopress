@@ -285,10 +285,6 @@ function cy_options_page() {
 			<td class="cy_ok">Graphs directory is writable.</td>
 			<?PHP } ?>
 		</tr>
-		<tr>
-			<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
-			<td class="cy_ok">CycloPress version <?php echo $cy_version; ?>.</td>
-		</tr>
 	</table>
 	
 	<form method="post" action="options.php">
@@ -356,6 +352,8 @@ function cy_options_page() {
 		</p>
 
 	</form>
+	
+	<p>CycloPress version <?php echo $cy_version; ?>.</p>
 	
 	</div>
 	<?PHP
