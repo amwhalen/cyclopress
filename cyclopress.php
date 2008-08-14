@@ -353,7 +353,7 @@ function cy_options_page() {
 
 	</form>
 	
-	<p>CycloPress version <?php echo $cy_version; ?>.</p>
+	<p>CycloPress version <?php echo $cy_version; ?>. See the <a href="http://amwhalen.com/blog/projects/cyclopress/">CycloPress page</a> for more information.</p>
 	
 	</div>
 	<?PHP
