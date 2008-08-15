@@ -293,9 +293,18 @@ function cy_options_page() {
 		
 		<input type="hidden" name="action" value="update" />
 		
-		<input type="hidden" name="page_options" value="cy_graph_type,cy_graph_width,cy_graph_height,cy_graph_color_top,cy_graph_color_bottom,cy_graph_transparency" />
+		<input type="hidden" name="page_options" value="cy_unit,cy_graph_type,cy_graph_width,cy_graph_height,cy_graph_color_top,cy_graph_color_bottom,cy_graph_transparency" />
 		
 		<table class="form-table">
+			<tr valign="top">
+				<th scope="row">Units</th>
+				<td>
+					<select name="cy_unit">
+						<option value="miles"<?php if (get_option('cy_unit')=='miles') { echo ' selected="selected"'; } ?>>Miles</option>
+						<option value="kilometers"<?php if (get_option('cy_unit')=='kilometers') { echo ' selected="selected"'; } ?>>Kilometers</option>
+					</select>
+				</td>
+			</tr>
 			<tr valign="top">
 				<th scope="row">Graph Type</th>
 				<td>
@@ -550,7 +559,7 @@ function cy_write_page() {
 		  </tr>
 		  <tr valign="top">
 			<th scope="row" style="text-align: right;">*Distance:</th>
-			<td><input type="text" name="miles" id="miles" size="5" value="<?php echo htmlentities(stripslashes($miles)); ?>" /> miles</td>
+			<td><input type="text" name="miles" id="miles" size="5" value="<?php echo htmlentities(stripslashes($miles)); ?>" /> <?php echo get_option('cy_distance_unit_text'); ?></td>
 		  </tr>
 		  <tr valign="top">
 			<th scope="row" style="text-align: right;">*Time:</th>
@@ -558,11 +567,11 @@ function cy_write_page() {
 		  </tr>
 		  <tr valign="top">
 			<th scope="row" style="text-align: right;">Average Speed:</th>
-			<td><input type="text" name="avg_speed" id="avg_speed" size="5" value="<?php echo htmlentities(stripslashes($as)); ?>" /> mph</td>
+			<td><input type="text" name="avg_speed" id="avg_speed" size="5" value="<?php echo htmlentities(stripslashes($as)); ?>" /> <?php echo get_option('cy_speed_unit_text'); ?></td>
 		  </tr>
 		  <tr valign="top">
 			<th scope="row" style="text-align: right;">Maximum Speed:</th>
-			<td><input type="text" name="max_speed" id="max_speed" size="5" value="<?php echo htmlentities(stripslashes($ms)); ?>" /> mph</td>
+			<td><input type="text" name="max_speed" id="max_speed" size="5" value="<?php echo htmlentities(stripslashes($ms)); ?>" /> <?php echo get_option('cy_speed_unit_text'); ?></td>
 		  </tr>
 		  <tr valign="top">
 		  	<th scope="row" style="text-align: right;">Cadence:</th>
@@ -1168,7 +1177,9 @@ function cy_get_default_options() {
 		'cy_graph_color_top' => 'cccccc',
 		'cy_graph_color_bottom' => '777777',
 		'cy_graph_transparency' => '0.7',
-		'cy_distance_unit' => 'miles',
+		'cy_unit' => 'miles',
+		'cy_distance_unit_text' => 'miles',
+		'cy_speed_unit_text' => 'mph',
 	);
 	
 	return $options;
