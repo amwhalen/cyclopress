@@ -731,6 +731,21 @@ function cy_distance_text($num=2) {
 }
 
 /**
+ * Returns the current unit for speed.
+ */
+function cy_speed_text($num=2) {
+
+	if (get_option('cy_unit') == 'mile') {
+		return 'mph';
+	} else if (get_option('cy_unit') == 'kilometer') {
+		return 'kmh';
+	} else {
+		return 'mph';
+	}
+	
+}
+
+/**
  * Converts miles to kilometers OR mph to kph
  */
 function cy_m2k($miles) {
