@@ -303,8 +303,8 @@ function cy_options_page() {
 				<th scope="row">Units</th>
 				<td>
 					<select name="cy_unit">
-						<option value="miles"<?php if (get_option('cy_unit')=='mile') { echo ' selected="selected"'; } ?>>Mile</option>
-						<option value="kilometer"<?php if (get_option('cy_unit')=='kilometer') { echo ' selected="selected"'; } ?>>Kilometer</option>
+						<option value="miles"<?php if (get_option('cy_unit')=='mile') { echo ' selected="selected"'; } ?>>Miles</option>
+						<option value="kilometer"<?php if (get_option('cy_unit')=='kilometer') { echo ' selected="selected"'; } ?>>Kilometers</option>
 					</select>
 				</td>
 			</tr>
