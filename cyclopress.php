@@ -633,8 +633,8 @@ function cy_manage_page() {
 				<td><?php echo $ride['miles'] . ' ' . cy_distance_text(); ?></td>
 				<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
 				<td><?php echo $ride['max_speed'] . ' '. cy_speed_text(); ?></td>
-				<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' hours, ' . $minutes . 'minutes'; ?></td>
 				<td><?php echo $ride['cadence']; ?> rpm</td>
+				<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' hours, ' . $minutes . 'minutes'; ?></td>
 				<td><?php echo (strlen(trim(strip_tags($ride['notes']))) > 100) ? substr(trim(strip_tags($ride['notes'])), 0, 100) : trim(strip_tags($ride['notes'])); ?></td>
 			</tr>
 				
