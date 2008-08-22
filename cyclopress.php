@@ -232,7 +232,7 @@ function cy_admin_menu() {
 	add_submenu_page('post.php', 'Ride', 'Ride', 'edit_files', __FILE__, 'cy_write_page');
 	
 	// add a ride editing page
-	add_submenu_page('edit.php', 'Ride', 'Ride', 'edit_files', __FILE__, 'cy_manage_page');
+	add_submenu_page('edit.php', 'Rides', 'Rides', 'edit_files', __FILE__, 'cy_manage_page');
 
 }
 
