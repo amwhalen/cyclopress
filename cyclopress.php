@@ -614,8 +614,6 @@ function cy_manage_page() {
 
 		<?php echo cy_get_summary(true); ?>
 
-		size: <?php echo sizeof($rides); ?>
-
 		<table border="1">
 			
 			<tr>
@@ -628,7 +626,16 @@ function cy_manage_page() {
 				<th>Notes</th>
 			</tr>
 			
-			<?php if (sizeof($rides)) { foreach ($rides as $ride) { $hours = floor($ride['minutes']/60); $minutes = floor($ride['minutes']%60);  ?>
+			<?php
+			
+			if (sizeof($rides)) { foreach ($rides as $ride) {
+			
+				$hours = floor($ride['minutes']/60);
+				$minutes = floor($ride['minutes']%60);
+				$h_text = ($hours == 1) ? 'hour' : 'hours';
+				$m_text = ($minutes == 1) ? 'minute' : 'minutes';
+				
+			?>
 			
 			<tr>
 				<td><?php echo date('F jS, Y g:ia', strtotime($ride['startdate'])); ?></td>
@@ -636,7 +643,7 @@ function cy_manage_page() {
 				<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
 				<td><?php echo $ride['max_speed'] . ' '. cy_speed_text(); ?></td>
 				<td><?php echo $ride['cadence']; ?> rpm</td>
-				<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' hours, ' . $minutes . 'minutes'; ?></td>
+				<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' '.$h_text.', ' . $minutes . ' '.$m_text; ?></td>
 				<td><?php echo (strlen(trim(strip_tags($ride['notes']))) > 100) ? substr(trim(strip_tags($ride['notes'])), 0, 100) : trim(strip_tags($ride['notes'])); ?></td>
 			</tr>
 				
