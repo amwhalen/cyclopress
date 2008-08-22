@@ -226,7 +226,7 @@ function cy_admin_menu() {
 
 	// options for cycling
 	//add_options_page('Cycling Options', 'Cycling', 'edit_files', __FILE__, 'cy_options_page');
-	add_submenu_page('plugins.php', 'CycloPress Options', 'CycloPress Options', 'edit_files', __FILE__, 'cy_options_page');
+	add_submenu_page('plugins.php', 'CycloPress', 'CycloPress', 'edit_files', __FILE__, 'cy_options_page');
 	
 	// add a ride form
 	add_submenu_page('post.php', 'Ride', 'Ride', 'edit_files', __FILE__, 'cy_write_page');
@@ -601,6 +601,9 @@ function cy_manage_page() {
 
 	$table_name = $wpdb->prefix . "cy_rides";
 	
+	$sql  = 'select * from '.$table_name.$where.' order by startdate desc limit 1';
+	$rides = $wpdb->get_results($sql, ARRAY_A);
+	
 	?>
 	
 	<div class="wrap">
@@ -611,6 +614,33 @@ function cy_manage_page() {
 
 		<?php echo cy_get_summary(true); ?>
 
+		<table>
+			
+			<tr>
+				<th>Date</th>
+				<th>Distance</th>
+				<th>Average Speed</th>
+				<th>Max Speed</th>
+				<th>Cadence</th>
+				<th>Time</th>
+				<th>Notes</th>
+			</tr>
+			
+			<?php if (sizeof($rides)) { foreach ($rides as $ride) { $hours = floor($ride['minutes']/60); $minutes = floor($ride['minutes']%60);  ?>
+			
+			<tr>
+				<td><?php echo date('F jS, Y g:ia', strtotime($ride['startdate'])); ?></td>
+				<td><?php echo $ride['miles'] . ' ' . cy_distance_text(); ?></td>
+				<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
+				<td><?php echo $ride['max_speed'] . ' '. cy_speed_text(); ?></td>
+				<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' hours, ' . $minutes . 'minutes'; ?></td>
+				<td><?php echo $ride['cadence']; ?> rpm</td>
+				<td><?php echo (strlen(trim(strip_tags($ride['notes']))) > 100) ? substr(trim(strip_tags($ride['notes'])), 0, 100) : trim(strip_tags($ride['notes'])); ?></td>
+			</tr>
+				
+			<?php } } ?>
+			
+		</table>
 	
 	</div>
 	
