@@ -601,7 +601,7 @@ function cy_manage_page() {
 
 	$table_name = $wpdb->prefix . "cy_rides";
 	
-	$sql  = 'select * from '.$table_name.$where.' order by startdate desc limit 1';
+	$sql  = 'select * from '.$table_name.$where.' order by startdate desc';
 	$rides = $wpdb->get_results($sql, ARRAY_A);
 	
 	?>
