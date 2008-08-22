@@ -614,7 +614,7 @@ function cy_manage_page() {
 
 		<?php echo cy_get_summary(true); ?>
 
-		<table>
+		<table border="1">
 			
 			<tr>
 				<th>Date</th>
