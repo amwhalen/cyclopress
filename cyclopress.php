@@ -37,7 +37,7 @@ $cy_src_dir = $cy_dir.'/'.$cy_graph_dir;
 /**
  * Returns an XHTML string with a brief stats overview.
  */
-function cy_get_brief_stats() {
+function cy_get_brief_stats($before='<p>', $separator=', ', $after='</p>') {
 
 	cy_check_version();
 
@@ -45,7 +45,7 @@ function cy_get_brief_stats() {
 	
 	if (!$stats) return false;
 
-	$str = '<p>'.$stats['total_miles'].' '.cy_distance_text($stats['total_miles']).', '.round($stats['avg_avg_speed'],1).' '.cy_speed_text().' average speed</p>';
+	$str = $before . $stats['total_miles'].' '.cy_distance_text($stats['total_miles']) . $separator . round($stats['avg_avg_speed'],1).' '.cy_speed_text().' average speed' . $after;
 
 	return $str;
 
@@ -107,7 +107,7 @@ function cy_get_summary_compare($year=false) {
 /**
  * Returns the date of the first ride.
  */
-function cy_get_first_ride_date() {
+function cy_get_first_ride_date($format='F jS, Y') {
 
 	cy_check_version();
 
@@ -120,14 +120,14 @@ function cy_get_first_ride_date() {
 	if (!$result) return false;
 	$first = $result[0];
 		
-	return date('F jS, Y', strtotime($first->startdate));
+	return date($format, strtotime($first->startdate));
 
 }
 
 /**
  * Returns the date of the last ride.
  */
-function cy_get_last_ride_date() {
+function cy_get_last_ride_date($format='F jS, Y') {
 
 	cy_check_version();
 
@@ -140,7 +140,7 @@ function cy_get_last_ride_date() {
 	if (!$result) return false;
 	$last = $result[0];
 	
-	return date('F jS, Y', strtotime($last->startdate));
+	return date($format, strtotime($last->startdate));
 
 }
 
@@ -230,6 +230,9 @@ function cy_admin_menu() {
 	
 	// add a ride form
 	add_submenu_page('post.php', 'Ride', 'Ride', 'edit_files', __FILE__, 'cy_write_page');
+	
+	// add a ride editing page
+	add_submenu_page('edit.php', 'Ride', 'Ride', 'edit_files', __FILE__, 'cy_manage_page');
 
 }
 
@@ -587,6 +590,32 @@ function cy_write_page() {
 	</div>
 	<?PHP
 
+}
+
+/**
+ * The "Manage Rides" page.
+ */
+function cy_manage_page() {
+
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . "cy_rides";
+	
+	?>
+	
+	<div class="wrap">
+	
+		<h2>Manage Rides</h2>
+	
+		<p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p>
+
+		<?php echo cy_get_summary(true); ?>
+
+	
+	</div>
+	
+	<?php
+	
 }
 
 /**
