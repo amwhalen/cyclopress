@@ -639,7 +639,7 @@ function cy_manage_page() {
 			?>
 			
 			<tr>
-				<td><?php echo date('F jS, Y g:ia', strtotime($ride['startdate'])); ?></td>
+				<td><a href="?cy_ride_id=<?php echo $ride['id']; ?>"><?php echo date('F j, Y g:ia', strtotime($ride['startdate'])); ?></a></td>
 				<td><?php echo $ride['miles'] . ' ' . cy_distance_text(); ?></td>
 				<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
 				<td><?php echo $ride['max_speed'] . ' '. cy_speed_text(); ?></td>
@@ -934,7 +934,7 @@ function cy_graph($associative_array, $title, $w, $h, $name='auto', $plot_type=0
 	
 	}
 	
-	if (phpversion() >= 5) {
+	if (version_compare(phpversion(), '5') === 1) {
 		$jpgraph = 'jpgraph-2.2/';
 	} else {
 		$jpgraph = 'jpgraph-1.26/';
