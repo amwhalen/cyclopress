@@ -617,7 +617,9 @@ function cy_manage_page() {
 		
 			<h2>Edit Ride</h2>
 		
-			<p>Date: <?php echo $ride['startdate']; ?></p> 
+			<p>Date: <?php echo $ride['startdate']; ?></p>
+			
+			<?php cy_get_form($ride); ?>
 		
 		</div>
 		
@@ -678,6 +680,168 @@ function cy_manage_page() {
 		
 	}
 	
+}
+
+/**
+ * Returns the cycling stats form
+ */
+function cy_get_form($ride=false) {
+
+	// set defaults
+	$mon = date('n');
+	$day = date('j');
+	$year = date('Y');
+	$hour = '';
+	$minute = '';
+	$ampm = 'am';
+	$miles = '';
+	$minutes = '';
+	$as = '';
+	$ms = '';
+	$cad = '';
+	$notes = '';
+	
+	if ($ride) {
+		// set defaults
+		$mon = date('n', strtotime($ride['startdate']));
+		$day = date('j', strtotime($ride['startdate']));
+		$year = date('Y', strtotime($ride['startdate']));
+		$hour = date('g', strtotime($ride['startdate']));
+		$minute = date('i', strtotime($ride['startdate']));
+		$ampm = date('a', strtotime($ride['startdate']));
+		$miles = $ride['miles'];
+		$minutes = $ride['minutes'];
+		$as = $ride['avg_speed'];
+		$ms = $ride['max_speed'];
+		$cad = $ride['cadence'];
+		$notes = $ride['notes'];
+	}
+
+	?>
+	
+	<form name="cycling" action="" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="submitted" value="1" />
+		<table class="form-table">
+		  <tr>
+			<th width="33%" scope="row" style="text-align: right;">*Date:</th>
+			<td>
+				<select name="month">
+					<?PHP
+						for ($i = 1; $i <= 12; $i++) {
+							if ($i == $mon) {
+								$sel = ' selected="selected"';
+							} else {
+								$sel = '';
+							}
+							if ($i < 10) {
+								$m = '0'.$i;
+							} else {
+								$m = $i;
+							}
+							?><option value="<?php echo $m; ?>"<?php echo $sel; ?>><?php echo $i.' - '.cy_get_month($i); ?></option><?PHP
+						}
+					?>
+				</select>
+				<select name="day">
+					<?PHP
+						for ($i = 1; $i <= 31; $i++) {
+							if ($i == $day) {
+								$sel = ' selected="selected"';
+							} else {
+								$sel = '';
+							}
+							if ($i < 10) {
+								$d = '0'.$i;
+							} else {
+								$d = $i;
+							}
+							?><option value="<?php echo $d; ?>"<?php echo $sel; ?>><?php echo $i;?></option><?PHP
+						}
+					?>
+				</select>
+				<select name="year">
+					<?PHP
+						for ($i = 2002; $i <= date('Y')+2; $i++) {
+							if ($i == $year) {
+								$sel = ' selected="selected"';
+							} else {
+								$sel = '';
+							}
+							?><option value="<?php echo $i; ?>"<?php echo $sel;?>><?php echo $i;?></option><?PHP
+						}
+					?>
+				</select>
+			</td>
+		  </tr>
+		  <th width="33%" scope="row" style="text-align: right;">Time:</th>
+			<td>
+				<select name="hour">
+					<option value=""></option>
+					<?PHP
+						for ($i = 1; $i <= 12; $i++) {
+							if ($i == $hour) {
+								$sel = ' selected="selected"';
+							} else {
+								$sel = '';
+							}
+							?><option value="<?php echo $i; ?>"<?php echo $sel; ?>><?php echo $i; ?></option><?PHP
+						}
+					?>
+				</select>
+				<select name="minute">
+					<option value=""></option>
+					<?PHP
+						for ($i = 0; $i < 60; $i+=5) {
+							if ($i < 10) {
+								$t = '0'.strval($i);
+							} else {
+								$t = ''.$i;
+							}
+							if ($t == $minute) {
+								$sel = ' selected="selected"';
+							} else {
+								$sel = '';
+							}
+							?><option value="<?php echo $t; ?>"<?php echo $sel; ?>><?php echo $t; ?></option><?PHP
+						}
+					?>
+				</select>
+				<select name="ampm">
+					<option value="am"<?php if ($ampm=='am') { echo ' selected="selected"'; } ?>>am</option>
+					<option value="pm"<?php if ($ampm=='pm') { echo ' selected="selected"'; } ?>>pm</option>
+				</select>
+			</td>
+		  </tr>
+		  <tr valign="top">
+			<th scope="row" style="text-align: right;">*Distance:</th>
+			<td><input type="text" name="miles" id="miles" size="5" value="<?php echo htmlentities(stripslashes($miles)); ?>" /> <?php echo cy_distance_text(); ?></td>
+		  </tr>
+		  <tr valign="top">
+			<th scope="row" style="text-align: right;">*Time:</th>
+			<td><input type="text" name="minutes" id="minutes" size="5" value="<?php echo htmlentities(stripslashes($minutes)); ?>" /> minutes</td>
+		  </tr>
+		  <tr valign="top">
+			<th scope="row" style="text-align: right;">Average Speed:</th>
+			<td><input type="text" name="avg_speed" id="avg_speed" size="5" value="<?php echo htmlentities(stripslashes($as)); ?>" /> <?php echo cy_speed_text(); ?></td>
+		  </tr>
+		  <tr valign="top">
+			<th scope="row" style="text-align: right;">Maximum Speed:</th>
+			<td><input type="text" name="max_speed" id="max_speed" size="5" value="<?php echo htmlentities(stripslashes($ms)); ?>" /> <?php echo cy_speed_text(); ?></td>
+		  </tr>
+		  <tr valign="top">
+		  	<th scope="row" style="text-align: right;">Cadence:</th>
+			<td><input type="text" name="cadence" id="cadence" size="5" value="<?php echo htmlentities(stripslashes($cad)); ?>" /> rpm</td>
+		  </tr>
+		  <tr valign="top">
+			<th scope="row" style="text-align: right;">Notes:</th>
+			<td><textarea name="notes" rows="10" cols="50"><?php echo htmlentities(stripslashes($notes)); ?></textarea></td>
+		  </tr>
+		</table>
+		<p class="submit"><input type="submit" name="Submit" value="Save" style="font-weight: bold;" /></p>
+	</form>
+	
+	<?php
+
 }
 
 /**
