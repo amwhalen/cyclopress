@@ -605,7 +605,11 @@ function cy_manage_page() {
 	$sql  = 'select * from '.$table_name.' order by startdate desc';
 	$rides = $wpdb->get_results($sql, ARRAY_A);
 	
-	if ($_GET['cy_ride_id']) {
+	if ($_POST['submitted']) {
+	
+		echo 'submitted edits';
+	
+	} else if ($_GET['cy_ride_id']) {
 	
 		$sql  = 'select * from '.$table_name.' where id=' . mysql_escape_string($_GET['cy_ride_id']);
 		$ride_result = $wpdb->get_results($sql, ARRAY_A);
