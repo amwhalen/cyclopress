@@ -260,7 +260,7 @@ function cy_options_page() {
 		<tr>
 			<?PHP if (!cy_check_php()) { ?>
 			<th class="cy_error"><img src="<?php echo $cy_dir; ?>/img/error.gif" alt="Error!" /></th>
-			<td class="cy_error">PHP version <?php echo phpversion(); ?> is not supported! PHP version 4 or higher is required.</td>
+			<td class="cy_error">PHP version <?php echo phpversion(); ?> is not supported! PHP version 4.3.1 or higher is required.</td>
 			<?PHP } else { ?>
 			<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
 			<td class="cy_ok">PHP version <?php echo phpversion(); ?> installed.</td>
@@ -306,6 +306,7 @@ function cy_options_page() {
 						<option value="miles"<?php if (get_option('cy_unit')=='mile') { echo ' selected="selected"'; } ?>>Miles</option>
 						<option value="kilometer"<?php if (get_option('cy_unit')=='kilometer') { echo ' selected="selected"'; } ?>>Kilometers</option>
 					</select>
+					<br /><small>This doesn't convert your numbers, it just changes the text 'miles' to 'kilometers' and vice versa.</small>
 				</td>
 			</tr>
 			<tr valign="top">
@@ -1171,7 +1172,7 @@ function cy_check_gd() {
  */
 function cy_check_php() {
 	
-	return (phpversion() < 4) ? false : true;
+	return (phpversion() < 4.3.1) ? false : true;
 
 }
 
