@@ -1168,11 +1168,11 @@ function cy_check_gd() {
 }
 
 /**
- * Returns true if PHP is version 5 or higher, false otherwise.
+ * Returns true if PHP is version 4.3.1 or higher, false otherwise.
  */
 function cy_check_php() {
 	
-	return (version_compare(PHP_VERSION, '4.3.1', '>')) ? false : true;
+	return (version_compare(phpversion(), '4.3.1') === 1) ? true : false;
 
 }
 
