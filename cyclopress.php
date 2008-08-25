@@ -1172,7 +1172,7 @@ function cy_check_gd() {
  */
 function cy_check_php() {
 	
-	return (phpversion() < 4.3.1) ? false : true;
+	return (phpversion() < 4) ? false : true;
 
 }
 
