@@ -1172,7 +1172,7 @@ function cy_check_gd() {
  */
 function cy_check_php() {
 	
-	return (version_compare(PHP_VERSION, '4.3.1') === 1) ? false : true;
+	return (version_compare(PHP_VERSION, '4.3.1', '>')) ? false : true;
 
 }
 
