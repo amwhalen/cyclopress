@@ -518,9 +518,7 @@ function cy_options_page() {
 function cy_write_page($ride=false) {
 	
 	// get a blank Ride
-	if (!$ride) {
-		$ride = new CYRide();
-	}
+	if ($ride === false) { $ride = new CYRide(); }
 	
 	// processing for when the form is submitted
 	if (isset($_POST['submitted'])) {
