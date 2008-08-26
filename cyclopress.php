@@ -772,7 +772,7 @@ function cy_manage_page() {
 				?>
 				
 				<tr class="<?php echo $c; ?>">
-					<td><a href="?page=cyclopress/cyclopress.php&cy_ride_id=<?php echo $ride['id']; ?>"><?php echo date('F j, Y g:ia', strtotime($ride['startdate'])); ?></a></td>
+					<td><strong><a href="?page=cyclopress/cyclopress.php&cy_ride_id=<?php echo $ride['id']; ?>"><?php echo date('F j, Y g:ia', strtotime($ride['startdate'])); ?></a></strong></td>
 					<td><?php echo $ride['miles'] . ' ' . cy_distance_text(); ?></td>
 					<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
 					<td><?php echo $ride['max_speed'] . ' '. cy_speed_text(); ?></td>
