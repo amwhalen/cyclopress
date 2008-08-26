@@ -523,6 +523,7 @@ function cy_options_page() {
  */
 function cy_write_page($ride=false) {
 	
+	global $wpdb;	
 	$wpdb->show_errors();
 	
 	// get a blank Ride
