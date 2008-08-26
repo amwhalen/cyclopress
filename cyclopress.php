@@ -353,7 +353,7 @@ function cy_update_ride($ride) {
 	$sql  = 'update '.$table_name.' ';
 	$sql .= "set startdate='".$wpdb->escape($ride->get_startdate())."', miles='".$wpdb->escape($ride->miles)."', avg_speed='".$wpdb->escape($ride->avg_speed)."'";
 	$sql .= ", max_speed='".$wpdb->escape($ride->max_speed)."', minutes='".$wpdb->escape($ride->minutes)."'";
-	$sql .= ", cadence='".$wpdb->escape($ride->cadence)."', notes='".$wpdb->escape($ride->notes)."'";
+	$sql .= ", cadence='".$wpdb->escape($ride->cadence)."', notes='".$wpdb->escape($ride->notes)."' where id='".$wpdb->escape($ride->id)."'";
 
 	// send the query to the DBMS
 	$result = $wpdb->query($sql);
