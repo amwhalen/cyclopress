@@ -23,7 +23,7 @@ Options, or when you add new data.
 === Requirements ===
 
 * WordPress version 2.5 or higher. CycloPress may work with older versions, but it is not suggested.
-* PHP version 4 or higher.
+* PHP version 4.3.1 or higher.
 * GD Library version 2 or higher.
 
 === Installation ===
