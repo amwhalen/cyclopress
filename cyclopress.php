@@ -523,6 +523,8 @@ function cy_options_page() {
  */
 function cy_write_page($ride=false) {
 	
+	$wpdb->show_errors();
+	
 	// get a blank Ride
 	if ($ride === false) { $ride = new CYRide(); }
 	
@@ -550,16 +552,14 @@ function cy_write_page($ride=false) {
 			// create the graphs
 			if ($saved) {
 				cy_create_all_graphs();
+				$ride = new CYRide();
 			}
-			
-			// new ride
-			$ride = new CYRide();
 	
 		}
 		
 		if (!$saved) {
 			?>
-			<div id="message" class="updated fade"><p><?php echo $e; ?></p></div>
+			<div id="message" class="updated fade"><p><?php echo $e; $wpdb->print_error(); ?></p></div>
 			<?PHP
 		} else {
 			?>
