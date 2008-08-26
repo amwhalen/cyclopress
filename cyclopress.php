@@ -305,9 +305,9 @@ function cy_db_stats($year=false) {
 function cy_save_ride($ride) {
 
 	if ($ride->id == NULL) {
-		cy_insert_ride($ride);
+		return cy_insert_ride($ride);
 	} else  {
-		cy_update_ride($ride);
+		return cy_update_ride($ride);
 	}
 
 }
@@ -545,10 +545,11 @@ function cy_write_page($ride=false) {
 			
 			// create the graphs
 			if ($saved) {
-			
 				cy_create_all_graphs();
-			
 			}
+			
+			// new ride
+			$ride = new CYRide();
 	
 		}
 		
