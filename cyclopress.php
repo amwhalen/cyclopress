@@ -330,7 +330,7 @@ function cy_insert_ride($ride) {
 	$sql  = 'insert into '.$table_name.'(startdate,miles,avg_speed,max_speed,minutes,cadence,notes) ';
 	$sql .= "values('".$wpdb->escape($ride->get_startdate())."','".$wpdb->escape($ride->miles)."','".$wpdb->escape($ride->avg_speed)."'";
 	$sql .= ",'".$wpdb->escape($ride->max_speed)."','".$wpdb->escape($ride->minutes)."'";
-	$sql .= ",'".$wpdb->escape($ride->cadence)."','".$wpdb->escape($ride->notes)."');";
+	$sql .= ",'".$wpdb->escape($ride->cadence)."','".$wpdb->escape($ride->notes)."')";
 
 	// send the query to the DBMS
 	$result = $wpdb->query($sql);
@@ -353,7 +353,7 @@ function cy_update_ride($ride) {
 	$sql  = 'update '.$table_name.' ';
 	$sql .= "set startdate='".$wpdb->escape($ride->get_startdate())."', miles='".$wpdb->escape($ride->miles)."', avg_speed='".$wpdb->escape($ride->avg_speed)."'";
 	$sql .= ", max_speed='".$wpdb->escape($ride->max_speed)."', minutes='".$wpdb->escape($ride->minutes)."'";
-	$sql .= ", cadence='".$wpdb->escape($ride->cadence)."', notes='".$wpdb->escape($ride->notes)."');";
+	$sql .= ", cadence='".$wpdb->escape($ride->cadence)."', notes='".$wpdb->escape($ride->notes)."'";
 
 	// send the query to the DBMS
 	$result = $wpdb->query($sql);
@@ -524,7 +524,6 @@ function cy_options_page() {
 function cy_write_page($ride=false) {
 	
 	global $wpdb;	
-	$wpdb->show_errors();
 	
 	// get a blank Ride
 	if ($ride === false) { $ride = new CYRide(); }
