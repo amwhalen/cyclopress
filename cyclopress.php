@@ -738,35 +738,40 @@ function cy_manage_page() {
 		<div class="wrap">
 		
 			<h2>Manage Rides</h2>
-		
-			<p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p>
 	
-			<?php echo cy_get_summary(true); ?>
-	
-			<table border="1">
+			<table class="widefat">
 				
-				<tr>
-					<th>Date</th>
-					<th>Distance</th>
-					<th>Average Speed</th>
-					<th>Max Speed</th>
-					<th>Cadence</th>
-					<th>Time</th>
-					<th>Notes</th>
-				</tr>
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Distance</th>
+						<th>Average Speed</th>
+						<th>Max Speed</th>
+						<th>Cadence</th>
+						<th>Time</th>
+						<th>Notes</th>
+					</tr>
+				</thead>
 				
+				<tbody>
 				<?php
 				
-				if (sizeof($rides)) { foreach ($rides as $ride) {
+				if (sizeof($rides)) { $i = 0; foreach ($rides as $ride) {
 				
 					$hours = floor($ride['minutes']/60);
 					$minutes = floor($ride['minutes']%60);
 					$h_text = ($hours == 1) ? 'hour' : 'hours';
 					$m_text = ($minutes == 1) ? 'minute' : 'minutes';
 					
+					if ($i%2 == 0) {
+						$c = '';
+					} else {
+						$c = 'alternate'
+					}
+					
 				?>
 				
-				<tr>
+				<tr class="<?php echo $c; ?>">
 					<td><a href="?page=cyclopress/cyclopress.php&cy_ride_id=<?php echo $ride['id']; ?>"><?php echo date('F j, Y g:ia', strtotime($ride['startdate'])); ?></a></td>
 					<td><?php echo $ride['miles'] . ' ' . cy_distance_text(); ?></td>
 					<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
@@ -777,6 +782,7 @@ function cy_manage_page() {
 				</tr>
 					
 				<?php } } ?>
+				</tbody>
 				
 			</table>
 		
