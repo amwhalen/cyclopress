@@ -538,7 +538,7 @@ function cy_write_page($ride=false) {
 			
 			// no average speed given? calculate it for the lazy person
 			if (!$_POST['avg_speed']) {
-				$ride->avg_speed = $_POST['miles'] / ($_POST['minutes']/60);
+				$ride->avg_speed = round($_POST['miles'] / ($_POST['minutes']/60), 2);
 			}
 			
 			$saved = cy_save_ride($ride);
