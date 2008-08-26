@@ -62,9 +62,9 @@ class CYRide {
 	function CYRide() {
 	
 		// set the default date
-		$mon = date('n');
-		$day = date('j');
-		$year = date('Y');
+		$this->month = date('n');
+		$this->day = date('j');
+		$this->year = date('Y');
 		$this->startdate = $this->get_startdate();
 	
 	}
