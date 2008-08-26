@@ -766,7 +766,7 @@ function cy_manage_page() {
 					if ($i%2 == 0) {
 						$c = '';
 					} else {
-						$c = 'alternate'
+						$c = 'alternate';
 					}
 					
 				?>
