@@ -3,7 +3,7 @@ Contributors: anukit
 Tags: cycling, graphs, sports, exercise, jpgraph, gd
 Requires at least: 2.5
 Tested up to: 2.6
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 
 Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
@@ -20,13 +20,13 @@ Options, or when you add new data.
 
 == Installation ==
 
-=== Requirements ===
+= Requirements =
 
 * WordPress version 2.5 or higher. CycloPress may work with older versions, but it is not suggested.
 * PHP version 4.3.1 or higher.
-* GD Library version 2 or higher.
+* GD Library version 1 or 2.
 
-=== Installation ===
+= Installation =
 
 1. Upload the `cyclopress` folder to the `/wp-content/plugins/` directory.
 1. Make the `/wp-content/plugins/cyclopress/graphs/` directory writable by your web server. (e.g. chmod 775)
@@ -38,9 +38,6 @@ Find [more instructions and discussion](http://amwhalen.com/blog/projects/cyclop
 
 == To Do ==
 
-* Add editing of previously entered statistics.
-* Add option for setting Kilometers/hour instead of Miles/hour.
-* Better API documentation for advanced users.
 * Automatic generation of a 'Cycling' page when stats are added. No template modifications required.
 
 == CycloPress Functions ==
