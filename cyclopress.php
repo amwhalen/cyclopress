@@ -526,7 +526,7 @@ function cy_write_page($ride=false) {
 	if (isset($_POST['submitted'])) {
 		
 		// load the form data from POST
-		$cy_ride->load_post();
+		$ride->load_post();
 		
 		// check that we got required data
 		if (!$_POST['miles'] || !$_POST['minutes']) {
@@ -538,10 +538,10 @@ function cy_write_page($ride=false) {
 			
 			// no average speed given? calculate it for the lazy person
 			if (!$_POST['avg_speed']) {
-				$cy_ride->avg_speed = $_POST['miles'] / ($_POST['minutes']/60);
+				$ride->avg_speed = $_POST['miles'] / ($_POST['minutes']/60);
 			}
 			
-			$saved = cy_save_ride();
+			$saved = cy_save_ride($ride);
 			
 			// create the graphs
 			if ($saved) {
