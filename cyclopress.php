@@ -39,7 +39,7 @@ $cy_src_dir = $cy_dir.'/'.$cy_graph_dir;
  */
 class CYRide {
 
-	var $id = null;
+	var $id = NULL;
 	var $startdate = '';
 	var $miles = '';
 	var $minutes = '';
@@ -575,7 +575,13 @@ function cy_write_page($ride=false) {
 		<h2>CycloPress Ride</h2>
 	
 		<form name="cycling" action="" method="post" enctype="multipart/form-data">
+			
 			<input type="hidden" name="submitted" value="1" />
+			
+			<?php if ($ride->id != NULL) { ?>
+			<input type="hidden" name="id" value="<?php echo $ride->id; ?>" />
+			<?php } ?>
+			
 			<table class="form-table">
 			  <tr>
 				<th width="33%" scope="row" style="text-align: right;">*Date:</th>
