@@ -35,6 +35,86 @@ $cy_src_dir = $cy_dir.'/'.$cy_graph_dir;
 
 
 /**
+ * The CycloPress Ride object
+ */
+class CYRide {
+
+	var $id = null;
+	var $startdate = '';
+	var $miles = '';
+	var $minutes = '';
+	var $avg_speed = '';
+	var $max_speed = '';
+	var $cadence = '';
+	var $notes = '';
+	
+	// form-only
+	var $month = '';
+	var $day = '';
+	var $year = '';
+	var $hour = '';
+	var $minute = '';
+	var $ampm = 'am';
+	
+	/**
+	 * Constructor
+	 */
+	function CYRide() {
+	
+		// set the default date
+		$mon = date('n');
+		$day = date('j');
+		$year = date('Y');
+		$this->startdate = $this->get_startdate();
+	
+	}
+	
+	/**
+	 * Returns this ride's start date.
+	 */
+	function get_startdate($format='Y-m-d H:i:s') {
+	
+		$date = $this->year.'-'.$this->month.'-'.$this->day;
+		if ($this->hour != '' && $this->minute != '') {
+			$time = $this->hour.':'.$this->minute.' '.$this->ampm;
+		} else {
+			$time = '00:00pm';
+		}
+		$this->startdate = date($format, strtotime($date . ' ' . $time));
+		
+		return $this->startdate;
+	
+	}
+	
+	/**
+	 * Loads all data from POST
+	 */
+	function load_post() {
+	
+		foreach ($this as $k=>$v) {
+			$this->$k = $_POST[$k];
+		}
+		
+		$this->startdate = $this->get_startdate();
+	
+	}
+	
+	/**
+	 * Loads all data from a DB row (associative)
+	 */
+	function load($row) {
+	
+		foreach ($this as $k=>$v) {
+			$this->$k = $row[$k];
+		}
+		
+		$this->startdate = $this->get_startdate();
+	
+	}
+
+};
+
+/**
  * Returns an XHTML string with a brief stats overview.
  */
 function cy_get_brief_stats($before='<p>', $separator=', ', $after='</p>') {
@@ -220,6 +300,65 @@ function cy_db_stats($year=false) {
 }
 
 /**
+ * Saves a ride in the database
+ */
+function cy_save_ride($ride) {
+
+	if ($ride->id == NULL) {
+		cy_insert_ride();
+	} else  {
+		cy_update_ride();
+	}
+
+}
+
+/**
+ * Inserts a ride into the database
+ */
+function cy_insert_ride($ride) {
+
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . "cy_rides";
+
+	$sql  = 'insert into '.$table_name.'(startdate,miles,avg_speed,max_speed,minutes,cadence,notes) ';
+	$sql .= "values('".$wpdb->escape($ride->get_startdate())."','".$wpdb->escape($ride->miles)."','".$wpdb->escape($ride->avg_speed)."'";
+	$sql .= ",'".$wpdb->escape($ride->max_speed)."','".$wpdb->escape($ride->minutes)."'";
+	$sql .= ",'".$wpdb->escape($ride->cadence)."','".$wpdb->escape($ride->notes)."');";
+
+	// send the query to the DBMS
+	$result = $wpdb->query($sql);
+	
+	// error?
+	$saved = ($result === false) ? false : true;
+	return $saved;
+
+}
+
+/**
+ * Updates a ride in the database
+ */
+function cy_update_ride($ride) {
+
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . "cy_rides";
+	
+	$sql  = 'update '.$table_name.' ';
+	$sql .= "set startdate='".$wpdb->escape($ride->get_startdate())."', miles='".$wpdb->escape($ride->miles)."', avg_speed='".$wpdb->escape($ride->avg_speed)."'";
+	$sql .= ", max_speed='".$wpdb->escape($ride->max_speed)."', minutes='".$wpdb->escape($ride->minutes)."'";
+	$sql .= ", cadence='".$wpdb->escape($ride->cadence)."', notes='".$wpdb->escape($ride->notes)."');";
+
+	// send the query to the DBMS
+	$result = $wpdb->query($sql);
+	
+	// error?
+	$saved = ($result === false) ? false : true;
+	return $saved;
+
+}
+
+/**
  * Add links to the cycling admin pages where appropriate.
  */
 function cy_admin_menu() {
@@ -376,73 +515,33 @@ function cy_options_page() {
 /**
  * The "Add a Ride" page.
  */
-function cy_write_page() {
-
-	global $wpdb;
-
-	$table_name = $wpdb->prefix . "cy_rides";
+function cy_write_page($ride=false) {
 	
-	// set defaults
-	$mon = date('n');
-	$day = date('j');
-	$year = date('Y');
-	$hour = '';
-	$minute = '';
-	$ampm = 'am';
-	$miles = '';
-	$minutes = '';
-	$as = '';
-	$ms = '';
-	$cad = '';
-	$notes = '';
-
+	// get a blank Ride
+	if (!$ride) {
+		$ride = new CYRide();
+	}
+	
 	// processing for when the form is submitted
 	if (isset($_POST['submitted'])) {
 		
+		// load the form data from POST
+		$cy_ride->load_post();
+		
 		// check that we got required data
 		if (!$_POST['miles'] || !$_POST['minutes']) {
-			
-			$mon = $_POST['month'];
-			$day = $_POST['day'];
-			$year = $_POST['year'];
-			$hour = $_POST['hour'];
-			$minute = $_POST['minute'];
-			$ampm = $_POST['ampm'];
-			$miles = $_POST['miles'];
-			$minutes = $_POST['minutes'];
-			$as = $_POST['avg_speed'];
-			$ms = $_POST['max_speed'];
-			$cad = $_POST['cadence'];
-			$notes = $_POST['notes'];
 			
 			$saved = false;
 			$e = 'Please fill in all required fields.';
 			
 		} else {
-		
-			// set the date and time
-			$date = $_POST['year'].'-'.$_POST['month'].'-'.$_POST['day'];
-			if ($_POST['hour'] != '' && $_POST['minute'] != '') {
-				$time = $_POST['hour'].':'.$_POST['minute'].' '.$_POST['ampm'];
-			} else {
-				$time = '00:00pm';
-			}
 			
 			// no average speed given? calculate it for the lazy person
 			if (!$_POST['avg_speed']) {
-				$_POST['avg_speed'] = $_POST['miles'] / ($_POST['minutes']/60);
+				$cy_ride->avg_speed = $_POST['miles'] / ($_POST['minutes']/60);
 			}
 			
-			$sql  = 'insert into '.$table_name.'(startdate,miles,avg_speed,max_speed,minutes,cadence,notes) ';
-			$sql .= "values('".$wpdb->escape($date)."','".$wpdb->escape($_POST['miles'])."','".$wpdb->escape($_POST['avg_speed'])."'";
-			$sql .= ",'".$wpdb->escape($_POST['max_speed'])."','".$wpdb->escape($_POST['minutes'])."'";
-			$sql .= ",'".$wpdb->escape($_POST['cadence'])."','".$wpdb->escape($_POST['notes'])."');";
-	
-			// send the query to the DBMS
-			$result = $wpdb->query($sql);
-			
-			// error?
-			$saved = ($result === false) ? false : true;
+			$saved = cy_save_ride();
 			
 			// create the graphs
 			if ($saved) {
@@ -468,10 +567,129 @@ function cy_write_page() {
 	?>
 	<div class="wrap">
 	
-		<h2>Add a Ride</h2>
+		<h2>CycloPress Ride</h2>
 	
-		<?php cy_get_form(); ?>
-	
+		<form name="cycling" action="" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="submitted" value="1" />
+			<table class="form-table">
+			  <tr>
+				<th width="33%" scope="row" style="text-align: right;">*Date:</th>
+				<td>
+					<select name="month">
+						<?PHP
+							for ($i = 1; $i <= 12; $i++) {
+								if ($i == $ride->month) {
+									$sel = ' selected="selected"';
+								} else {
+									$sel = '';
+								}
+								if ($i < 10) {
+									$m = '0'.$i;
+								} else {
+									$m = $i;
+								}
+								?><option value="<?php echo $m; ?>"<?php echo $sel; ?>><?php echo $i.' - '.cy_get_month($i); ?></option><?PHP
+							}
+						?>
+					</select>
+					<select name="day">
+						<?PHP
+							for ($i = 1; $i <= 31; $i++) {
+								if ($i == $ride->day) {
+									$sel = ' selected="selected"';
+								} else {
+									$sel = '';
+								}
+								if ($i < 10) {
+									$d = '0'.$i;
+								} else {
+									$d = $i;
+								}
+								?><option value="<?php echo $d; ?>"<?php echo $sel; ?>><?php echo $i;?></option><?PHP
+							}
+						?>
+					</select>
+					<select name="year">
+						<?PHP
+							for ($i = 2002; $i <= date('Y')+2; $i++) {
+								if ($i == $ride->year) {
+									$sel = ' selected="selected"';
+								} else {
+									$sel = '';
+								}
+								?><option value="<?php echo $i; ?>"<?php echo $sel;?>><?php echo $i;?></option><?PHP
+							}
+						?>
+					</select>
+				</td>
+			  </tr>
+			  <th width="33%" scope="row" style="text-align: right;">Time:</th>
+				<td>
+					<select name="hour">
+						<option value=""></option>
+						<?PHP
+							for ($i = 1; $i <= 12; $i++) {
+								if ($i == $ride->hour) {
+									$sel = ' selected="selected"';
+								} else {
+									$sel = '';
+								}
+								?><option value="<?php echo $i; ?>"<?php echo $sel; ?>><?php echo $i; ?></option><?PHP
+							}
+						?>
+					</select>
+					<select name="minute">
+						<option value=""></option>
+						<?PHP
+							for ($i = 0; $i < 60; $i+=5) {
+								if ($i < 10) {
+									$t = '0'.strval($i);
+								} else {
+									$t = ''.$i;
+								}
+								if ($t == $ride->minute) {
+									$sel = ' selected="selected"';
+								} else {
+									$sel = '';
+								}
+								?><option value="<?php echo $t; ?>"<?php echo $sel; ?>><?php echo $t; ?></option><?PHP
+							}
+						?>
+					</select>
+					<select name="ampm">
+						<option value="am"<?php if ($ride->ampm=='am') { echo ' selected="selected"'; } ?>>am</option>
+						<option value="pm"<?php if ($ride->ampm=='pm') { echo ' selected="selected"'; } ?>>pm</option>
+					</select>
+				</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">*Distance:</th>
+				<td><input type="text" name="miles" id="miles" size="5" value="<?php echo htmlentities(stripslashes($ride->miles)); ?>" /> <?php echo cy_distance_text($ride->miles); ?></td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">*Time:</th>
+				<td><input type="text" name="minutes" id="minutes" size="5" value="<?php echo htmlentities(stripslashes($ride->minutes)); ?>" /> minutes</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Average Speed:</th>
+				<td><input type="text" name="avg_speed" id="avg_speed" size="5" value="<?php echo htmlentities(stripslashes($ride->avg_speed)); ?>" /> <?php echo cy_speed_text($ride->avg_speed); ?></td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Maximum Speed:</th>
+				<td><input type="text" name="max_speed" id="max_speed" size="5" value="<?php echo htmlentities(stripslashes($ride->max_speed)); ?>" /> <?php echo cy_speed_text($ride->avg_speed); ?></td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Cadence:</th>
+				<td><input type="text" name="cadence" id="cadence" size="5" value="<?php echo htmlentities(stripslashes($ride->cadence)); ?>" /> rpm</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Notes:</th>
+				<td><textarea name="notes" rows="10" cols="50"><?php echo htmlentities(stripslashes($ride->notes)); ?></textarea></td>
+			  </tr>
+			</table>
+			<p class="submit"><input type="submit" name="Submit" value="Save" style="font-weight: bold;" /></p>
+		</form>
+		
 	</div>
 	<?PHP
 
@@ -483,37 +701,27 @@ function cy_write_page() {
 function cy_manage_page() {
 
 	global $wpdb;
-
 	$table_name = $wpdb->prefix . "cy_rides";
 	
-	$sql  = 'select * from '.$table_name.' order by startdate desc';
-	$rides = $wpdb->get_results($sql, ARRAY_A);
-	
 	if ($_POST['submitted']) {
-	
-		echo 'submitted edits';
+		
+		cy_write_page();
 	
 	} else if ($_GET['cy_ride_id']) {
 	
 		$sql  = 'select * from '.$table_name.' where id=' . mysql_escape_string($_GET['cy_ride_id']);
 		$ride_result = $wpdb->get_results($sql, ARRAY_A);
-		$ride = $ride_result[0];
+		$db_ride = $ride_result[0];
 	
-		?>
-		
-		<div class="wrap">
-		
-			<h2>Edit Ride</h2>
-		
-			<p>Date: <?php echo $ride['startdate']; ?></p>
-			
-			<?php cy_get_form($ride); ?>
-		
-		</div>
-		
-		<?php
+		$ride = new CYRide();
+		$ride->load($db_ride);
+	
+		cy_write_page($ride);
 	
 	} else {
+	
+		$sql  = 'select * from '.$table_name.' order by startdate desc';
+		$rides = $wpdb->get_results($sql, ARRAY_A);
 	
 		?>
 		
@@ -568,168 +776,6 @@ function cy_manage_page() {
 		
 	}
 	
-}
-
-/**
- * Returns the cycling stats form
- */
-function cy_get_form($ride=false) {
-
-	// set defaults
-	$mon = date('n');
-	$day = date('j');
-	$year = date('Y');
-	$hour = '';
-	$minute = '';
-	$ampm = 'am';
-	$miles = '';
-	$minutes = '';
-	$as = '';
-	$ms = '';
-	$cad = '';
-	$notes = '';
-	
-	if ($ride) {
-		// set defaults
-		$mon = date('n', strtotime($ride['startdate']));
-		$day = date('j', strtotime($ride['startdate']));
-		$year = date('Y', strtotime($ride['startdate']));
-		$hour = date('g', strtotime($ride['startdate']));
-		$minute = date('i', strtotime($ride['startdate']));
-		$ampm = date('a', strtotime($ride['startdate']));
-		$miles = $ride['miles'];
-		$minutes = $ride['minutes'];
-		$as = $ride['avg_speed'];
-		$ms = $ride['max_speed'];
-		$cad = $ride['cadence'];
-		$notes = $ride['notes'];
-	}
-
-	?>
-	
-	<form name="cycling" action="" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="submitted" value="1" />
-		<table class="form-table">
-		  <tr>
-			<th width="33%" scope="row" style="text-align: right;">*Date:</th>
-			<td>
-				<select name="month">
-					<?PHP
-						for ($i = 1; $i <= 12; $i++) {
-							if ($i == $mon) {
-								$sel = ' selected="selected"';
-							} else {
-								$sel = '';
-							}
-							if ($i < 10) {
-								$m = '0'.$i;
-							} else {
-								$m = $i;
-							}
-							?><option value="<?php echo $m; ?>"<?php echo $sel; ?>><?php echo $i.' - '.cy_get_month($i); ?></option><?PHP
-						}
-					?>
-				</select>
-				<select name="day">
-					<?PHP
-						for ($i = 1; $i <= 31; $i++) {
-							if ($i == $day) {
-								$sel = ' selected="selected"';
-							} else {
-								$sel = '';
-							}
-							if ($i < 10) {
-								$d = '0'.$i;
-							} else {
-								$d = $i;
-							}
-							?><option value="<?php echo $d; ?>"<?php echo $sel; ?>><?php echo $i;?></option><?PHP
-						}
-					?>
-				</select>
-				<select name="year">
-					<?PHP
-						for ($i = 2002; $i <= date('Y')+2; $i++) {
-							if ($i == $year) {
-								$sel = ' selected="selected"';
-							} else {
-								$sel = '';
-							}
-							?><option value="<?php echo $i; ?>"<?php echo $sel;?>><?php echo $i;?></option><?PHP
-						}
-					?>
-				</select>
-			</td>
-		  </tr>
-		  <th width="33%" scope="row" style="text-align: right;">Time:</th>
-			<td>
-				<select name="hour">
-					<option value=""></option>
-					<?PHP
-						for ($i = 1; $i <= 12; $i++) {
-							if ($i == $hour) {
-								$sel = ' selected="selected"';
-							} else {
-								$sel = '';
-							}
-							?><option value="<?php echo $i; ?>"<?php echo $sel; ?>><?php echo $i; ?></option><?PHP
-						}
-					?>
-				</select>
-				<select name="minute">
-					<option value=""></option>
-					<?PHP
-						for ($i = 0; $i < 60; $i+=5) {
-							if ($i < 10) {
-								$t = '0'.strval($i);
-							} else {
-								$t = ''.$i;
-							}
-							if ($t == $minute) {
-								$sel = ' selected="selected"';
-							} else {
-								$sel = '';
-							}
-							?><option value="<?php echo $t; ?>"<?php echo $sel; ?>><?php echo $t; ?></option><?PHP
-						}
-					?>
-				</select>
-				<select name="ampm">
-					<option value="am"<?php if ($ampm=='am') { echo ' selected="selected"'; } ?>>am</option>
-					<option value="pm"<?php if ($ampm=='pm') { echo ' selected="selected"'; } ?>>pm</option>
-				</select>
-			</td>
-		  </tr>
-		  <tr valign="top">
-			<th scope="row" style="text-align: right;">*Distance:</th>
-			<td><input type="text" name="miles" id="miles" size="5" value="<?php echo htmlentities(stripslashes($miles)); ?>" /> <?php echo cy_distance_text(); ?></td>
-		  </tr>
-		  <tr valign="top">
-			<th scope="row" style="text-align: right;">*Time:</th>
-			<td><input type="text" name="minutes" id="minutes" size="5" value="<?php echo htmlentities(stripslashes($minutes)); ?>" /> minutes</td>
-		  </tr>
-		  <tr valign="top">
-			<th scope="row" style="text-align: right;">Average Speed:</th>
-			<td><input type="text" name="avg_speed" id="avg_speed" size="5" value="<?php echo htmlentities(stripslashes($as)); ?>" /> <?php echo cy_speed_text(); ?></td>
-		  </tr>
-		  <tr valign="top">
-			<th scope="row" style="text-align: right;">Maximum Speed:</th>
-			<td><input type="text" name="max_speed" id="max_speed" size="5" value="<?php echo htmlentities(stripslashes($ms)); ?>" /> <?php echo cy_speed_text(); ?></td>
-		  </tr>
-		  <tr valign="top">
-		  	<th scope="row" style="text-align: right;">Cadence:</th>
-			<td><input type="text" name="cadence" id="cadence" size="5" value="<?php echo htmlentities(stripslashes($cad)); ?>" /> rpm</td>
-		  </tr>
-		  <tr valign="top">
-			<th scope="row" style="text-align: right;">Notes:</th>
-			<td><textarea name="notes" rows="10" cols="50"><?php echo htmlentities(stripslashes($notes)); ?></textarea></td>
-		  </tr>
-		</table>
-		<p class="submit"><input type="submit" name="Submit" value="Save" style="font-weight: bold;" /></p>
-	</form>
-	
-	<?php
-
 }
 
 /**
