@@ -781,7 +781,7 @@ function cy_manage_page() {
 					<td><?php echo (strlen(trim(strip_tags($ride['notes']))) > 100) ? substr(trim(strip_tags($ride['notes'])), 0, 100) : trim(strip_tags($ride['notes'])); ?></td>
 				</tr>
 					
-				<?php } } ?>
+				<?php $i++; } } ?>
 				</tbody>
 				
 			</table>
