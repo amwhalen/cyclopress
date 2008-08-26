@@ -108,7 +108,13 @@ class CYRide {
 			$this->$k = $row[$k];
 		}
 		
-		$this->startdate = $this->get_startdate();
+		$ts = strtotime($this->startdate);
+		$this->month = date('n', $ts);
+		$this->day = date('j', $ts);
+		$this->year = date('Y', $ts);
+		$this->hour = date('g', $ts);
+		$this->minute = date('i', $ts);
+		$this->ampm = date('a', $ts);
 	
 	}
 
