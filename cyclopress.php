@@ -305,9 +305,9 @@ function cy_db_stats($year=false) {
 function cy_save_ride($ride) {
 
 	if ($ride->id == NULL) {
-		cy_insert_ride();
+		cy_insert_ride($ride);
 	} else  {
-		cy_update_ride();
+		cy_update_ride($ride);
 	}
 
 }
