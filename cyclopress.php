@@ -552,7 +552,6 @@ function cy_write_page($ride=false) {
 			// create the graphs
 			if ($saved) {
 				cy_create_all_graphs();
-				$ride = new CYRide();
 			}
 	
 		}
