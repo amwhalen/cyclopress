@@ -388,8 +388,16 @@ function cy_options_page() {
 
 	global $cy_graph_dir_full, $cy_dir, $cy_version;
 
+	// redirect to the debug page if clicked on
+	if (isset($_GET['debug']) && $_GET['debug']) {
+		
+		cy_debug_page();
+		return;
+		
+	}
+
 	// update the graphs if settings were changed
-	if ($_GET['updated']) {
+	if (isset($_GET['updated']) && $_GET['updated']) {
 	
 		cy_create_all_graphs();
 	
@@ -511,7 +519,7 @@ function cy_options_page() {
 
 	</form>
 	
-	<p>CycloPress version <?php echo $cy_version; ?>. See the <a href="http://amwhalen.com/blog/projects/cyclopress/">CycloPress page</a> for more information.</p>
+	<p>CycloPress version <?php echo $cy_version; ?>. See the <a href="http://amwhalen.com/blog/projects/cyclopress/">CycloPress page</a> for more information. <a href="?page=cyclopress/cyclopress.php&debug=1">Debug</a>.</p>
 	
 	</div>
 	<?PHP
@@ -519,7 +527,7 @@ function cy_options_page() {
 }
 
 /**
- * The "Add a Ride" page.
+ * The "Add a Ride" and "Edit a Ride" page.
  */
 function cy_write_page($ride=false) {
 	
@@ -791,6 +799,50 @@ function cy_manage_page() {
 		<?php
 		
 	}
+	
+}
+
+/**
+ * CycloPress debugging information page.
+ */
+function cy_debug_page() {
+	
+	global $wpdb;
+	
+	$table_name = $wpdb->prefix . "cy_rides";
+	
+	// all options
+	$opts = cy_get_default_options();
+	?>
+	
+	<div class="wrap"
+	
+		<h2>CycloPress Debugging Information</h2>
+		
+		<table class="widefat">
+			
+			<tr>
+				<th>cy_rides table exists</th>
+				<td><?PHP echo ($wpdb->get_var("show tables like '$table_name'") != $table_name) ? 'yes' : 'no'; ?></td>
+			</tr>
+			
+			<?PHP
+			foreach($opts as $k=>$v) {
+				$val = get_option($k);
+				?>
+				<tr>
+					<th><?php echo $k; ?></th>
+					<td><?php echo $val; ?></td>
+				</tr>
+				<?PHP
+			}
+			?>
+			
+		</table>
+	
+	</div>
+	
+	<?PHP
 	
 }
 
