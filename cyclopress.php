@@ -841,8 +841,8 @@ function cy_debug_page() {
 			</tr>
 			
 			<tr>
-				<th>Cache writeable</th>
-				<td><?PHP cy_is_cache_writable(); ?></td>
+				<th>cache is writeable</th>
+				<td><?PHP echo (cy_is_cache_writable()) ? 'yes' :'no'; ?></td>
 			</tr>
 			
 			<?PHP
