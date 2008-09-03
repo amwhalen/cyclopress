@@ -813,6 +813,10 @@ function cy_debug_page() {
 	
 	// all options
 	$opts = cy_get_default_options();
+	
+	// GD
+	if (function_exists('gd_info')) { $GDArray = gd_info(); } else { $GDArray = false; }
+	
 	?>
 	
 	<div class="wrap"
@@ -822,8 +826,23 @@ function cy_debug_page() {
 		<table class="widefat">
 			
 			<tr>
+				<th>PHP</th>
+				<td><?PHP echo phpversion(); ?></td>
+			</tr>
+			
+			<tr>
+				<th>GD</th>
+				<td><?php if (is_array($GDArray)) { echo ereg_replace('[[:alpha:][:space:]()]+', '', $GDArray['GD Version']); } else { echo 'GD library is not installed.'; } ?></td>
+			</tr>
+			
+			<tr>
 				<th>cy_rides table exists</th>
-				<td><?PHP echo ($wpdb->get_var("show tables like '$table_name'") != $table_name) ? 'yes' : 'no'; ?></td>
+				<td><?PHP echo ($wpdb->get_var("show tables like '$table_name'") == $table_name) ? 'yes' : 'no'; ?></td>
+			</tr>
+			
+			<tr>
+				<th>Cache writeable</th>
+				<td><?PHP cy_is_cache_writable(); ?></td>
 			</tr>
 			
 			<?PHP
