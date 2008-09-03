@@ -1430,10 +1430,6 @@ function cy_install() {
 
 		dbDelta($sql);
 	
-		// update only CY options, leave user options alone
-		update_option("cy_version", $cy_version);
-		update_option("cy_db_version", $cy_db_version);
-	
 	} else if ( $wpdb->get_var("show tables like '$table_name'") != $table_name ) {
 	
 		// install
@@ -1449,6 +1445,10 @@ function cy_install() {
 		}
 	
 	}
+	
+	// update only CY options, leave user options alone
+	update_option("cy_version", $cy_version);
+	update_option("cy_db_version", $cy_db_version);
 	
 	// create all graphs
 	if (cy_is_cache_writable()) {
