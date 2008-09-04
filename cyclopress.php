@@ -807,7 +807,7 @@ function cy_manage_page() {
  */
 function cy_debug_page() {
 	
-	global $wpdb;
+	global $wpdb, $wp_version;;
 	
 	$table_name = $wpdb->prefix . "cy_rides";
 	
@@ -824,6 +824,11 @@ function cy_debug_page() {
 		<h2>CycloPress Debugging Information</h2>
 		
 		<table class="widefat">
+			
+			<tr>
+				<th>WordPress</th>
+				<td><?PHP echo $wp_version; ?></td>
+			</tr>
 			
 			<tr>
 				<th>PHP</th>
@@ -1430,6 +1435,10 @@ function cy_install() {
 
 		dbDelta($sql);
 	
+		// update only CY options, leave user options alone
+		update_option("cy_version", $cy_version);
+		update_option("cy_db_version", $cy_db_version);
+	
 	} else if ( $wpdb->get_var("show tables like '$table_name'") != $table_name ) {
 	
 		// install
@@ -1445,10 +1454,6 @@ function cy_install() {
 		}
 	
 	}
-	
-	// update only CY options, leave user options alone
-	update_option("cy_version", $cy_version);
-	update_option("cy_db_version", $cy_db_version);
 	
 	// create all graphs
 	if (cy_is_cache_writable()) {
