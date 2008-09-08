@@ -531,10 +531,7 @@ function cy_options_page() {
  */
 function cy_write_page($ride=false) {
 	
-	global $wpdb;	
-	
-	// get a blank Ride
-	if ($ride === false) { $ride =& new CYRide(); }
+	global $wpdb;
 	
 	// processing for when the form is submitted
 	if (isset($_POST['submitted'])) {
@@ -574,6 +571,10 @@ function cy_write_page($ride=false) {
 			<?PHP
 		}
 			
+	} else {
+	
+		$ride = new CYRide();
+	
 	}
 
 	?>
