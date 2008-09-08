@@ -534,7 +534,7 @@ function cy_write_page($ride=false) {
 	global $wpdb;	
 	
 	// get a blank Ride
-	if ($ride === false) { $ride = new CYRide(); }
+	if ($ride === false) { $ride =& new CYRide(); }
 	
 	// processing for when the form is submitted
 	if (isset($_POST['submitted'])) {
