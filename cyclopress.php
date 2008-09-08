@@ -596,7 +596,7 @@ function cy_write_page($ride=false) {
 					<select name="month">
 						<?PHP
 							for ($i = 1; $i <= 12; $i++) {
-								if ($i == $ride->month) {
+								if ($i == $ride->month || $i == '0'.$ride->month) {
 									$sel = ' selected="selected"';
 								} else {
 									$sel = '';
@@ -613,7 +613,7 @@ function cy_write_page($ride=false) {
 					<select name="day">
 						<?PHP
 							for ($i = 1; $i <= 31; $i++) {
-								if ($i == $ride->day) {
+								if ($i == $ride->day || $i == '0'.$ride->day) {
 									$sel = ' selected="selected"';
 								} else {
 									$sel = '';
