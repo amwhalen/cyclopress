@@ -537,6 +537,7 @@ function cy_write_page($ride=false) {
 	if (isset($_POST['submitted'])) {
 		
 		// load the form data from POST
+		$ride = new CYRide();
 		$ride->load_post();
 		
 		// check that we got required data
@@ -571,7 +572,7 @@ function cy_write_page($ride=false) {
 			<?PHP
 		}
 			
-	} else {
+	} else if ($ride === false) {
 	
 		$ride = new CYRide();
 	
