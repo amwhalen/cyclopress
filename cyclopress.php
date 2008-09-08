@@ -572,7 +572,7 @@ function cy_write_page($ride=false) {
 			<?PHP
 		}
 			
-	} else if ($ride === false) {
+	} else if ($ride === false || !is_object($ride)) {
 	
 		$ride = new CYRide();
 	
