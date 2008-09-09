@@ -1111,6 +1111,7 @@ function cy_admin_css() {
 		}
 		.cy_admin_navigation {
 			margin: 1.5em 0;
+			padding: 5px;
 			background: #fff;
 			border-bottom: 3px solid #ccc;
 		}
