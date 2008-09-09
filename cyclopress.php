@@ -449,6 +449,14 @@ function cy_options_page() {
 		return;
 		
 	}
+	
+	// redirect to the about page
+	if (isset($_GET['about']) && $_GET['about']) {
+	
+		cy_about_page();
+		return;
+	
+	}
 
 	// update the graphs if settings were changed
 	if (isset($_GET['updated']) && $_GET['updated']) {
@@ -539,9 +547,7 @@ function cy_options_page() {
 		</p>
 
 	</form>
-	
-	<p>CycloPress version <?php echo $cy_version; ?>. See the <a href="http://amwhalen.com/blog/projects/cyclopress/">CycloPress page</a> for more information. <a href="?page=cyclopress/cyclopress.php&debug=1">Debug</a>.</p>
-	
+		
 	</div>
 	<?PHP
 
@@ -969,6 +975,32 @@ function cy_debug_page() {
 	
 	<?PHP
 	
+}
+
+/**
+ * CycloPress information page.
+ */
+function cy_about_page() {
+
+	global $cy_dir;
+
+	?>
+	<div class="wrap">
+	
+		<?php echo cy_admin_navigation('debug'); ?>
+	
+		<p>CycloPress was created by <a href="http://amwhalen.com">Andrew M. Whalen</a>.</p>
+		
+		<ul>
+			<li><a href="http://amwhalen.com/blog/projects/cyclopress/" target="_blank">CycloPress Docs and Support on AMWhalen.com &raquo;</a></li>
+			<li><a href="http://wordpress.org/extend/plugins/cyclopress/" target="_blank">CycloPress on WordPress.org &raquo;</a></li>
+		</ul>
+		
+		<p><a href="http://amwhalen.com/blog/projects/cyclopress/"><img src="<?php echo $cy_dir; ?>/img/poweredby.gif" alt="Powered by CycloPress" /></a></p>
+		
+	</div>
+	<?PHP
+
 }
 
 /**
