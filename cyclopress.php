@@ -573,6 +573,7 @@ function cy_write_page($ride=false) {
 			?>
 			<div id="message" class="updated fade"><p>Ride saved.</p></div>
 			<?PHP
+			$ride = new CYRide();
 		}
 			
 	} else if ($ride === false || !is_object($ride)) {
@@ -730,7 +731,7 @@ function cy_manage_page() {
 		
 		cy_write_page();
 	
-	} else if ($_GET['cy_ride_id']) {
+	} else if (isset($_GET['cy_ride_id']) && $_GET['cy_ride_id']) {
 	
 		$sql  = 'select * from '.$table_name.' where id=' . mysql_escape_string($_GET['cy_ride_id']);
 		$ride_result = $wpdb->get_results($sql, ARRAY_A);
@@ -743,7 +744,47 @@ function cy_manage_page() {
 	
 	} else {
 	
-		$sql  = 'select * from '.$table_name.' order by startdate desc';
+		if (isset($_GET['cy_sort_col'])) {
+		
+			switch ($_GET['cy_sort_col']) {
+				
+				case "date":
+					$sort_col = 'startdate';
+					break;
+				
+				case "distance":
+					$sort_col = 'miles';
+					break;
+					
+				case "max_speed":
+					$sort_col = 'max_speed';
+					break;
+					
+				case "avg_speed":
+					$sort_col = 'avg_speed';
+					break;
+					
+				case "cadence":
+					$sort_col = 'cadence';
+					break;
+					
+				case "time":
+					$sort_col = 'minutes';
+					break;
+				
+				default:
+					$sort_col = 'startdate';
+				
+			}
+		
+			$sort_order = (isset($_GET['cy_sort'])) ? $_GET['cy_sort'] : 'desc';
+		
+		} else {
+			$sort_col = 'startdate';
+			$sort_order = 'desc';
+		}
+	
+		$sql  = 'select * from '.$table_name.' order by '.mysql_escape_string($sort_col).' '.mysql_escape_string($sort_order);
 		$rides = $wpdb->get_results($sql, ARRAY_A);
 	
 		?>
@@ -756,7 +797,7 @@ function cy_manage_page() {
 				
 				<thead>
 					<tr>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=date&cy_sort=asc" class="cy_sort">Date</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=date&cy_sort=asc" class="cy_sort">Date &darr;</a></th>
 						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=distance&cy_sort=desc" class="cy_sort">Distance</a></th>
 						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=avg_speed&cy_sort=desc" class="cy_sort">Average Speed</a></th>
 						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=max_speed&cy_sort=desc" class="cy_sort">Max Speed</a></th>
