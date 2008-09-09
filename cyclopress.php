@@ -381,7 +381,7 @@ function cy_admin_navigation($current_page='') {
 			'title' => 'Manage Rides',
 		),
 		'options' => array(
-			'url' => $wp_url.'/wp-admin/admin.php?page=cyclopress/cyclopress.php',
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php',
 			'title' => 'Options',
 		),
 		'debug' => array(
@@ -425,8 +425,7 @@ function cy_admin_navigation($current_page='') {
 function cy_admin_menu() {
 
 	// options for cycling
-	//add_options_page('Cycling Options', 'Cycling', 'edit_files', __FILE__, 'cy_options_page');
-	add_submenu_page('plugins.php', 'CycloPress', 'CycloPress', 'edit_pages', __FILE__, 'cy_options_page');
+	add_submenu_page('plugins.php', 'CycloPress', 'CycloPress', 'edit_files', __FILE__, 'cy_options_page');
 	
 	// add a ride form
 	add_submenu_page('post.php', 'Ride', 'Ride', 'edit_pages', __FILE__, 'cy_write_page');
