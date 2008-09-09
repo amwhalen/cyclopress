@@ -1136,6 +1136,7 @@ function cy_admin_css() {
 		.cy_admin_navigation ul li.here a {
 			background: #ccc;
 			font-weight: bold;
+			color: #000;
 			border: 1px solid #ccc;
 			border-width: 1px 1px 0 1px;
 		}
