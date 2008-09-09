@@ -399,7 +399,7 @@ function cy_admin_navigation($current_page='') {
 	
 		// should an error be reported in the nav?
 		if ($k == 'debug') {
-			if (!cy_check_php() || !cy_check_gd() || !cy_cache_is_writable()) {
+			if (!cy_check_php() || !cy_check_gd() || !cy_is_cache_writable()) {
 				$class = ' cy_debug';
 				$warning = ' !';
 			}
