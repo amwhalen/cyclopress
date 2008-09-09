@@ -388,6 +388,10 @@ function cy_admin_navigation($current_page='') {
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&debug=1',
 			'title' => 'Debug',
 		),
+		'about' => array(
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&about=1',
+			'title' => 'About',
+		),
 	);
 
 	$str = '<div class="cy_admin_navigation">CycloPress: <ul>';
