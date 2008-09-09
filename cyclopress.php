@@ -884,36 +884,32 @@ function cy_debug_page() {
 	
 		<h2>CycloPress Debugging Information</h2>
 		
-		<table class="widefat cy_status_table">
-			<caption>Requirements Status</caption>
+		<table class="widefat">
 			<tr>
+				<th>PHP</th>
 				<?PHP if (!cy_check_php()) { ?>
-				<th class="cy_error"><img src="<?php echo $cy_dir; ?>/img/error.gif" alt="Error!" /></th>
 				<td class="cy_error">PHP version <?php echo phpversion(); ?> is not supported! PHP version 4.3.1 or higher is required.</td>
 				<?PHP } else { ?>
-				<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
 				<td class="cy_ok">PHP version <?php echo phpversion(); ?> installed.</td>
 				<?PHP } ?>
 			</tr>
 			<tr>
+				<th>GD</th>
 				<?PHP if (!cy_check_gd()) { if (function_exists('gd_info')) { $GDArray = gd_info(); } else { $GDArray = false; } ?>
-				<th class="cy_error"><img src="<?php echo $cy_dir; ?>/img/error.gif" alt="Error!" /></th>
 				<td class="cy_error"><?php if (is_array($GDArray)) { echo 'GD version '.ereg_replace('[[:alpha:][:space:]()]+', '', $GDArray['GD Version']).' is not supported. GD version 2 or higher is required.'; } else { echo 'GD library is not installed!'; } ?> You cannot create graphs.</td>
 				<?PHP } else { $GDArray = gd_info(); ?>
-				<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
 				<td class="cy_ok">GD version <?php echo ereg_replace('[[:alpha:][:space:]()]+', '', $GDArray['GD Version']); ?> installed.</td>
 				<?PHP } ?>
 			</tr>
 			<tr>
+				<th>Cache is writeable</th>
 				<?PHP if (!cy_is_cache_writable()) { ?>
-				<th class="cy_warning"><img src="<?php echo $cy_dir; ?>/img/warning.gif" alt="Warning!" /></th>
 				<td class="cy_warning">
 					Graphs directory is not writable for PHP!<br />
 					Please make <?php echo $cy_graph_dir_full; ?> writable.<br />
 					You cannot create graphs until this directory can be written to.
 				</td>
 				<?PHP } else { ?>
-				<th class="cy_ok"><img src="<?php echo $cy_dir; ?>/img/ok.gif" alt="OK" /></th>
 				<td class="cy_ok">Graphs directory is writable.</td>
 				<?PHP } ?>
 			</tr>
