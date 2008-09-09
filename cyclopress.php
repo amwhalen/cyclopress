@@ -1113,7 +1113,7 @@ function cy_admin_css() {
 			margin: 1.5em 0;
 			padding: 4px;
 			background: #fff;
-			border-bottom: 3px solid #ccc;
+			border-bottom: 3px solid #ddd;
 		}
 		.cy_admin_navigation ul {
 			margin: 0;
@@ -1132,14 +1132,14 @@ function cy_admin_css() {
 			text-decoration: none;
 		}
 		.cy_admin_navigation ul li a:hover {
-			border: 1px solid #ccc;
+			border: 1px solid #ddd;
 			border-width: 1px 1px 0 1px;
 		}
 		.cy_admin_navigation ul li.here a {
 			background: #ccc;
 			font-weight: bold;
 			color: #000;
-			border: 1px solid #ccc;
+			border: 1px solid #ddd;
 			border-width: 1px 1px 0 1px;
 		}
 	</style>
