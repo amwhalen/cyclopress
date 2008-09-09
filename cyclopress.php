@@ -866,16 +866,13 @@ function cy_manage_page() {
  */
 function cy_debug_page() {
 	
-	global $wpdb, $wp_version, $cy_version, $cy_db_version;
+	global $wpdb, $wp_version, $cy_version, $cy_db_version, $cy_dir;
 	
 	$table_name = $wpdb->prefix . "cy_rides";
 	
 	// all options
 	$opts = cy_get_default_options();
-	
-	// GD
-	if (function_exists('gd_info')) { $GDArray = gd_info(); } else { $GDArray = false; }
-	
+		
 	// stats
 	$stats = cy_db_stats();
 	
@@ -887,7 +884,7 @@ function cy_debug_page() {
 	
 		<h2>CycloPress Debugging Information</h2>
 		
-		<table class="cy_status_table">
+		<table class="widefat cy_status_table">
 			<caption>Requirements Status</caption>
 			<tr>
 				<?PHP if (!cy_check_php()) { ?>
@@ -920,9 +917,6 @@ function cy_debug_page() {
 				<td class="cy_ok">Graphs directory is writable.</td>
 				<?PHP } ?>
 			</tr>
-		</table>
-			
-		<table class="widefat">
 			
 			<tr>
 				<th>WordPress</th>
@@ -930,23 +924,8 @@ function cy_debug_page() {
 			</tr>
 			
 			<tr>
-				<th>PHP</th>
-				<td><?PHP echo phpversion(); ?></td>
-			</tr>
-			
-			<tr>
-				<th>GD</th>
-				<td><?php if (is_array($GDArray)) { echo ereg_replace('[[:alpha:][:space:]()]+', '', $GDArray['GD Version']); } else { echo 'GD library is not installed.'; } ?></td>
-			</tr>
-			
-			<tr>
 				<th>cy_rides table exists</th>
 				<td><?PHP echo ($wpdb->get_var("show tables like '$table_name'") == $table_name) ? 'yes ('.$table_name.')' : 'no'; ?></td>
-			</tr>
-			
-			<tr>
-				<th>cache is writeable</th>
-				<td><?PHP echo (cy_is_cache_writable()) ? 'yes' :'no'; ?></td>
 			</tr>
 			
 			<tr>
