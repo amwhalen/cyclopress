@@ -1123,15 +1123,19 @@ function cy_admin_css() {
 		}
 		.cy_admin_navigation ul li {
 			display: inline;
+			padding: 5px;
 		}
 		.cy_admin_navigation ul li a {
 			padding: 5px;
-			border: none;
+			border: 1px solid #eee;
+			border-width: 1px 1px 0 1px;
 		}
 		.cy_admin_navigation ul li a:hover,
 		.cy_admin_navigation ul li.here a {
 			background: #ccc;
 			font-weight: bold;
+			border: 1px solid #ccc;
+			border-width: 1px 1px 0 1px;
 		}
 	</style>
 	
