@@ -390,17 +390,17 @@ function cy_admin_navigation($current_page='') {
 		),
 	);
 
-	$str = '<p>CycloPress: ';
+	$str = '<div class="cy_admin_navigation">CycloPress: <ul>';
 	$tabs = array();
 	foreach ($links as $k=>$link) {
 		if ($current_page == $k) {
-			$tabs[] = '<strong>'.$link['title'].'</strong>';
+			$tabs[] = '<li class="here">'.$link['title'].'</li>';
 		} else {
-			$tabs[] = '<a href="'.$link['url'].'">'.$link['title'].'</a>';
+			$tabs[] = '<li><a href="'.$link['url'].'">'.$link['title'].'</a></li>';
 		}
 	}
-	$str .= implode(' | ', $tabs);
-	$str .= '</p>';
+	$str .= implode('', $tabs);
+	$str .= '</ul></div>';
 	
 	return $str;
 
@@ -1108,6 +1108,30 @@ function cy_admin_css() {
 		}
 		.cy_sort {
 			color: #ddd;
+		}
+		.cy_admin_navigation {
+			margin: 1.5em 0;
+			background: #fff;
+			border-bottom: 3px solid #ccc;
+		}
+		.cy_admin_navigation ul {
+			margin: 0;
+			padding: 0;
+			display: inline;
+			background: none;
+
+		}
+		.cy_admin_navigation ul li {
+			display: inline;
+		}
+		.cy_admin_navigation ul li a {
+			padding: 5px;
+			border: none;
+		}
+		.cy_admin_navigation ul li a:hover,
+		.cy_admin_navigation ul li.here a {
+			background: #ccc;
+			font-weight: bold;
 		}
 	</style>
 	
