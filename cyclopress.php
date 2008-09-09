@@ -365,6 +365,48 @@ function cy_update_ride($ride) {
 }
 
 /**
+ * Returns the admin navigation bar
+ */
+function cy_admin_navigation($current_page='') {
+
+	$wp_url = get_bloginfo('url');
+
+	$links = array(
+		'add' => array(
+			'url' => $wp_url.'/wp-admin/post-new.php?page=cyclopress/cyclopress.php',
+			'title' => 'Add a Ride',
+		),
+		'manage' => array(
+			'url' => $wp_url.'/wp-admin/edit.php?page=cyclopress/cyclopress.php',
+			'title' => 'Manage Rides',
+		),
+		'options' => array(
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php',
+			'title' => 'Options',
+		),
+		'debug' => array(
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&debug=1',
+			'title' => 'Debug',
+		),
+	);
+
+	$str = '<p>CycloPress: ';
+	$tabs = array();
+	foreach ($links as $k=>$link) {
+		if ($current_page == $k) {
+			$tabs[] = '<strong>'.$link['title'].'</strong>';
+		} else {
+			$tabs[] = '<a href="'.$link['url'].'">'.$link['title'].'</a>';
+		}
+	}
+	$str .= implode(' | ', $tabs);
+	$str .= '</p>';
+	
+	return $str;
+
+}
+
+/**
  * Add links to the cycling admin pages where appropriate.
  */
 function cy_admin_menu() {
@@ -408,6 +450,8 @@ function cy_options_page() {
 
 	?>
 	<div class="wrap">
+	
+	<?php echo cy_admin_navigation('options'); ?>
 	
 	<h2>CycloPress Options</h2>
 	
@@ -584,6 +628,8 @@ function cy_write_page($ride=false) {
 
 	?>
 	<div class="wrap">
+	
+		<?php echo cy_admin_navigation('add'); ?>
 	
 		<h2>CycloPress Ride</h2>
 	
@@ -790,6 +836,8 @@ function cy_manage_page() {
 		?>
 		
 		<div class="wrap">
+		
+			<?php echo cy_admin_navigation('manage'); ?>
 		
 			<h2>Manage Rides</h2>
 	
