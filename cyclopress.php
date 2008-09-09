@@ -1486,8 +1486,7 @@ function cy_check_gd() {
  */
 function cy_check_php() {
 	
-	//return (version_compare(phpversion(), '4.3.1') === 1) ? true : false;
-	return (version_compare(phpversion(), '6.1') === 1) ? true : false;
+	return (version_compare(phpversion(), '4.3.1') === 1) ? true : false;
 
 }
 
