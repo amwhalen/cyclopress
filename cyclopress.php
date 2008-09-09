@@ -394,7 +394,7 @@ function cy_admin_navigation($current_page='') {
 	$tabs = array();
 	foreach ($links as $k=>$link) {
 		if ($current_page == $k) {
-			$tabs[] = '<li class="here">'.$link['title'].'</li>';
+			$tabs[] = '<li class="here"><a href="'.$link['url'].'">'.$link['title'].'</a></li>';
 		} else {
 			$tabs[] = '<li><a href="'.$link['url'].'">'.$link['title'].'</a></li>';
 		}
@@ -1116,10 +1116,9 @@ function cy_admin_css() {
 		}
 		.cy_admin_navigation ul {
 			margin: 0;
-			padding: 5px 0;
+			padding: 0;
 			display: inline;
 			background: none;
-
 		}
 		.cy_admin_navigation ul li {
 			display: inline;
