@@ -1116,7 +1116,7 @@ function cy_admin_css() {
 		}
 		.cy_admin_navigation ul {
 			margin: 0;
-			padding: 0;
+			padding: 5px 0;
 			display: inline;
 			background: none;
 
