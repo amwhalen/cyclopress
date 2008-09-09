@@ -827,48 +827,77 @@ function cy_manage_page() {
 	
 			<table class="widefat">
 				
-				<thead>
-					<tr>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=date&cy_sort=<?php if ($sort_col=='startdate') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Date<?php if ($sort_col=='startdate') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=distance&cy_sort=<?php if ($sort_col=='miles') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Distance<?php if ($sort_col=='miles') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=avg_speed&cy_sort=<?php if ($sort_col=='avg_speed') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Average Speed<?php if ($sort_col=='avg_speed') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=max_speed&cy_sort=<?php if ($sort_col=='max_speed') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Max Speed<?php if ($sort_col=='max_speed') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=cadence&cy_sort=<?php if ($sort_col=='cadence') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Cadence<?php if ($sort_col=='cadence') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=time&cy_sort=<?php if ($sort_col=='minutes') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Time<?php if ($sort_col=='minutes') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
-						<th>Notes</th>
-					</tr>
-				</thead>
-				
-				<tbody>
 				<?php
 				
-				if (sizeof($rides)) { $i = 0; foreach ($rides as $ride) {
+				if (sizeof($rides)) {
+					
+					$i = 0;
+					
+					?>
+					
+					<thead>
+						<tr>
+							<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=date&cy_sort=<?php if ($sort_col=='startdate') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Date<?php if ($sort_col=='startdate') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=distance&cy_sort=<?php if ($sort_col=='miles') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Distance<?php if ($sort_col=='miles') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=avg_speed&cy_sort=<?php if ($sort_col=='avg_speed') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Average Speed<?php if ($sort_col=='avg_speed') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=max_speed&cy_sort=<?php if ($sort_col=='max_speed') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Max Speed<?php if ($sort_col=='max_speed') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=cadence&cy_sort=<?php if ($sort_col=='cadence') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Cadence<?php if ($sort_col=='cadence') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=time&cy_sort=<?php if ($sort_col=='minutes') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Time<?php if ($sort_col=='minutes') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th>Notes</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+					<?php
+					
+					foreach ($rides as $ride) {
 				
-					$hours = floor($ride['minutes']/60);
-					$minutes = floor($ride['minutes']%60);
-					$h_text = ($hours == 1) ? 'hour' : 'hours';
-					$m_text = ($minutes == 1) ? 'minute' : 'minutes';
+						$hours = floor($ride['minutes']/60);
+						$minutes = floor($ride['minutes']%60);
+						$h_text = ($hours == 1) ? 'hour' : 'hours';
+						$m_text = ($minutes == 1) ? 'minute' : 'minutes';
+						
+						if ($i%2 == 0) {
+							$c = '';
+						} else {
+							$c = 'alternate';
+						}
 					
-					if ($i%2 == 0) {
-						$c = '';
-					} else {
-						$c = 'alternate';
-					}
+						?>
+						
+						<tr class="<?php echo $c; ?>">
+							<td><strong><a href="?page=cyclopress/cyclopress.php&cy_ride_id=<?php echo $ride['id']; ?>"><?php echo date('F j, Y g:ia', strtotime($ride['startdate'])); ?></a></strong></td>
+							<td><?php echo $ride['miles'] . ' ' . cy_distance_text(); ?></td>
+							<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
+							<td><?php echo $ride['max_speed'] . ' '. cy_speed_text(); ?></td>
+							<td><?php echo $ride['cadence']; ?> rpm</td>
+							<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' '.$h_text.', ' . $minutes . ' '.$m_text; ?></td>
+							<td><?php echo (strlen(trim(strip_tags($ride['notes']))) > 50) ? substr(trim(strip_tags($ride['notes'])), 0, 50).'...' : trim(strip_tags($ride['notes'])); ?></td>
+						</tr>
+							
+						<?php
+				
+						$i++;
+				
+					} // end foreach
 					
+					?>
+					</tbody>
+					<?php
+				
+				} else {
+				
+					?>
+					<tbody>
+					<tr>
+						<td>No Rides! Get out there on your bike!</td>
+					</tr>
+					</tbody>
+					<?php
+				
+				}
+				
 				?>
-				
-				<tr class="<?php echo $c; ?>">
-					<td><strong><a href="?page=cyclopress/cyclopress.php&cy_ride_id=<?php echo $ride['id']; ?>"><?php echo date('F j, Y g:ia', strtotime($ride['startdate'])); ?></a></strong></td>
-					<td><?php echo $ride['miles'] . ' ' . cy_distance_text(); ?></td>
-					<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
-					<td><?php echo $ride['max_speed'] . ' '. cy_speed_text(); ?></td>
-					<td><?php echo $ride['cadence']; ?> rpm</td>
-					<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' '.$h_text.', ' . $minutes . ' '.$m_text; ?></td>
-					<td><?php echo (strlen(trim(strip_tags($ride['notes']))) > 50) ? substr(trim(strip_tags($ride['notes'])), 0, 50).'...' : trim(strip_tags($ride['notes'])); ?></td>
-				</tr>
-					
-				<?php $i++; } } ?>
-				</tbody>
 				
 			</table>
 		

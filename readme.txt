@@ -2,7 +2,7 @@
 Contributors: anukit
 Tags: cycling, graphs, sports, exercise, jpgraph, gd
 Requires at least: 2.5
-Tested up to: 2.6
+Tested up to: 2.6.2
 Stable tag: 1.3.0
 
 Track cycling stats from your bike's cyclocomputer and make pretty graphs.
@@ -34,32 +34,7 @@ Options, or when you add new data.
 1. Add your stats through the `Write -> Ride` interface.
 1. Place some CycloPress PHP functions in your templates or in your PHP-enabled pages or posts to see your stats.
 
-Find [more instructions and discussion](http://amwhalen.com/blog/projects/cyclopress/) on the CycloPress home page.
-
-== To Do ==
-
-* Automatic generation of a 'Cycling' page when stats are added. No template modifications required.
-
-== CycloPress Functions ==
-
-After installing CycloPress, see the CycloPress Options page in Plugins for more information.
-
-Here are the functions you can insert into your templates or into Pages if you have a plugin that allows PHP in pages and posts.
-
-`cy_get_brief_stats()`
-Returns XHTML code with total miles traveled and average speed. Returns `false` if no data is available.
-
-`cy_get_summary( [ bool $compare, string $year ] )`
-Returns XHTML code with a summary of your stats. Returns `false` if no data is available.
-
-`cy_get_first_ride_date()`
-Returns the date of the least recent ride in the database.
-
-`cy_get_last_ride_date()`
-Returns the date of the most recent ride in the database.
-
-`cy_get_graph_img_tag( $type )`
-The parameter `type` cane take either `'distance'` or `'average_speed'`.
+Find [more instructions and discussion](http://amwhalen.com/blog/projects/cyclopress/) on the CycloPress home page at amwhalen.com.
 
 == Screenshots ==
 
