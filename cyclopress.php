@@ -571,7 +571,7 @@ function cy_write_page($ride=false) {
 			<?PHP
 		} else {
 			?>
-			<div id="message" class="updated fade"><p>Ride saved.</p></div>
+			<div id="message" class="updated fade"><p>Ride for <?php echo $ride->get_startdate(); ?> saved.</p></div>
 			<?PHP
 			$ride = new CYRide();
 		}
