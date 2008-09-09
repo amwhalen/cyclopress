@@ -996,7 +996,7 @@ function cy_about_page() {
 		<p>CycloPress was created by <a href="http://amwhalen.com">Andrew M. Whalen</a>.</p>
 		
 		<ul>
-			<li><a href="http://amwhalen.com/blog/projects/cyclopress/" target="_blank">CycloPress Docs and Support on AMWhalen.com &raquo;</a></li>
+			<li><a href="http://amwhalen.com/blog/projects/cyclopress/" target="_blank">Docs and Support on AMWhalen.com &raquo;</a></li>
 			<li><a href="http://wordpress.org/extend/plugins/cyclopress/" target="_blank">CycloPress on WordPress.org &raquo;</a></li>
 		</ul>
 		
