@@ -819,6 +819,9 @@ function cy_debug_page() {
 	// GD
 	if (function_exists('gd_info')) { $GDArray = gd_info(); } else { $GDArray = false; }
 	
+	// stats
+	$stats = cy_db_stats();
+	
 	?>
 	
 	<div class="wrap"
@@ -854,12 +857,12 @@ function cy_debug_page() {
 			
 			<tr>
 				<th>cy_version</th>
-				<th><?PHP echo $cy_version; ?></th>
+				<td><?PHP echo $cy_version; ?></td>
 			</tr>
 			
 			<tr>
 				<th>cy_db_version</th>
-				<th><?PHP echo $cy_db_version; ?></th>
+				<td><?PHP echo $cy_db_version; ?></td>
 			</tr>
 			
 			<?PHP
@@ -876,6 +879,11 @@ function cy_debug_page() {
 				<?PHP
 			}
 			?>
+			
+			<tr>
+				<th>total rides</th>
+				<td><?php echo $stats['total_rides']; ?></td>
+			</tr>
 			
 		</table>
 	
