@@ -992,7 +992,7 @@ function cy_admin_css() {
 			overflow: auto;
 		}
 		.cy_sort {
-			color: #eee;
+			color: #ddd;
 		}
 	</style>
 	
