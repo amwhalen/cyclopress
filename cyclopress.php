@@ -381,11 +381,11 @@ function cy_admin_navigation($current_page='') {
 			'title' => 'Manage Rides',
 		),
 		'options' => array(
-			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php',
+			'url' => $wp_url.'/wp-admin/admin.php?page=cyclopress/cyclopress.php',
 			'title' => 'Options',
 		),
 		'debug' => array(
-			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&debug=1',
+			'url' => $wp_url.'/wp-admin/admin.php?page=cyclopress/cyclopress.php&debug=1',
 			'title' => 'Debug',
 		),
 	);
