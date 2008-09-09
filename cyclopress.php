@@ -393,10 +393,23 @@ function cy_admin_navigation($current_page='') {
 	$str = '<div class="cy_admin_navigation">CycloPress: <ul>';
 	$tabs = array();
 	foreach ($links as $k=>$link) {
+	
+		$class = '';
+		$warning = '';
+	
+		// should an error be reported in the nav?
+		if ($k == 'debug') {
+			if (!cy_check_php() || !cy_check_gd() || !cy_cache_is_writable()) {
+				$class = ' cy_debug';
+				$warning = ' !';
+			}
+		}
+	
+		// make the current page look different
 		if ($current_page == $k) {
-			$tabs[] = '<li class="here"><a href="'.$link['url'].'">'.$link['title'].'</a></li>';
+			$tabs[] = '<li class="here'.$class.'"><a href="'.$link['url'].'">'.$link['title'].$warning.'</a></li>';
 		} else {
-			$tabs[] = '<li><a href="'.$link['url'].'">'.$link['title'].'</a></li>';
+			$tabs[] = '<li class="'.$class.'"><a href="'.$link['url'].'">'.$link['title'].$warning.'</a></li>';
 		}
 	}
 	$str .= implode('', $tabs);
@@ -1040,26 +1053,6 @@ function cy_admin_css() {
 			color: #c00;
 			font-weight: bold;
 		}
-		.cy_function {
-			border: 1px solid #ccc;
-			padding: 0 1em;
-			margin: 0 0 1em 0;
-			background: #eee;
-		}
-		.cy_function h4 {
-			font-size: 14px;
-			margin: 0 -1em 1em -1em;
-			padding: 1em;
-			font-family: "Courier New", Courier, monospace;
-			background: #ddf;
-			font-weight: normal;
-		}
-		.cy_function pre {
-			border: 1px solid #aaa;
-			background: #ccc;
-			padding: .5em;
-			overflow: auto;
-		}
 		.cy_sort {
 			color: #ddd;
 		}
@@ -1095,6 +1088,10 @@ function cy_admin_css() {
 			color: #000;
 			border: 1px solid #ddd;
 			border-width: 1px 1px 0 1px;
+		}
+		.cy_admin_navigation ul li.cy_debug {
+			background: #fec;
+			font-weight: bold;
 		}
 	</style>
 	
