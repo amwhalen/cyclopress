@@ -753,12 +753,12 @@ function cy_manage_page() {
 				
 				<thead>
 					<tr>
-						<th>Date</th>
-						<th>Distance</th>
-						<th>Average Speed</th>
-						<th>Max Speed</th>
-						<th>Cadence</th>
-						<th>Time</th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=date&cy_sort=asc">Date</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=distance&cy_sort=desc">Distance</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=avg_speed&cy_sort=desc">Average Speed</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=max_speed&cy_sort=desc">Max Speed</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=cadence&cy_sort=desc">Cadence</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=time&cy_sort=desc">Time</a></th>
 						<th>Notes</th>
 					</tr>
 				</thead>
