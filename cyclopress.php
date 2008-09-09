@@ -1025,38 +1025,17 @@ function cy_admin_css() {
 	?>
 	
 	<style type="text/css">
-		table.cy_status_table {
-			border-collapse: collapse;
-			width: 100%;
-			border-top: 1px solid #ccc;
-			margin-top: 1em;
-		}
-		table.cy_status_table caption {
-			background: #fff;
-			font-weight: bold;
-			text-align: left;
-			margin-top: 1em;
-		}
-		table.cy_status_table tr {
-			border-bottom: 1px solid #ccc;
-		}
-		table.cy_status_table th {
-			width: 50px;
-		}
-		table.cy_status_table th, table.cy_status_table td {
-			padding: 3px;
-		}
-		table.cy_status_table .cy_ok {
+		.cy_ok {
 			background: #cfc;
 			color: #060;
 			font-weight: bold;
 		}
-		table.cy_status_table .cy_warning {
+		.cy_warning {
 			background: #fec;
 			color: #000;
 			font-weight: bold;
 		}
-		table.cy_status_table .cy_error {
+		.cy_error {
 			background: #fcc;
 			color: #c00;
 			font-weight: bold;
