@@ -939,6 +939,16 @@ function cy_debug_page() {
 			</tr>
 			
 			<tr>
+				<th>Server</th>
+				<td><?PHP echo $_SERVER['SERVER_SOFTWARE']; ?></td>
+			</tr>
+			
+			<tr>
+				<th>User Agent</th>
+				<td><?PHP echo $_SERVER['HTTP_USER_AGENT']; ?></td>
+			</tr>
+			
+			<tr>
 				<th>cy_rides table exists</th>
 				<td><?PHP echo ($wpdb->get_var("show tables like '$table_name'") == $table_name) ? 'yes ('.$table_name.')' : 'no'; ?></td>
 			</tr>
