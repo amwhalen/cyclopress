@@ -78,7 +78,7 @@ class CYRide {
 		if ($this->hour != '' && $this->minute != '') {
 			$time = $this->hour.':'.$this->minute.' '.$this->ampm;
 		} else {
-			$time = '00:00pm';
+			$time = '00:00:00';
 		}
 		$this->startdate = date($format, strtotime($date . ' ' . $time));
 		
