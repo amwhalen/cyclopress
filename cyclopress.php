@@ -1227,13 +1227,15 @@ function cy_create_all_graphs($year=false) {
 	
 	$sql = 'select * from '.$table_name;
 	$result = $wpdb->query($sql);
-	$rows = mysql_num_rows($result);
+	$rows = sizeof($result);
 	
 	// create all graphs
 	if ($rows >= 1) {
+		echo 'selected some rows, creating graphs...';
 		cy_create_average_speed_graph($year);
 		cy_create_distance_graph($year);
 	} else {
+		echo 'no rows, clearing cache';
 		cy_empty_cache();
 	}
 
