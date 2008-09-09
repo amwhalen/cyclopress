@@ -1227,7 +1227,7 @@ function cy_create_all_graphs($year=false) {
 	
 	$sql = 'select * from '.$table_name;
 	$result = $wpdb->query($sql);
-	$rows = sizeof($result);
+	$rows = mysql_num_rows($result);
 	
 	// create all graphs
 	if ($rows >= 1) {
