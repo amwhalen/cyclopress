@@ -797,12 +797,12 @@ function cy_manage_page() {
 				
 				<thead>
 					<tr>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=date&cy_sort=asc" class="cy_sort">Date &darr;</a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=distance&cy_sort=desc" class="cy_sort">Distance</a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=avg_speed&cy_sort=desc" class="cy_sort">Average Speed</a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=max_speed&cy_sort=desc" class="cy_sort">Max Speed</a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=cadence&cy_sort=desc" class="cy_sort">Cadence</a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=time&cy_sort=desc" class="cy_sort">Time</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=date&cy_sort=<?php if ($sort_col=='date') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } ?>" class="cy_sort">Date<?php if ($sort_col=='date') { if ($sort_order=='desc') { echo ' &darr;'; } else { echo ' &uarr;'; } } ?></a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=distance&cy_sort=<?php if ($sort_col=='distance') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } ?>" class="cy_sort">Distance<?php if ($sort_col=='distance') { if ($sort_order=='desc') { echo ' &darr;'; } else { echo ' &uarr;'; } } ?></a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=avg_speed&cy_sort=<?php if ($sort_col=='avg_speed') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } ?>" class="cy_sort">Average Speed<?php if ($sort_col=='avg_speed') { if ($sort_order=='desc') { echo ' &darr;'; } else { echo ' &uarr;'; } } ?></a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=max_speed&cy_sort=<?php if ($sort_col=='max_speed') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } ?>" class="cy_sort">Max Speed<?php if ($sort_col=='max_speed') { if ($sort_order=='desc') { echo ' &darr;'; } else { echo ' &uarr;'; } } ?></a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=cadence&cy_sort=<?php if ($sort_col=='cadence') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } ?>" class="cy_sort">Cadence<?php if ($sort_col=='cadence') { if ($sort_order=='desc') { echo ' &darr;'; } else { echo ' &uarr;'; } } ?></a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=time&cy_sort=<?php if ($sort_col=='time') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } ?>" class="cy_sort">Time<?php if ($sort_col=='time') { if ($sort_order=='desc') { echo ' &darr;'; } else { echo ' &uarr;'; } } ?></a></th>
 						<th>Notes</th>
 					</tr>
 				</thead>
