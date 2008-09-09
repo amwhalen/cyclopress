@@ -753,12 +753,12 @@ function cy_manage_page() {
 				
 				<thead>
 					<tr>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=date&cy_sort=asc">Date</a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=distance&cy_sort=desc">Distance</a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=avg_speed&cy_sort=desc">Average Speed</a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=max_speed&cy_sort=desc">Max Speed</a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=cadence&cy_sort=desc">Cadence</a></th>
-						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=time&cy_sort=desc">Time</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=date&cy_sort=asc" class="cy_sort">Date</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=distance&cy_sort=desc" class="cy_sort">Distance</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=avg_speed&cy_sort=desc" class="cy_sort">Average Speed</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=max_speed&cy_sort=desc" class="cy_sort">Max Speed</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=cadence&cy_sort=desc" class="cy_sort">Cadence</a></th>
+						<th><a href="?page=cyclopress/cyclopress.php&cy_sort_col=time&cy_sort=desc" class="cy_sort">Time</a></th>
 						<th>Notes</th>
 					</tr>
 				</thead>
@@ -990,6 +990,9 @@ function cy_admin_css() {
 			background: #ccc;
 			padding: .5em;
 			overflow: auto;
+		}
+		.cy_sort {
+			color: #eee;
 		}
 	</style>
 	
