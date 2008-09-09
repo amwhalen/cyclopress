@@ -1086,7 +1086,7 @@ function cy_admin_css() {
 			border: 1px solid #ddd;
 			border-width: 1px 1px 0 1px;
 		}
-		.cy_admin_navigation ul li.cy_debug {
+		.cy_admin_navigation ul li.cy_debug a {
 			background: #fec;
 			font-weight: bold;
 		}
