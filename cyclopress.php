@@ -1230,11 +1230,9 @@ function cy_create_all_graphs($year=false) {
 	
 	// create all graphs
 	if ($result != 0) {
-		echo 'selected some rows, creating graphs...';
 		cy_create_average_speed_graph($year);
 		cy_create_distance_graph($year);
 	} else {
-		echo 'no rows, clearing cache';
 		cy_empty_cache();
 	}
 
