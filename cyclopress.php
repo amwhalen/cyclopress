@@ -847,7 +847,7 @@ function cy_debug_page() {
 			
 			<tr>
 				<th>cy_rides table exists</th>
-				<td><?PHP echo ($wpdb->get_var("show tables like '$table_name'") == $table_name) ? 'yes' : 'no'; ?></td>
+				<td><?PHP echo ($wpdb->get_var("show tables like '$table_name'") == $table_name) ? 'yes ('.$table_name.')' : 'no'; ?></td>
 			</tr>
 			
 			<tr>
