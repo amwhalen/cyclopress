@@ -809,7 +809,7 @@ function cy_manage_page() {
  */
 function cy_debug_page() {
 	
-	global $wpdb, $wp_version;;
+	global $wpdb, $wp_version, $cy_version, $cy_db_version;
 	
 	$table_name = $wpdb->prefix . "cy_rides";
 	
@@ -852,8 +852,21 @@ function cy_debug_page() {
 				<td><?PHP echo (cy_is_cache_writable()) ? 'yes' :'no'; ?></td>
 			</tr>
 			
+			<tr>
+				<th>cy_version</th>
+				<th><?PHP echo $cy_version; ?></th>
+			</tr>
+			
+			<tr>
+				<th>cy_db_version</th>
+				<th><?PHP echo $cy_db_version; ?></th>
+			</tr>
+			
 			<?PHP
 			foreach($opts as $k=>$v) {
+				
+				if ($k == 'cy_version' || $k == 'cy_db_version') continue;
+				
 				$val = get_option($k);
 				?>
 				<tr>
