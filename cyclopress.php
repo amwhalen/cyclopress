@@ -890,7 +890,7 @@ function cy_manage_page() {
 					?>
 					<tbody>
 					<tr>
-						<td>No Rides! Get out there on your bike!</td>
+						<th>No Rides! Get out there on your bike!</th>
 					</tr>
 					</tbody>
 					<?php
