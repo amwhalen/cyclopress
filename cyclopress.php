@@ -991,7 +991,7 @@ function cy_about_page() {
 	?>
 	<div class="wrap">
 	
-		<?php echo cy_admin_navigation('debug'); ?>
+		<?php echo cy_admin_navigation('about'); ?>
 	
 		<p>CycloPress was created by <a href="http://amwhalen.com">Andrew M. Whalen</a>.</p>
 		
