@@ -1129,6 +1129,7 @@ function cy_admin_css() {
 			padding: 5px;
 			border: 1px solid #eee;
 			border-width: 1px 1px 0 1px;
+			text-decoration: none;
 		}
 		.cy_admin_navigation ul li a:hover {
 			border: 1px solid #ccc;
