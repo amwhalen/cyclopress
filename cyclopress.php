@@ -567,11 +567,11 @@ function cy_write_page($ride=false) {
 		
 		if (!$saved) {
 			?>
-			<div id="message" class="updated fade"><p><?php echo $e; $wpdb->print_error(); ?></p></div>
+			<div id="message" class="updated fade" style="margin-top: 1.5em;"><p><?php echo $e; $wpdb->print_error(); ?></p></div>
 			<?PHP
 		} else {
 			?>
-			<div id="message" class="updated fade"><p>Ride for <?php echo $ride->get_startdate(); ?> saved.</p></div>
+			<div id="message" class="updated fade" style="margin-top: 1.5em;"><p>Your Ride for <?php echo $ride->get_startdate(); ?> saved.</p></div>
 			<?PHP
 			$ride = new CYRide();
 		}
