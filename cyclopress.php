@@ -866,7 +866,7 @@ function cy_manage_page() {
  */
 function cy_debug_page() {
 	
-	global $wpdb, $wp_version, $cy_version, $cy_db_version, $cy_dir;
+	global $wpdb, $wp_version, $cy_version, $cy_db_version, $cy_dir, $cy_graph_dir_full;
 	
 	$table_name = $wpdb->prefix . "cy_rides";
 	
@@ -902,7 +902,7 @@ function cy_debug_page() {
 				<?PHP } ?>
 			</tr>
 			<tr>
-				<th>Cache is writeable</th>
+				<th>Cache is writable</th>
 				<?PHP if (!cy_is_cache_writable()) { ?>
 				<td class="cy_warning">
 					Graphs directory is not writable for PHP!<br />
