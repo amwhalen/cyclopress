@@ -385,7 +385,7 @@ function cy_admin_navigation($current_page='') {
 			'title' => 'Options',
 		),
 		'debug' => array(
-			'url' => $wp_url.'/wp-admin/admin.php?page=cyclopress/cyclopress.php&debug=1',
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&debug=1',
 			'title' => 'Debug',
 		),
 	);
