@@ -369,6 +369,9 @@ function cy_update_ride($ride) {
  */
 function cy_admin_menu() {
 
+	// check!
+	cy_check_version();
+
 	// options for cycling
 	//add_options_page('Cycling Options', 'Cycling', 'edit_files', __FILE__, 'cy_options_page');
 	add_submenu_page('plugins.php', 'CycloPress', 'CycloPress', 'edit_files', __FILE__, 'cy_options_page');
