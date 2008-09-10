@@ -3,20 +3,20 @@ Contributors: anukit
 Tags: cycling, graphs, sports, exercise, jpgraph, gd
 Requires at least: 2.5
 Tested up to: 2.6.2
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 
 Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
 == Description ==
 
-Take the data from your cyclocomputer after each ride and plug it into CycloPress under the Write menu.
-CycloPress will update your graphs and text statistics accordingly.
+CycloPress allows you to track your cycling statistics from a cyclocomputer with WordPress.
 
-CycloPress requires that the GD library is installed on your web server. After you activate CycloPress
-you can see what version of GD (if any) you have installed by checking the CycloPress Options page under Plugins.
+The GD library must be installed on your web server. After you activate CycloPress
+you can see what version of GD (if any) you have installed by checking the CycloPress Debug page.
 
-Graphs are cached after each update made to CycloPress. Graphs are recreated when you update the CycloPress
-Options, or when you add new data.
+To display a 'cycling' page of statistics and graphs, you'll need to install a plugin to enable PHP in posts
+and pages. The CycloPress API contains functions that you can call to show graphs, text statistics, or other
+information about your rides.
 
 == Installation ==
 
@@ -24,7 +24,8 @@ Options, or when you add new data.
 
 * WordPress version 2.5 or higher. CycloPress may work with older versions, but it is not suggested.
 * PHP version 4.3.1 or higher.
-* GD Library version 1 or 2.
+* GD Library.
+* Optional plugin to allow PHP code in pages and posts.
 
 = Installation =
 
@@ -38,6 +39,10 @@ Find [more instructions and discussion](http://amwhalen.com/blog/projects/cyclop
 
 == Screenshots ==
 
-1. The 'Add a Ride' interface found under `Write -> Ride`.
-2. The 'CycloPress Options' page found under `Plugins -> CycloPress Options`.
-3. Example output of `cy_get_summary()` and a distance graph.
+1. Manage your stats with CycloPress.
+2. The 'Add a Ride' interface found under `Write -> Ride`.
+3. A graph of distance over time.
+4. A graph of average speed over time.
+5. Example output of `cy_get_summary()`.
+6. CycloPress is widget-compatible. It shows your total miles and average speed.
+7. The 'CycloPress Options' page found under `Plugins -> CycloPress Options`.
