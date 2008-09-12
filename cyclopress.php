@@ -384,6 +384,10 @@ function cy_admin_navigation($current_page='') {
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php',
 			'title' => 'Options',
 		),
+		'stats' => array(
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&stats=1',
+			'title' => 'Stats',
+		),
 		'debug' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&debug=1',
 			'title' => 'Debug',
@@ -452,6 +456,14 @@ function cy_options_page() {
 		cy_debug_page();
 		return;
 		
+	}
+	
+	// redirect to the stats page
+	if (isset($_GET['stats']) && $_GET['stats']) {
+	
+		cy_stats_page();
+		return;
+	
 	}
 	
 	// redirect to the about page
@@ -1018,6 +1030,55 @@ function cy_debug_page() {
 	
 	<?PHP
 	
+}
+
+/**
+ * CycloPress stats page.
+ */
+function cy_stats_page() {
+
+	global $cy_dir;
+
+	?>
+	<div class="wrap">
+	
+		<?php
+		
+		echo cy_admin_navigation('stats');
+		
+		$stats = cy_db_stats();
+		
+		if ($stats) {
+		
+			cy_css();
+		
+			$first_ride_date = cy_get_last_ride_date();
+		
+			?><p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p><?php
+		
+			echo cy_get_summary(true, date('Y', strtotime($last_ride_date)));
+			
+			?><h3>Distance</h3><?php
+			
+			echo cy_get_graph_img_tag('distance');
+			
+			?><h3>Average Speed</h3><?php
+			
+			echo cy_get_graph_img_tag('average_speed');
+		
+		} else {
+		
+			?><p>No stats! Get out there and ride!</p><?php
+		
+		}
+		
+		echo cy_get_summary(true);
+		
+		?>
+
+	</div>
+	<?PHP
+
 }
 
 /**
