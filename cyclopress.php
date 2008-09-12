@@ -1056,7 +1056,7 @@ function cy_stats_page() {
 		
 			?><p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p><?php
 		
-			echo cy_get_summary(true, date('Y', strtotime($last_ride_date)));
+			echo cy_get_summary(true, cy_get_last_ride_date('Y'));
 			
 			?><h3>Distance</h3><?php
 			
@@ -1071,9 +1071,7 @@ function cy_stats_page() {
 			?><p>No stats! Get out there and ride!</p><?php
 		
 		}
-		
-		echo cy_get_summary(true);
-		
+				
 		?>
 
 	</div>
