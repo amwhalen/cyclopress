@@ -1673,6 +1673,14 @@ function cy_install($recreate_graphs=false) {
 		// update only CY options, leave user options alone
 		update_option("cy_version", $cy_version);
 		update_option("cy_db_version", $cy_db_version);
+		
+		// add any new options, leaving old values untouched
+		$opts = cy_get_default_options();
+		foreach($opts as $k=>$v) {
+			if (get_option($k) === FALSE) {
+				add_option($k, $v);
+			}
+		}
 	
 		// set this flag to true so the graphs will be recreated
 		$changed = true;
