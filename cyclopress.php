@@ -1627,17 +1627,17 @@ function cy_check_php() {
  * The cy_install function isn't called when the plugin is 'upgraded automatically'.
  * This function should be called from any API functions.
  */
-function cy_check_version() {
+function cy_check_version($recreate_graphs=false) {
 
 	// for now, this just needs to call cy_install
-	cy_install();
+	cy_install($recreate_graphs);
 
 }
 
 /**
  * Install this plugin
  */
-function cy_install() {
+function cy_install($recreate_graphs=false) {
 
 	global $wpdb;
 	global $cy_db_version, $cy_version;
@@ -1661,6 +1661,7 @@ function cy_install() {
 	$opts = cy_get_default_options();
 
 	// Upgrade or install
+	$changed = false;
 	if ( $installed_ver != $cy_db_version ) {
 	
 		// upgrade
@@ -1672,6 +1673,9 @@ function cy_install() {
 		// update only CY options, leave user options alone
 		update_option("cy_version", $cy_version);
 		update_option("cy_db_version", $cy_db_version);
+	
+		// set this flag to true so the graphs will be recreated
+		$changed = true;
 	
 	} else if ( $wpdb->get_var("show tables like '$table_name'") != $table_name ) {
 	
@@ -1686,11 +1690,14 @@ function cy_install() {
 		foreach($opts as $k=>$v) {
 			add_option($k, $v);
 		}
+		
+		// set this flag to true so the graphs will be recreated
+		$changed = true;
 	
 	}
 	
 	// create all graphs
-	if (cy_is_cache_writable()) {
+	if ( (cy_is_cache_writable() && $changed) || $recreate_graphs) {
 		cy_empty_cache();
 		cy_create_all_graphs();
 	}
