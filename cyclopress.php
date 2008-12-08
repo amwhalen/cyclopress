@@ -26,7 +26,7 @@ Author URI: http://amwhalen.com
 */
 
 
-$cy_version = '1.3.3';
+$cy_version = '1.3.4';
 $cy_db_version = '1.0';
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
