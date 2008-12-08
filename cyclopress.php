@@ -48,6 +48,10 @@ class CYRide {
 	var $cadence = '';
 	var $notes = '';
 	
+	// new stats
+	var $bike_id = NULL;
+	var $type_id = NULL;
+	
 	// form-only
 	var $month = '';
 	var $day = '';
@@ -117,6 +121,30 @@ class CYRide {
 		$this->ampm = date('a', $ts);
 	
 	}
+
+};
+
+/**
+ * The CycloPress Bike object
+ */
+class CYBike {
+
+	var $id;
+	var $make;
+	var $model;
+	var $year;
+	var $notes;
+
+};
+
+/**
+ * The CycloPress Type object
+ */
+class CYType {
+
+	var $id;
+	var $label;
+	var $description;
 
 };
 
