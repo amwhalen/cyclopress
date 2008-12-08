@@ -1280,6 +1280,8 @@ function cy_k2m($kilometers) {
  */
 function cy_create_all_graphs($year=false) {
 
+	echo 'cy_create_all_graphs()';
+
 	// first check if we have data
 	global $wpdb;
 	$table_name = $wpdb->prefix . "cy_rides";
