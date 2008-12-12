@@ -1264,6 +1264,9 @@ function cy_admin_css() {
 		.cy_manage_table th a {
 			color: #000;
 		}
+		.cy_manage_table th a:hover {
+			color: #666;
+		}
 	</style>
 	
 	<?PHP
