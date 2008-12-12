@@ -874,7 +874,7 @@ function cy_manage_page() {
 		
 			<h2>Manage Rides</h2>
 	
-			<table class="widefat">
+			<table class="widefat cy_manage_table">
 				
 				<?php
 				
@@ -1260,6 +1260,9 @@ function cy_admin_css() {
 			background: #fcc;
 			color: #000;
 			font-weight: bold;
+		}
+		.cy_manage_table th a {
+			color: #000;
 		}
 	</style>
 	
