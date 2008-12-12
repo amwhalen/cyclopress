@@ -405,7 +405,7 @@ function cy_admin_navigation($current_page='') {
 			'title' => 'Add a Ride',
 		),
 		'manage' => array(
-			'url' => $wp_url.'/wp-admin/edit.php?page=cyclopress/cyclopress.php&manage=1',
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage=1',
 			'title' => 'Manage Rides',
 		),
 		'options' => array(
