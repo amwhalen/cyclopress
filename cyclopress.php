@@ -467,7 +467,8 @@ function cy_admin_menu() {
 	add_submenu_page('post.php', 'Ride', 'Ride', 'edit_pages', __FILE__, 'cy_write_page');
 	
 	// add a ride editing page
-	add_submenu_page('edit.php', 'Rides', 'Rides', 'edit_pages', __FILE__, 'cy_manage_page');
+	// removed for version 2.7. Older versions will be OK, since there's a CycloPress nav bar anyway.
+	//add_submenu_page('edit.php', 'Rides', 'Rides', 'edit_pages', __FILE__, 'cy_manage_page');
 
 }
 
