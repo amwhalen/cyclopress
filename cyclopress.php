@@ -479,6 +479,14 @@ function cy_options_page() {
 
 	global $cy_graph_dir_full, $cy_dir, $cy_version;
 
+	// manage rides
+	if (isset($_GET['manage']) && $_GET['manage']) {
+	
+		cy_manage_page();
+		return;
+	
+	}
+
 	// redirect to the debug page if clicked on
 	if (isset($_GET['debug']) && $_GET['debug']) {
 		
