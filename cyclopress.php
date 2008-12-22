@@ -1780,6 +1780,7 @@ function cy_install($recreate_graphs=false) {
 	if ( $installed_db_ver != $cy_db_version || $installed_ver != $cy_version ) {
 	
 		// upgrade
+		echo 'upgrading cyclopress';
 	
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
