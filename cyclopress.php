@@ -490,7 +490,7 @@ function cy_options_page() {
 	// export
 	if (isset($_GET['export']) && $_GET['export']) {
 	
-		echo '<h3>CycloPress Export</h3><textarea rows="50" cols="100">'.cy_export().'</textarea>';
+		echo '<h3>CycloPress Export</h3><textarea rows="20" cols="80">'.cy_export().'</textarea>';
 		return;
 	
 	}
