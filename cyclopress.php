@@ -1701,18 +1701,19 @@ function cy_rides_sql() {
 	
 	$table_name = $wpdb->prefix . "cy_rides";
 
-	$sql  = 'CREATE TABLE `'.$table_name.'` (';
-	$sql .= '`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,';
-	$sql .= '`startdate` DATETIME NOT NULL ,';
-	$sql .= '`miles` DOUBLE(6,2) NOT NULL ,';
-	$sql .= '`avg_speed` DOUBLE(4,2) NULL ,';
-	$sql .= '`max_speed` DOUBLE(4,2) NULL ,';
-	$sql .= '`minutes` INT(4) UNSIGNED NOT NULL ,';
-	$sql .= '`cadence` DOUBLE(5,2) NULL ,';
-	$sql .= '`bike_id` UNSIGNED INT NULL ,';
-	$sql .= '`type_id` UNSIGNED INT NULL ,';
-	$sql .= '`notes` TEXT NULL';
-	$sql .= ');';
+	$sql  = 'CREATE TABLE `'.$table_name.'` (
+				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+				startdate DATETIME NOT NULL ,
+				miles DOUBLE(6,2) NOT NULL ,
+				avg_speed DOUBLE(4,2) NULL ,
+				max_speed DOUBLE(4,2) NULL ,
+				minutes INT(4) UNSIGNED NOT NULL ,
+				cadence DOUBLE(5,2) NULL ,
+				bike_id UNSIGNED INT NULL ,
+				type_id UNSIGNED INT NULL ,
+				notes TEXT NULL,
+				PRIMARY KEY  id
+			);';
 	
 	return $sql;
 
