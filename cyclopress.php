@@ -27,7 +27,7 @@ Author URI: http://amwhalen.com
 
 
 $cy_version = '1.3.5';
-$cy_db_version = '1.0';
+$cy_db_version = '1.1';
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
 $cy_dir = get_bloginfo('url').'/wp-content/plugins/'.basename(dirname(__FILE__));
@@ -1680,7 +1680,7 @@ function cy_check_version($recreate_graphs=false) {
 /**
  * Returns the SQL for the main Rides table
  */
-function cy_sql_rides() {
+function cy_rides_sql() {
 
 	global $wpdb;
 	
@@ -1742,33 +1742,6 @@ function cy_types_sql() {
 
 }
 
-/** 
- * Checks to see if all tables are created
- */
-function cy_check_tables() {
-
-	global $wpdb;
-
-	$tables = array(
-		'cy_rides',
-		'cy_bikes',
-		'cy_types'
-	);
-	
-	foreach ($tables as $table) {
-	
-		$table_name = $wpdb->prefix . $table;
-		if ($wpdb->get_var("show tables like '$table_name'") != $table_name) {
-			echo 'tables do not exist. creating...';
-			return false;
-		}
-	
-	}
-	
-	return true;
-
-}
-
 /**
  * Install this plugin
  */
@@ -1778,6 +1751,8 @@ function cy_install($recreate_graphs=false) {
 	global $cy_db_version, $cy_version;
 
 	$installed_ver = get_option("cy_db_version");
+	
+	$rides_table = $wpdb->prefix . 'cy_rides';
 
 	// get defaul options
 	$opts = cy_get_default_options();
@@ -1812,7 +1787,7 @@ function cy_install($recreate_graphs=false) {
 		// set this flag to true so the graphs will be recreated
 		$changed = true;
 	
-	} else if ( ! cy_check_tables() ) {
+	} else if ( $wpdb->get_var("show tables like '$rides_table'") != $rides_table ) {
 	
 		// install
 		
