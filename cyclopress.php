@@ -27,7 +27,7 @@ Author URI: http://amwhalen.com
 
 
 $cy_version = '1.3.5';
-$cy_db_version = '1.5';
+$cy_db_version = '1.1';
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
 $cy_dir = get_bloginfo('url').'/wp-content/plugins/'.basename(dirname(__FILE__));
@@ -1696,6 +1696,8 @@ function cy_check_version($recreate_graphs=false) {
  * Returns the SQL for the main Rides table
  */
 function cy_rides_sql() {
+
+	echo 'checking cy_rides_sql';
 
 	global $wpdb;
 	
