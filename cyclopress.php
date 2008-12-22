@@ -27,7 +27,7 @@ Author URI: http://amwhalen.com
 
 
 $cy_version = '1.3.5';
-$cy_db_version = '1.0';
+$cy_db_version = '1.1';
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
 $cy_dir = get_bloginfo('url').'/wp-content/plugins/'.basename(dirname(__FILE__));
@@ -1711,8 +1711,8 @@ function cy_rides_sql() {
 				max_speed DOUBLE(4,2) NULL ,
 				minutes INT(4) UNSIGNED NOT NULL ,
 				cadence DOUBLE(5,2) NULL ,
-				bike_id UNSIGNED INT NULL ,
-				type_id UNSIGNED INT NULL ,
+				bike_id INT(10) UNSIGNED INT NULL ,
+				type_id INT(10) UNSIGNED INT NULL ,
 				notes TEXT NULL,
 				UNIQUE KEY  id (id)
 			);';
