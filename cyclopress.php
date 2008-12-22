@@ -1714,7 +1714,7 @@ function cy_rides_sql() {
 				bike_id UNSIGNED INT NULL ,
 				type_id UNSIGNED INT NULL ,
 				notes TEXT NULL,
-				PRIMARY KEY  id
+				UNIQUE KEY  id (id)
 			);';
 	
 	return $sql;
