@@ -428,6 +428,10 @@ function cy_admin_navigation($current_page='') {
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&about=1',
 			'title' => 'About',
 		),
+		'export' => array(
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&export=1',
+			'title' => 'Export',
+		),
 	);
 
 	$str = '<div class="cy_admin_navigation">CycloPress: <ul>';
@@ -482,6 +486,14 @@ function cy_admin_menu() {
 function cy_options_page() {
 
 	global $cy_graph_dir_full, $cy_dir, $cy_version;
+
+	// export
+	if (isset($_GET['export']) && $_GET['export']) {
+	
+		echo cy_export();
+		return;
+	
+	}
 
 	// manage rides
 	if (isset($_GET['manage']) && $_GET['manage']) {
@@ -1838,6 +1850,49 @@ function cy_install($recreate_graphs=false) {
 		cy_empty_cache();
 		cy_create_all_graphs();
 	}
+
+}
+
+/**
+ * Exports all data to an XML format.
+ */
+function cy_export() {
+
+	global $wpdb;
+
+	$tables = array(
+		'xy_rides',
+		'cy_bikes',
+		'cy_types'
+	);
+	
+	$xml = '<cyclopress><meta><version>'.$cy_version.'</version><dbversion>'.$cy_db_version.'</dbversion></meta>';
+	
+	foreach ($tables as $table) {
+		
+		$table_name = $wpdb->prefix . $table;
+		
+		// open this table's tag
+		$xml .= '<'.$table.'>';
+		
+		// get the rows
+		$sql  = 'select * from '.$table_name;
+		$result = $wpdb->get_results($sql, ARRAY_A);
+		if (!$result) {
+			$xml .= '</'.$table.'>';
+			continue;
+		}
+		$stats = $result[0];
+		
+		// add all rows here
+		
+		$xml .= '</'.$table.'>';
+		
+	}
+	
+	$xml .= '</cyclopress>';
+
+	return $xml;
 
 }
 
