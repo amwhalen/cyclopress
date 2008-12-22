@@ -1861,7 +1861,7 @@ function cy_export() {
 	global $wpdb;
 
 	$tables = array(
-		'xy_rides',
+		'cy_rides',
 		'cy_bikes',
 		'cy_types'
 	);
