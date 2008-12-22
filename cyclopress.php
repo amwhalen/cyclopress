@@ -1742,6 +1742,30 @@ function cy_types_sql() {
 
 }
 
+/** 
+ * Checks to see if all tables are created
+ */
+function cy_check_tables() {
+
+	global $wpdb;
+
+	$tables = array(
+		'cy_rides',
+		'cy_bikes',
+		'cy_types'
+	);
+	
+	foreach ($tables as $table) {
+	
+		$table_name = $wpdb->prefix . $table;
+		if ($wpdb->get_var("show tables like '$table_name'") != $table_name) return false;
+	
+	}
+	
+	return true;
+
+}
+
 /**
  * Install this plugin
  */
@@ -1785,7 +1809,7 @@ function cy_install($recreate_graphs=false) {
 		// set this flag to true so the graphs will be recreated
 		$changed = true;
 	
-	} else if ( $wpdb->get_var("show tables like '$table_name'") != $table_name ) {
+	} else if ( ! cy_check_tables() ) {
 	
 		// install
 		
