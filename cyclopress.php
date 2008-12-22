@@ -27,7 +27,7 @@ Author URI: http://amwhalen.com
 
 
 $cy_version = '1.3.5';
-$cy_db_version = '1.1';
+$cy_db_version = '1.2';
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
 $cy_dir = get_bloginfo('url').'/wp-content/plugins/'.basename(dirname(__FILE__));
@@ -1783,12 +1783,12 @@ function cy_install($recreate_graphs=false) {
 	if ( $installed_db_ver != $cy_db_version || $installed_ver != $cy_version ) {
 	
 		// upgrade
-		echo 'upgrading cyclopress';
+		echo 'upgrading cyclopress<br />';
 	
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
 		// cy_rides
-		dbDelta(cy_rides_sql());
+		echo 'rides: '.dbDelta(cy_rides_sql()).'<br />';
 		// cy_bikes
 		dbDelta(cy_bikes_sql());
 		// cy_types
