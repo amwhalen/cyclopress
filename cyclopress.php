@@ -130,6 +130,7 @@ class CYRide {
 class CYBike {
 
 	var $id;
+	var $label;
 	var $make;
 	var $model;
 	var $year;
@@ -1677,17 +1678,14 @@ function cy_check_version($recreate_graphs=false) {
 }
 
 /**
- * Install this plugin
+ * Returns the SQL for the main Rides table
  */
-function cy_install($recreate_graphs=false) {
+function cy_sql_rides() {
 
 	global $wpdb;
-	global $cy_db_version, $cy_version;
-
-	$installed_ver = get_option("cy_db_version");
+	
 	$table_name = $wpdb->prefix . "cy_rides";
 
-	// the table
 	$sql  = 'CREATE TABLE `'.$table_name.'` (';
 	$sql .= '`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,';
 	$sql .= '`startdate` DATETIME NOT NULL ,';
@@ -1698,6 +1696,59 @@ function cy_install($recreate_graphs=false) {
 	$sql .= '`cadence` DOUBLE(5,2) NULL ,';
 	$sql .= '`notes` TEXT NULL';
 	$sql .= ');';
+
+}
+
+/**
+ * Returns the SQL for the main Bikes table
+ */
+function cy_bikes_sql() {
+
+	global $wpdb;
+	
+	$table_name = $wpdb->prefix . "cy_bikes";
+
+	$sql  = 'CREATE TABLE `'.$table_name.'` (';
+	$sql .= '`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,';
+	$sql .= '`label` VARCHAR(255) NOT NULL ,';
+	$sql .= '`make` VARCHAR(255) NULL ,';
+	$sql .= '`model` VARCHAR(255) NULL ,';
+	$sql .= '`year` INT(4) UNSIGNED NULL ,';
+	$sql .= '`notes` TEXT NULL';
+	$sql .= ');';
+
+}
+
+	var $id;
+	var $label;
+	var $description;
+	
+/**
+ * Returns the SQL for the main Bikes table
+ */
+function cy_types_sql() {
+
+	global $wpdb;
+	
+	$table_name = $wpdb->prefix . "cy_types";
+
+	$sql  = 'CREATE TABLE `'.$table_name.'` (';
+	$sql .= '`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,';
+	$sql .= '`label` VARCHAR(255) NOT NULL ,';
+	$sql .= '`description` TEXT NULL';
+	$sql .= ');';
+
+}
+
+/**
+ * Install this plugin
+ */
+function cy_install($recreate_graphs=false) {
+
+	global $wpdb;
+	global $cy_db_version, $cy_version;
+
+	$installed_ver = get_option("cy_db_version");
 
 	// get defaul options
 	$opts = cy_get_default_options();
@@ -1710,7 +1761,12 @@ function cy_install($recreate_graphs=false) {
 	
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-		dbDelta($sql);
+		// cy_rides
+		dbDelta(cy_rides_sql());
+		// cy_bikes
+		dbDelta(cy_bikes_sql());
+		// cy_types
+		dbDelta(cy_types_sql());
 	
 		// update only CY options, leave user options alone
 		update_option("cy_version", $cy_version);
@@ -1733,7 +1789,12 @@ function cy_install($recreate_graphs=false) {
 		
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-		dbDelta($sql);
+		// cy_rides
+		dbDelta(cy_rides_sql());
+		// cy_bikes
+		dbDelta(cy_bikes_sql());
+		// cy_types
+		dbDelta(cy_types_sql());
 		
 		// add all options
 		$opts = cy_get_default_options();
