@@ -969,7 +969,9 @@ function cy_debug_page() {
 	
 	global $wpdb, $wp_version, $cy_version, $cy_db_version, $cy_dir, $cy_graph_dir_full;
 	
-	$table_name = $wpdb->prefix . "cy_rides";
+	$rides_table = $wpdb->prefix . "cy_rides";
+	$bikes_table = $wpdb->prefix . "cy_bikes";
+	$types_table = $wpdb->prefix . "cy_types";
 	
 	// all options
 	$opts = cy_get_default_options();
@@ -1032,7 +1034,17 @@ function cy_debug_page() {
 			
 			<tr>
 				<th>cy_rides table exists</th>
-				<td><?PHP echo ($wpdb->get_var("show tables like '$table_name'") == $table_name) ? 'yes ('.$table_name.')' : 'no'; ?></td>
+				<td><?PHP echo ($wpdb->get_var("show tables like '$rides_table'") == $rides_table) ? 'yes ('.$rides_table.')' : 'no'; ?></td>
+			</tr>
+			
+			<tr>
+				<th>cy_bikes table exists</th>
+				<td><?PHP echo ($wpdb->get_var("show tables like '$bikes_table'") == $bikes_table) ? 'yes ('.$bikes_table.')' : 'no'; ?></td>
+			</tr>
+			
+			<tr>
+				<th>cy_types table exists</th>
+				<td><?PHP echo ($wpdb->get_var("show tables like '$types_table'") == $types_table) ? 'yes ('.$types_table.')' : 'no'; ?></td>
 			</tr>
 			
 			<tr>
@@ -1755,7 +1767,8 @@ function cy_install($recreate_graphs=false) {
 	global $wpdb;
 	global $cy_db_version, $cy_version;
 
-	$installed_ver = get_option("cy_db_version");
+	$installed_db_ver = get_option("cy_db_version");
+	$installed_ver = get_option("cy_version");
 	
 	$rides_table = $wpdb->prefix . 'cy_rides';
 
@@ -1764,7 +1777,7 @@ function cy_install($recreate_graphs=false) {
 
 	// Upgrade or install
 	$changed = false;
-	if ( $installed_ver != $cy_db_version ) {
+	if ( $installed_db_ver != $cy_db_version || $installed_ver != $cy_version ) {
 	
 		// upgrade
 	
