@@ -1882,9 +1882,15 @@ function cy_export() {
 			$xml .= '</'.$table.'>';
 			continue;
 		}
-		$stats = $result[0];
 		
 		// add all rows here
+		foreach ($result as $row) {
+			$xml .= '<row>';
+			foreach ($row as $key=>$val) {
+				$xml .= '<'.$key.'>'.$val.'</'.$key.'>';
+			}
+			$xml .= '</row>';
+		}
 		
 		$xml .= '</'.$table.'>';
 		
