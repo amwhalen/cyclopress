@@ -1758,7 +1758,10 @@ function cy_check_tables() {
 	foreach ($tables as $table) {
 	
 		$table_name = $wpdb->prefix . $table;
-		if ($wpdb->get_var("show tables like '$table_name'") != $table_name) return false;
+		if ($wpdb->get_var("show tables like '$table_name'") != $table_name) {
+			echo 'tables do not exist. creating...';
+			return false;
+		}
 	
 	}
 	
