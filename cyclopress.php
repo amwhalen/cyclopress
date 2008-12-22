@@ -1696,6 +1696,8 @@ function cy_sql_rides() {
 	$sql .= '`cadence` DOUBLE(5,2) NULL ,';
 	$sql .= '`notes` TEXT NULL';
 	$sql .= ');';
+	
+	return $sql;
 
 }
 
@@ -1716,12 +1718,10 @@ function cy_bikes_sql() {
 	$sql .= '`year` INT(4) UNSIGNED NULL ,';
 	$sql .= '`notes` TEXT NULL';
 	$sql .= ');';
+	
+	return $sql;
 
 }
-
-	var $id;
-	var $label;
-	var $description;
 	
 /**
  * Returns the SQL for the main Bikes table
@@ -1737,6 +1737,8 @@ function cy_types_sql() {
 	$sql .= '`label` VARCHAR(255) NOT NULL ,';
 	$sql .= '`description` TEXT NULL';
 	$sql .= ');';
+	
+	return $sql;
 
 }
 
