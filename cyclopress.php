@@ -27,7 +27,7 @@ Author URI: http://amwhalen.com
 
 
 $cy_version = '1.3.5';
-$cy_db_version = '1.1';
+$cy_db_version = '1.2';
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
 $cy_dir = get_bloginfo('url').'/wp-content/plugins/'.basename(dirname(__FILE__));
@@ -356,10 +356,10 @@ function cy_insert_ride($ride) {
 
 	$table_name = $wpdb->prefix . "cy_rides";
 
-	$sql  = 'insert into '.$table_name.'(startdate,miles,avg_speed,max_speed,minutes,cadence,notes) ';
+	$sql  = 'insert into '.$table_name.'(startdate,miles,avg_speed,max_speed,minutes,cadence,notes,bike_id,type_id) ';
 	$sql .= "values('".$wpdb->escape($ride->get_startdate())."','".$wpdb->escape($ride->miles)."','".$wpdb->escape($ride->avg_speed)."'";
 	$sql .= ",'".$wpdb->escape($ride->max_speed)."','".$wpdb->escape($ride->minutes)."'";
-	$sql .= ",'".$wpdb->escape($ride->cadence)."','".$wpdb->escape($ride->notes)."')";
+	$sql .= ",'".$wpdb->escape($ride->cadence)."','".$wpdb->escape($ride->notes)."','".$wpdb->escape($ride->bike_id)."','".$wpdb->escape($ride->ride_id)."')";
 
 	// send the query to the DBMS
 	$result = $wpdb->query($sql);
@@ -383,6 +383,7 @@ function cy_update_ride($ride) {
 	$sql .= "set startdate='".$wpdb->escape($ride->get_startdate())."', miles='".$wpdb->escape($ride->miles)."', avg_speed='".$wpdb->escape($ride->avg_speed)."'";
 	$sql .= ", max_speed='".$wpdb->escape($ride->max_speed)."', minutes='".$wpdb->escape($ride->minutes)."'";
 	$sql .= ", cadence='".$wpdb->escape($ride->cadence)."', notes='".$wpdb->escape($ride->notes)."' where id='".$wpdb->escape($ride->id)."'";
+	$sql .= ", bike_id='".$wpdb->escape($ride->bike_id)."', type_id='".$wpdb->escape($ride->type_id)."'"
 
 	// send the query to the DBMS
 	$result = $wpdb->query($sql);
@@ -1696,6 +1697,8 @@ function cy_rides_sql() {
 	$sql .= '`max_speed` DOUBLE(4,2) NULL ,';
 	$sql .= '`minutes` INT(4) UNSIGNED NOT NULL ,';
 	$sql .= '`cadence` DOUBLE(5,2) NULL ,';
+	$sql .= '`bike_id` UNSIGNED INT NULL ,';
+	$sql .= '`type_jd` UNSIGNED INT NULL ,';
 	$sql .= '`notes` TEXT NULL';
 	$sql .= ');';
 	
