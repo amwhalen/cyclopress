@@ -398,6 +398,8 @@ function cy_update_ride($ride) {
  */
 function cy_admin_navigation($current_page='') {
 
+	cy_check_version();
+
 	$wp_url = get_bloginfo('url');
 
 	$links = array(
