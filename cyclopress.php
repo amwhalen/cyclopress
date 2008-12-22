@@ -383,7 +383,7 @@ function cy_update_ride($ride) {
 	$sql .= "set startdate='".$wpdb->escape($ride->get_startdate())."', miles='".$wpdb->escape($ride->miles)."', avg_speed='".$wpdb->escape($ride->avg_speed)."'";
 	$sql .= ", max_speed='".$wpdb->escape($ride->max_speed)."', minutes='".$wpdb->escape($ride->minutes)."'";
 	$sql .= ", cadence='".$wpdb->escape($ride->cadence)."', notes='".$wpdb->escape($ride->notes)."' where id='".$wpdb->escape($ride->id)."'";
-	$sql .= ", bike_id='".$wpdb->escape($ride->bike_id)."', type_id='".$wpdb->escape($ride->type_id)."'"
+	$sql .= ", bike_id='".$wpdb->escape($ride->bike_id)."', type_id='".$wpdb->escape($ride->type_id)."'";
 
 	// send the query to the DBMS
 	$result = $wpdb->query($sql);
@@ -1698,7 +1698,7 @@ function cy_rides_sql() {
 	$sql .= '`minutes` INT(4) UNSIGNED NOT NULL ,';
 	$sql .= '`cadence` DOUBLE(5,2) NULL ,';
 	$sql .= '`bike_id` UNSIGNED INT NULL ,';
-	$sql .= '`type_jd` UNSIGNED INT NULL ,';
+	$sql .= '`type_id` UNSIGNED INT NULL ,';
 	$sql .= '`notes` TEXT NULL';
 	$sql .= ');';
 	
