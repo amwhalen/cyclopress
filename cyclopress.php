@@ -1180,10 +1180,8 @@ function cy_export_page() {
 		
 		<?php echo cy_admin_navigation('export'); ?>
 		
-		<p>
-			Copy this XML into a text file and save it with a .xml extension.
-			Import functionality will be incorporated at a later date, but for now you can use this to backup your data whenever you like.
-		</p>
+		<p>Copy this XML into a text file and save it with a .xml extension.</p>
+		<p>Import functionality will be incorporated at a later date, but for now you can use this to backup your data whenever you like.</p>
 		
 		<textarea rows="20" cols="80"><?php echo cy_export(); ?></textarea>
 	
