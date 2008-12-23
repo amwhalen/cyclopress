@@ -1886,33 +1886,33 @@ function cy_export() {
 		'cy_types'
 	);
 	
-	$xml = '<cyclopress><meta><version>'.$cy_version.'</version><dbversion>'.$cy_db_version.'</dbversion></meta>';
+	$xml = "<cyclopress>\n\t<meta>\n\t\t<version>".$cy_version."</version>\n\t\t<dbversion>".$cy_db_version."</dbversion>\n\t</meta>";
 	
 	foreach ($tables as $table) {
 		
 		$table_name = $wpdb->prefix . $table;
 		
 		// open this table's tag
-		$xml .= '<'.$table.'>';
+		$xml .= "\n\t<".$table.'>';
 		
 		// get the rows
 		$sql  = 'select * from '.$table_name;
 		$result = $wpdb->get_results($sql, ARRAY_A);
 		if (!$result) {
-			$xml .= '</'.$table.'>';
+			$xml .= "\n\t</".$table.'>';
 			continue;
 		}
 		
 		// add all rows here
 		foreach ($result as $row) {
-			$xml .= '<row>';
+			$xml .= '\n\t\t<row>';
 			foreach ($row as $key=>$val) {
-				$xml .= '<'.$key.'>'.$val.'</'.$key.'>';
+				$xml .= "\n\t\t\t<".$key.'>'.$val.'</'.$key.'>';
 			}
-			$xml .= '</row>';
+			$xml .= "\n\t\t</row>";
 		}
 		
-		$xml .= '</'.$table.'>';
+		$xml .= "\n\t</".$table.'>';
 		
 	}
 	
