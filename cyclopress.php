@@ -1905,7 +1905,7 @@ function cy_export() {
 		
 		// add all rows here
 		foreach ($result as $row) {
-			$xml .= '\n\t\t<row>';
+			$xml .= "\n\t\t<row>";
 			foreach ($row as $key=>$val) {
 				$xml .= "\n\t\t\t<".$key.'>'.$val.'</'.$key.'>';
 			}
