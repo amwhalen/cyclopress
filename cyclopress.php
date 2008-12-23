@@ -1886,7 +1886,12 @@ function cy_export() {
 		'cy_types'
 	);
 	
-	$xml = "<cyclopress>\n\t<meta>\n\t\t<version>".$cy_version."</version>\n\t\t<dbversion>".$cy_db_version."</dbversion>\n\t</meta>";
+	$xml = "<cyclopress>";
+	$xml .= "\n\t<meta>";
+	$xml .= "\n\t\t<version>".$cy_version."</version>";
+	$xml .= "\n\t\t<dbversion>".$cy_db_version."</dbversion>";
+	$xml .= "\n\t\t<exportdate>".date('r')."</exportdate>";
+	$xml .= "\n\t</meta>";
 	
 	foreach ($tables as $table) {
 		
