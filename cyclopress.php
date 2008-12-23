@@ -1921,7 +1921,7 @@ function cy_export() {
 		
 	}
 	
-	$xml .= '</cyclopress>';
+	$xml .= "\n</cyclopress>";
 
 	return $xml;
 
