@@ -490,7 +490,7 @@ function cy_options_page() {
 	// export
 	if (isset($_GET['export']) && $_GET['export']) {
 	
-		echo '<h3>CycloPress Export</h3><textarea rows="20" cols="80">'.cy_export().'</textarea>';
+		cy_export_page();
 		return;
 	
 	}
@@ -1165,6 +1165,28 @@ function cy_about_page() {
 		
 		<p><a href="http://amwhalen.com/blog/projects/cyclopress/"><img src="<?php echo $cy_dir; ?>/img/poweredby.gif" alt="Powered by CycloPress" /></a></p>
 		
+	</div>
+	<?PHP
+
+}
+
+/**
+ * CycloPress export page
+ */
+function cy_export_page() {
+
+	?>
+	<div class="wrap">
+		
+		<?php echo cy_admin_navigation('export'); ?>
+		
+		<p>
+			Copy this XML into a text file and save it with a .xml extension.
+			Import functionality will be incorporated at a later date, but for now you can use this to backup your data whenever you like.
+		</p>
+		
+		<textarea rows="20" cols="80"><?php echo cy_export(); ?></textarea>
+	
 	</div>
 	<?PHP
 
