@@ -1207,9 +1207,15 @@ function cy_cycling_page() {
 				
 			} else {
 			
+				if ($page->post_status == 'draft') {
+					$preview = '&preview=true';
+				} else {
+					$preview = '';
+				}
+			
 				?>
 				
-				<p><a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id').'&preview=true'; ?>">View cycling page &raquo;</a></p>
+				<p><a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id').$preview; ?>">View cycling page &raquo;</a></p>
 				
 				<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
 				
