@@ -1307,7 +1307,7 @@ function cy_export_page() {
 			
 			<div id="cy_export_list">
 				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=xml"<?php if (!isset($_GET['cy_export_format']) || $_GET['cy_export_format'] == 'xml') echo ' class="here"'; ?>>XML</a>
-				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=csv"<?php if (isset($_GET['cy_export_format']) || $_GET['cy_export_format'] == 'csv') echo ' class="here"'; ?>>CSV</a>
+				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=csv"<?php if (isset($_GET['cy_export_format']) && $_GET['cy_export_format'] == 'csv') echo ' class="here"'; ?>>CSV</a>
 			</div>
 			<?php if ($_GET['cy_export_format'] == 'csv') { ?>
 				<div id="cy_export_desc"><p>Exporting as <acronym title="Comma Separated Values">CSV</acronym> allows you to open your stats in Excel or other spreadsheet software.</p></div>
@@ -1452,7 +1452,7 @@ function cy_admin_css() {
 		}
 		#cy_export_list {
 			background: #fff;
-			padding: 5px;
+			padding: 5px 0;
 		}
 		#cy_export_list a {
 			padding: 5px;
