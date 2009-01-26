@@ -1227,30 +1227,26 @@ function cy_cycling_page() {
 						</tr>
 						<tr>
 							<th><input type="checkbox" name="cy_show_summary" value="1"<?php if (get_option('cy_show_summary')) { echo ' checked="checked"'; } ?> /></th>
-							<td>Summary</td>
+							<td>Show Tracking Summary</td>
 						</tr>
 						<tr>
 							<th><input type="checkbox" name="cy_show_detailed_stats" value="1"<?php if (get_option('cy_show_detailed_stats')) { echo ' checked="checked"'; } ?> /></th>
-							<td>Stats</td>
+							<td>Show Detailed Stats</td>
 						</tr>
 						<tr>
 							<th><input type="checkbox" name="cy_show_distance_graph" value="1"<?php if (get_option('cy_show_distance_graph')) { echo ' checked="checked"'; } ?> /></th>
-							<td>Distance Graph</td>
+							<td>Show Distance Graph</td>
 						</tr>
 						<tr>
 							<th><input type="checkbox" name="cy_show_avg_speed_graph" value="1"<?php if (get_option('cy_show_avg_speed_graph')) { echo ' checked="checked"'; } ?> /></th>
-							<td>Average Speed Graph</td>
+							<td>Show Average Speed Graph</td>
 						</tr>
 					</table>
 										
 				</form>
-			
-				<p>You've already created a cycling page. <a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id'); ?>">See it</a>.</p>
-				
+							
 				<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
-				
-				<p>If you'd like to remove your cycling page temporarily from public view, you can <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_draft_page=1">set its status to draft</a>.</p>
-			
+							
 				<?php
 		
 			}
