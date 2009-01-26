@@ -1215,7 +1215,7 @@ function cy_cycling_page() {
 				
 				<form action="plugins.php" method="get" enctype="multipart/form-data">
 				
-					<input type="hidden" name="page" value="cyclopress" />
+					<input type="hidden" name="page" value="cyclopress/cyclopress.php" />
 					<input type="hidden" name="cycling" value="1" />
 					<input type="hidden" name="cy_update_page" value="1" />
 				
