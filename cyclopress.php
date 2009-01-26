@@ -2077,7 +2077,7 @@ function cy_export($format) {
 					$j = 0;
 					foreach ($row as $key=>$val) {
 						$csv .= '"'.$key.'"';
-						if ($j < sizeof($row)) ( $csv .= ','; } else { $csv .= "\n" }
+						if ($j < sizeof($row)) ( $csv .= ','; } else { $csv .= "\n"; }
 						$j++;
 					}
 				}
@@ -2085,7 +2085,7 @@ function cy_export($format) {
 				$j = 0;
 				foreach ($row as $key=>$val) {
 					$csv .= '"'.$val.'"';
-					if ($j < sizeof($row)) { $csv .= ','; } else { $csv .= "\n" }
+					if ($j < sizeof($row)) { $csv .= ','; } else { $csv .= "\n"; }
 					$j++;
 				}
 				$csv .= "\n";
