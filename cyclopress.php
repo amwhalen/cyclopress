@@ -1167,7 +1167,7 @@ function cy_cycling_page() {
 		
 		<?php } else { ?>
 		
-			<p>You've already created a cycling page. <a href="<?php echo get_bloginfo('url').'/?p='.$get_option('cy_page_id'); ?>">See it</a>.</p>
+			<p>You've already created a cycling page. <a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id'); ?>">See it</a>.</p>
 			
 			<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
 			
