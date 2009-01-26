@@ -1153,7 +1153,11 @@ function cy_cycling_page() {
 		
 			$page_id = wp_update_post($post);
 			
-			?><p class="cy_ok">Your cycling page is no longer visible to the public.</p><?php
+			if ($page_id) {
+				?><p class="cy_ok">Your cycling page is no longer visible to the public.</p><?php
+			} else {
+				?><p class="cy_error">There was an error while making your cycling page a draft.</p><?php
+			}
 		
 		} else if (isset($_GET['cy_publish_page']) && $_GET['cy_publish_page']) {
 		
