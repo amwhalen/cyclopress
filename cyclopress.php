@@ -1129,7 +1129,7 @@ function cy_cycling_page() {
 		
 			$post = array(
 				'comment_status' => 'closed',
-				'post_content' => '<?php $stats = cy_db_stats(); if ($stats) { $first_ride_date = cy_get_last_ride_date(); ?><p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p><?php echo cy_get_summary(true); ?><h3>Distance</h3><?php echo cy_get_graph_img_tag("distance"); ?><h3>Average Speed</h3><?php echo cy_get_graph_img_tag("average_speed"); } else { ?><p>No stats! Get out there and ride!</p><?php } ?>',
+				'post_content' => '<?php $stats = cy_db_stats(); if ($stats) { ?><p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p><?php echo cy_get_summary(true); ?><h3>Distance</h3><?php echo cy_get_graph_img_tag("distance"); ?><h3>Average Speed</h3><?php echo cy_get_graph_img_tag("average_speed"); } else { ?><p>No stats! Get out there and ride!</p><?php } ?>',
 				'post_status' => 'draft', // draft, publish, pending
 				'post_title' => 'Cycling Stats',
 				'post_type' => 'page',
@@ -1152,6 +1152,21 @@ function cy_cycling_page() {
 			
 		} else if (isset($_GET['cy_update_page']) && $_GET['cy_update_page']) {
 		
+			$php = '<?php $stats = cy_db_stats(); if ($stats) { ';
+			if (isset($_GET['cy_show_summary']) && $_GET['cy_show_summary']) {
+				$php .= ' ?><p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p> ';
+			}
+			if (isset($_GET['cy_show_detailed_stats']) && $_GET['cy_show_detailed_stats']) {
+				$php .= ' <?php echo cy_get_summary(true); ?> ';
+			}
+			if (isset($_GET['cy_show_distance_graph']) && $_GET['cy_show_distance_graph']) {
+				$php .= ' <h3>Distance</h3><?php echo cy_get_graph_img_tag("distance"); ?> ';
+			}
+			if (isset($_GET['cy_show_avg_speed_graph']) && $_GET['cy_show_avg_speed_graph']) {
+				$php .= ' <h3>Average Speed</h3><?php echo cy_get_graph_img_tag("average_speed"); ?> ';
+			}
+			$php .= ' } else { echo "<p>No stats! Get out there and ride!</p>"; } ?>';
+		
 			$post = array(
 				'post_status' => $_GET['cy_page_status'],
 				'post_title' => $_GET['cy_page_name'],
@@ -1160,7 +1175,7 @@ function cy_cycling_page() {
 		
 			$page_id = wp_update_post($post);
 			
-			$cy_show_summary = (isset($_GET['cy_page_status']) && $_GET['cy_page_status']) ? '1' : '0';
+			$cy_show_summary = (isset($_GET['cy_show_summary']) && $_GET['cy_show_summary']) ? '1' : '0';
 			$cy_show_detailed_stats = (isset($_GET['cy_show_detailed_stats']) && $_GET['cy_show_detailed_stats']) ? '1' : '0';
 			$cy_show_distance_graph = (isset($_GET['cy_show_distance_graph']) && $_GET['cy_show_distance_graph']) ? '1' : '0';
 			$cy_show_avg_speed_graph = (isset($_GET['cy_show_avg_speed_graph']) && $_GET['cy_show_avg_speed_graph']) ? '1' : '0';
@@ -1207,15 +1222,9 @@ function cy_cycling_page() {
 				
 			} else {
 			
-				if ($page->post_status == 'draft') {
-					$preview = '&preview=true';
-				} else {
-					$preview = '';
-				}
-			
 				?>
 				
-				<p><a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id').$preview; ?>">View cycling page &raquo;</a></p>
+				<p><a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id'); ?>">View cycling page &raquo;</a></p>
 				
 				<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
 				
