@@ -1468,7 +1468,7 @@ function cy_admin_css() {
 		}
 		#cy_export_desc p {
 			margin: 0;
-			padding: 0;
+			padding: 5px;
 		}
 		#cy_export_content {
 			width: 600px;
