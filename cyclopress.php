@@ -1129,7 +1129,7 @@ function cy_cycling_page() {
 		
 			$post = array(
 				'comment_status' => 'closed',
-				'post_content' => '<?php echo "<p>This is a test from PHP.</p>"; echo cy_get_brief_stats(); ?>',
+				'post_content' => '<?php $stats = cy_db_stats(); if ($stats) { $first_ride_date = cy_get_last_ride_date(); ?><p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p><?php echo cy_get_summary(true); ?><h3>Distance</h3><?php echo cy_get_graph_img_tag("distance"); ?><h3>Average Speed</h3><?php echo cy_get_graph_img_tag("average_speed"); } else { ?><p>No stats! Get out there and ride!</p><?php } ?>',
 				'post_status' => 'publish', // draft, publish, pending
 				'post_title' => 'Cycling Stats',
 				'post_type' => 'page',
