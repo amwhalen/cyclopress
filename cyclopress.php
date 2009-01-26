@@ -1299,20 +1299,24 @@ function cy_about_page() {
 function cy_export_page() {
 
 	?>
-	<div id="cy_export">
+	<div class="wrap">
 		
 		<?php echo cy_admin_navigation('export'); ?>
 		
-		<div id="cy_export_list">
-			<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=xml"<?php if ($_GET['cy_export_format'] == 'xml') echo ' class="here"'; ?>>XML</a>
-			<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=csv"<?php if ($_GET['cy_export_format'] == 'csv') echo ' class="here"'; ?>>CSV</a>
+		<div id="cy_export">
+			
+			<div id="cy_export_list">
+				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=xml"<?php if ($_GET['cy_export_format'] == 'xml') echo ' class="here"'; ?>>XML</a>
+				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=csv"<?php if ($_GET['cy_export_format'] == 'csv') echo ' class="here"'; ?>>CSV</a>
+			</div>
+			<?php if ($_GET['cy_export_format'] == 'csv') { ?>
+				<div id="cy_export_desc"><p>Exporting as <acronym title="Comma Separated Values">CSV</acronym> allows you to open your stats in Excel or other spreadsheet software.</p></div>
+			<?php } else { ?>
+				<div id="cy_export_desc"><p>Exporting as <acronym title="Extensible Markup Language">XML</acronym> allows you to <em>eventually</em> (not yet implemented) import your stats and options back into CycloPress. For now you can back up your stats to be safe.</p></div>
+			<?php } ?>
+			<textarea id="cy_export_content" rows="20" cols="80"><?php echo htmlentities(cy_export($_GET['cy_export_format'])); ?></textarea>
+		
 		</div>
-		<?php if ($_GET['cy_export_format'] == 'csv') { ?>
-			<div id="cy_export_desc"><p>Exporting as <acronym title="Comma Separated Values">CSV</acronym> allows you to open your stats in Excel or other spreadsheet software.</p></div>
-		<?php } else { ?>
-			<div id="cy_export_desc"><p>Exporting as <acronym title="Extensible Markup Language">XML</acronym> allows you to <em>eventually</em> (not yet implemented) import your stats and options back into CycloPress. For now you can back up your stats to be safe.</p></div>
-		<?php } ?>
-		<textarea id="cy_export_content" rows="20" cols="80"><?php echo htmlentities(cy_export($_GET['cy_export_format'])); ?></textarea>
 	
 	</div>
 	<?PHP
