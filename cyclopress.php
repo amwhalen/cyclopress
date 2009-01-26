@@ -1507,6 +1507,7 @@ function cy_admin_css() {
 			background: #eee;
 			font-weight: bold;
 			color: #000;
+			margin-bottom: -1px;
 		}
 		#cy_export_desc {
 			background: #eee;
