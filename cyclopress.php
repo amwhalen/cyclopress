@@ -1153,11 +1153,7 @@ function cy_cycling_page() {
 		
 			$page_id = wp_update_post($post);
 			
-			if ($page_id) {
-				?><p class="cy_ok">Your cycling page is no longer visible to the public.</p><?php
-			} else {
-				?><p class="cy_error">There was an error while making your cycling page a draft.</p><?php
-			}
+			?><p class="cy_ok">Your cycling page is no longer visible to the public.</p><?php
 		
 		} else if (isset($_GET['cy_publish_page']) && $_GET['cy_publish_page']) {
 		
@@ -1307,10 +1303,16 @@ function cy_export_page() {
 		
 		<?php echo cy_admin_navigation('export'); ?>
 		
-		<p>Copy this XML into a text file and save it with a .xml or .txt extension.</p>
-		<p>Import functionality will be incorporated at a later date, but for now you can use this to backup your data whenever you like.</p>
-		
-		<textarea rows="20" cols="80"><?php echo htmlentities(cy_export()); ?></textarea>
+		<div id="cy_export_list">
+			<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=xml"<?php if ($_GET['cy_export_format'] == 'xml') echo ' class="here"'; ?>>XML</a>
+			<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=csv"<?php if ($_GET['cy_export_format'] == 'csv') echo ' class="here"'; ?>>CSV</a>
+		</div>
+		<?php if ($_GET['cy_export_format'] == 'csv') { ?>
+			<div><p>Exporting as <acronym title="Comma Separated Values">CSV</acronym> allows you to open your stats in Excel or other spreadsheet software.</p></div>
+		<?php } else { ?>
+			<div><p>Exporting as <acronym title="Extensible Markup Language">XML</acronym> allows you to <em>eventually</em> (not yet implemented) import your stats and options back into CycloPress. For now you can back up your stats to be safe.</p></div>
+		<?php } ?>
+		<textarea rows="20" cols="80"><?php echo htmlentities(cy_export($_GET['cy_export_format'])); ?></textarea>
 	
 	</div>
 	<?PHP
@@ -2003,7 +2005,7 @@ function cy_install($recreate_graphs=false) {
 /**
  * Exports all data to an XML format.
  */
-function cy_export() {
+function cy_export($format) {
 
 	global $wpdb, $cy_db_version, $cy_version;
 
@@ -2013,44 +2015,54 @@ function cy_export() {
 		'cy_types'
 	);
 	
-	$xml = "<cyclopress>";
-	$xml .= "\n\t<meta>";
-	$xml .= "\n\t\t<version>".$cy_version."</version>";
-	$xml .= "\n\t\t<dbversion>".$cy_db_version."</dbversion>";
-	$xml .= "\n\t\t<exportdate>".date('r')."</exportdate>";
-	$xml .= "\n\t</meta>";
+	if ($format == 'csv') {
 	
-	foreach ($tables as $table) {
+		$csv = 'This is a CSV export.';
 		
-		$table_name = $wpdb->prefix . $table;
+		return $csv;
+	
+	} else {
+	
+		$xml = "<cyclopress>";
+		$xml .= "\n\t<meta>";
+		$xml .= "\n\t\t<version>".$cy_version."</version>";
+		$xml .= "\n\t\t<dbversion>".$cy_db_version."</dbversion>";
+		$xml .= "\n\t\t<exportdate>".date('r')."</exportdate>";
+		$xml .= "\n\t</meta>";
 		
-		// open this table's tag
-		$xml .= "\n\t<".$table.'>';
-		
-		// get the rows
-		$sql  = 'select * from '.$table_name;
-		$result = $wpdb->get_results($sql, ARRAY_A);
-		if (!$result) {
-			$xml .= "\n\t</".$table.'>';
-			continue;
-		}
-		
-		// add all rows here
-		foreach ($result as $row) {
-			$xml .= "\n\t\t<row>";
-			foreach ($row as $key=>$val) {
-				$xml .= "\n\t\t\t<".$key.'>'.$val.'</'.$key.'>';
+		foreach ($tables as $table) {
+			
+			$table_name = $wpdb->prefix . $table;
+			
+			// open this table's tag
+			$xml .= "\n\t<".$table.'>';
+			
+			// get the rows
+			$sql  = 'select * from '.$table_name;
+			$result = $wpdb->get_results($sql, ARRAY_A);
+			if (!$result) {
+				$xml .= "\n\t</".$table.'>';
+				continue;
 			}
-			$xml .= "\n\t\t</row>";
+			
+			// add all rows here
+			foreach ($result as $row) {
+				$xml .= "\n\t\t<row>";
+				foreach ($row as $key=>$val) {
+					$xml .= "\n\t\t\t<".$key.'>'.$val.'</'.$key.'>';
+				}
+				$xml .= "\n\t\t</row>";
+			}
+			
+			$xml .= "\n\t</".$table.'>';
+			
 		}
 		
-		$xml .= "\n\t</".$table.'>';
+		$xml .= "\n</cyclopress>";
+	
+		return $xml;
 		
 	}
-	
-	$xml .= "\n</cyclopress>";
-
-	return $xml;
 
 }
 
