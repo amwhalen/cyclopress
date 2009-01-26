@@ -2072,15 +2072,17 @@ function cy_export($format) {
 			// add all rows here
 			$i = 0;
 			foreach ($result as $row) {
+				
 				// add the column labels
 				if ($i == 0) {
 					$j = 0;
 					foreach ($row as $key=>$val) {
 						$csv .= '"'.$key.'"';
-						if ($j < sizeof($row)) ( $csv .= ','; } else { $csv .= "\n"; }
+						if ($j < sizeof($row)) { $csv .= ','; } else { $csv .= "\n"; }
 						$j++;
 					}
 				}
+				
 				// add the column values
 				$j = 0;
 				foreach ($row as $key=>$val) {
@@ -2089,7 +2091,9 @@ function cy_export($format) {
 					$j++;
 				}
 				$csv .= "\n";
+				
 				$i++;
+				
 			}
 						
 		}
