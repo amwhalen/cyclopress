@@ -1211,7 +1211,8 @@ function cy_cycling_page() {
 				
 				<p><a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id').'&preview=true'; ?>">View cycling page &raquo;</a></p>
 				
-				<form action="" method="get" action="">
+				<form action="plguins.php" method="get" enctype="multipart/form-data">
+				
 					<input type="hidden" name="page" value="cyclopress" />
 					<input type="hidden" name="cycling" value="1" />
 				
@@ -1220,8 +1221,8 @@ function cy_cycling_page() {
 							<th>Status</th>
 							<td>
 								<select name="cy_cycling_status">
-									<option value="draft">Draft</option>
-									<option value="publish">Published</option>
+									<option value="draft"<?php if ($page->post_status == 'draft') { echo ' selected="selected"'; } ?>>Draft</option>
+									<option value="publish"<?php if ($page->post_status == 'publish') { echo ' selected="selected"'; } ?>>Published</option>
 								</select>
 							</td>
 						</tr>
