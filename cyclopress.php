@@ -1151,9 +1151,20 @@ function cy_cycling_page() {
 				'ID' => get_option('cy_page_id'),
 			);
 		
-			$page_id = wp_insert_post($post);
+			$page_id = wp_update_post($post);
 			
 			?><p class="cy_ok">Your cycling page is no longer visible to the public.</p><?php
+		
+		} else if (isset($_GET['cy_publish_page']) && $_GET['cy_publish_page']) {
+		
+			$post = array(
+				'post_status' => 'publish',
+				'ID' => get_option('cy_page_id'),
+			);
+		
+			$page_id = wp_update_post($post);
+			
+			?><p class="cy_ok">Your cycling page is once again visible to the public.</p><?php
 		
 		} else if (isset($_GET['cy_clear_page']) && $_GET['cy_clear_page']) {
 		
@@ -1170,18 +1181,39 @@ function cy_cycling_page() {
 			<p>From here you can create a page where your viewers can see your graphs and stats.</p>
 		
 			<p>You haven't created a cycling page yet. Would you like to <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_create_page=1">create a cycling page now</a>?</p>
+				
+		<?php
 		
-		<?php } else { ?>
+		} else {
 		
-			<p>You've already created a cycling page. <a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id'); ?>">See it</a>.</p>
+			$page = get_post(get_option('cy_page_id'));
+		
+			if ($page->status == 'draft') {
 			
-			<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
+				?>
+				
+				<p>You've created a cycling page, but set its status to draft so the public can't see it. <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_publish_page=1">Publish your cycling stats page</a> so you can brag to the world.</p>
+				
+				<?php
 			
-			<p>If you'd like to remove your cycling page temporarily, you can <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_draft_page=1">set its status to draft</a>.</p>
+			} else {
+			
+				?>
+			
+				<p>You've already created a cycling page. <a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id'); ?>">See it</a>.</p>
+				
+				<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
+				
+				<p>If you'd like to remove your cycling page temporarily from public view, you can <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_draft_page=1">set its status to draft</a>.</p>
+			
+				<p>Did you delete your cycling page from the WordPress menu but CycloPress is still saying you have one? <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_clear_page=1">Tell CycloPress to figure it out</a>.</p>
+			
+				<?php
 		
-			<p>Did you delete your cycling page from the WordPress menu but CycloPress is still saying you have one? <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_clear_page=1">Tell CycloPress to figure it out</a>.</p>
+			}
+		}
 		
-		<?php } ?>
+		?>
 
 	</div>
 	<?PHP
