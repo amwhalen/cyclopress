@@ -1229,24 +1229,30 @@ function cy_cycling_page() {
 						<tr>
 							<th><input type="checkbox" name="cy_show_summary" id="cy_show_summary" value="1"<?php if (get_option('cy_show_summary')) { echo ' checked="checked"'; } ?> /></th>
 							<td>
-								<label for="cy_show_summary">Show Tracking Summary</label>
+								<label for="cy_show_summary"><strong>Show Tracking Summary:</strong></label>
 								<p><?php echo cy_get_brief_stats(); ?></p>
 							</td>
 						</tr>
 						<tr>
 							<th><input type="checkbox" name="cy_show_detailed_stats" id="cy_show_detailed_stats" value="1"<?php if (get_option('cy_show_detailed_stats')) { echo ' checked="checked"'; } ?> /></th>
 							<td>
-								<label for="cy_show_detailed_stats">Show Detailed Stats</label>
+								<label for="cy_show_detailed_stats"><strong>Show Detailed Stats:</strong></label>
 								<p><?php echo cy_get_summary(); ?></p>
 							</td>
 						</tr>
 						<tr>
 							<th><input type="checkbox" name="cy_show_distance_graph" id="cy_show_distance_graph" value="1"<?php if (get_option('cy_show_distance_graph')) { echo ' checked="checked"'; } ?> /></th>
-							<td><label for="cy_show_distance_graph">Show Distance Graph</label></td>
+							<td>
+								<label for="cy_show_distance_graph"><strong>Show Distance Graph:</strong></label>
+								<p><?php echo cy_get_graph_img_tag('distance'); ?></p>
+							</td>
 						</tr>
 						<tr>
 							<th><input type="checkbox" name="cy_show_avg_speed_graph" id="cy_show_avg_speed_graph" value="1"<?php if (get_option('cy_show_avg_speed_graph')) { echo ' checked="checked"'; } ?> /></th>
-							<td><label for="cy_show_avg_speed_graph">Show Average Speed Graph</label></td>
+							<td>
+								<label for="cy_show_avg_speed_graph"><strong>Show Average Speed Graph:</strong></label>
+								<p><?php echo cy_get_graph_img_tag('average_speed'); ?></p>
+							</td>
 						</tr>
 					</table>
 										
