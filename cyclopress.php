@@ -412,6 +412,10 @@ function cy_admin_navigation($current_page='') {
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage=1',
 			'title' => 'Manage Rides',
 		),
+		'cycling' => array(
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&cycling=1',
+			'title' => 'Cycling Page',
+		),
 		'options' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php',
 			'title' => 'Options',
@@ -431,10 +435,6 @@ function cy_admin_navigation($current_page='') {
 		'export' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&export=1',
 			'title' => 'Export',
-		),
-		'cycling' => array(
-			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&cycling=1',
-			'title' => 'Cycling Page',
 		),
 	);
 
@@ -1121,7 +1121,35 @@ function cy_cycling_page() {
 
 		<?php echo cy_admin_navigation('cycling'); ?>
 	
-		<p>cycling page</p>
+		<h3>Cycling Page</h3>
+	
+		<?php
+		
+		if (isset($_GET['cy_create_page']) && $_GET['cy_create_page']) {
+		
+			$post = array(
+				'comment_status' => 'closed',
+				'post_content' => '<?php echo "<p>This is a test from PHP.</p>"; echo cy_get_brief_stats(); ?>',
+				'post_status' => 'publish', // draft, publish, pending
+				'post_title' => 'Cycling Stats',
+				'post_type' => 'page',
+			);
+		
+			$page_id = wp_insert_post($post);
+			
+			if ($page_id) {
+				?><p>Your page was created. <a href="<?php echo get_bloginfo('url').'/?p='.$page_id; ?>">See it</a>.</p><?php
+			} else {
+				?><p>There was an error creating your page.</p><?php
+			}
+		
+		} else {
+		
+		?>
+		
+			<p>Would you like to <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_create_page=1">create a cycling page</a>?</p>
+		
+		<?php } ?>
 
 	</div>
 	<?PHP
