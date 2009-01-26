@@ -1466,6 +1466,7 @@ function cy_admin_css() {
 		}
 		#cy_export_content {
 			width: 600px;
+			margin: 0;
 		}
 	</style>
 	
