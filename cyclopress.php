@@ -1155,6 +1155,12 @@ function cy_cycling_page() {
 			
 			?><p>Your cycling page is no longer visible to the public.</p><?php
 		
+		} else if (isset($_GET['cy_clear_page']) && $_GET['cy_clear_page']) {
+		
+			update_option('cy_page_id', '');
+			
+			?><p>OK, CycloPress no longer thinks you still have a cycling page.</p><?php
+		
 		}
 		
 		if (!get_option('cy_page_id')) {
@@ -1172,6 +1178,8 @@ function cy_cycling_page() {
 			<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
 			
 			<p>If you'd like to remove your cycling page temporarily, you can <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_draft_page=1">set its status to draft</a>.</p>
+		
+			<p>Did you delete your cycling page from the WordPress menu but CycloPress is still saying you have one? <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_clear_page=1">Tell CycloPress to figure it out</a>.</p>
 		
 		<?php } ?>
 
