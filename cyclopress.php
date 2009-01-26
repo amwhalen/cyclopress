@@ -1118,6 +1118,8 @@ function cy_cycling_page() {
 
 	?>
 	<div class="wrap">
+
+		<?php echo cy_admin_navigation('cycling'); ?>
 	
 		<p>cycling page</p>
 
