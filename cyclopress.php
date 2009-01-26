@@ -1499,7 +1499,7 @@ function cy_admin_css() {
 		#cy_export_list a {
 			padding: 5px;
 			background: #fff;
-			border: 1px solid #ccc;
+			border: 1px solid #eee;
 			border-width: 1px 1px 0 1px;
 			text-decoration: none;
 		}
@@ -1507,12 +1507,9 @@ function cy_admin_css() {
 			background: #eee;
 			font-weight: bold;
 			color: #000;
-			margin-bottom: -1px;
 		}
 		#cy_export_desc {
 			background: #eee;
-			border: 1px solid #ccc;
-			border-width: 1px 1px 0 1px;
 		}
 		#cy_export_desc p {
 			margin: 0;
