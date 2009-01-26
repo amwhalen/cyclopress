@@ -432,6 +432,10 @@ function cy_admin_navigation($current_page='') {
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&export=1',
 			'title' => 'Export',
 		),
+		'cycling' => array(
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&cycling=1',
+			'title' = 'Cycling Page',
+		),
 	);
 
 	$str = '<div class="cy_admin_navigation">CycloPress: <ul>';
@@ -491,6 +495,14 @@ function cy_options_page() {
 	if (isset($_GET['export']) && $_GET['export']) {
 	
 		cy_export_page();
+		return;
+	
+	}
+	
+	// cycling page
+	if (isset($_GET['cycling']) && $_GET['cycling']) {
+	
+		cy_cycling_page();
 		return;
 	
 	}
@@ -1095,6 +1107,23 @@ function cy_debug_page() {
 	
 	<?PHP
 	
+}
+
+/**
+ * CycloPress cycling page.
+ */
+function cy_cycling_page() {
+
+	global $cy_dir;
+
+	?>
+	<div class="wrap">
+	
+		cycling page
+
+	</div>
+	<?PHP
+
 }
 
 /**
