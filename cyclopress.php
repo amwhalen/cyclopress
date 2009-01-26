@@ -1510,6 +1510,8 @@ function cy_admin_css() {
 		}
 		#cy_export_desc {
 			background: #eee;
+			border: 1px solid #ccc;
+			border-width: 1px 1px 0 1px;
 		}
 		#cy_export_desc p {
 			margin: 0;
