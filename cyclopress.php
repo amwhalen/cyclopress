@@ -1138,10 +1138,10 @@ function cy_cycling_page() {
 			$page_id = wp_insert_post($post);
 			
 			if ($page_id) {
-				?><p>Your page was created. <a href="<?php echo get_bloginfo('url').'/?p='.$page_id; ?>">See it</a>.</p><?php
+				?><p class="cy_ok">Your page was created.<?php
 				update_option('cy_page_id', $page_id);
 			} else {
-				?><p>There was an error creating your page.</p><?php
+				?><p class="cy_error">There was an error creating your page.</p><?php
 			}
 			
 		} else if (isset($_GET['cy_create_page']) && $_GET['cy_create_page']) {
@@ -1153,13 +1153,13 @@ function cy_cycling_page() {
 		
 			$page_id = wp_insert_post($post);
 			
-			?><p>Your cycling page is no longer visible to the public.</p><?php
+			?><p class="cy_ok">Your cycling page is no longer visible to the public.</p><?php
 		
 		} else if (isset($_GET['cy_clear_page']) && $_GET['cy_clear_page']) {
 		
 			update_option('cy_page_id', '');
 			
-			?><p>OK, CycloPress no longer thinks you still have a cycling page.</p><?php
+			?><p class="cy_ok">OK, CycloPress no longer thinks you still have a cycling page.</p><?php
 		
 		}
 		
