@@ -1449,7 +1449,6 @@ function cy_admin_css() {
 		}
 		#cy_export {
 			width: 600px;
-			border: 1px solid #ccc;
 		}
 		#cy_export_list {
 			background: #fff;
@@ -1457,12 +1456,18 @@ function cy_admin_css() {
 		#cy_export_list a {
 			padding: 5px;
 			background: #fff;
+			border: 1px solid #ccc;
+			border-width: 1px 1px 0 1px;
 		}
 		#cy_export_list a.here {
 			background #ccc;
 		}
 		#cy_export_desc {
 			background: #ccc;
+		}
+		#cy_export_desc p {
+			margin: 0;
+			padding: 0;
 		}
 		#cy_export_content {
 			width: 600px;
