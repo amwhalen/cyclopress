@@ -1219,12 +1219,12 @@ function cy_cycling_page() {
 					<table class="widefat">
 						<tr>
 							<th>Status</th>
-							<td>
+							<th>
 								<select name="cy_cycling_status">
 									<option value="draft"<?php if ($page->post_status == 'draft') { echo ' selected="selected"'; } ?>>Draft</option>
 									<option value="publish"<?php if ($page->post_status == 'publish') { echo ' selected="selected"'; } ?>>Published</option>
 								</select>
-							</td>
+							</th>
 						</tr>
 						<tr>
 							<th><input type="checkbox" name="cy_show_summary" value="1"<?php if (get_option('cy_show_summary')) { echo ' checked="checked"'; } ?> /></th>
