@@ -1144,7 +1144,7 @@ function cy_cycling_page() {
 				?><p class="cy_error">There was an error creating your page.</p><?php
 			}
 			
-		} else if (isset($_GET['cy_create_page']) && $_GET['cy_create_page']) {
+		} else if (isset($_GET['cy_draft_page']) && $_GET['cy_draft_page']) {
 		
 			$post = array(
 				'post_status' => 'draft',
