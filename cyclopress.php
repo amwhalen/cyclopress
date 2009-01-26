@@ -1227,20 +1227,20 @@ function cy_cycling_page() {
 							</th>
 						</tr>
 						<tr>
-							<th><input type="checkbox" name="cy_show_summary" value="1"<?php if (get_option('cy_show_summary')) { echo ' checked="checked"'; } ?> /></th>
-							<td>Show Tracking Summary</td>
+							<th><input type="checkbox" name="cy_show_summary" id="cy_show_summary" value="1"<?php if (get_option('cy_show_summary')) { echo ' checked="checked"'; } ?> /></th>
+							<td><label for="cy_show_summary">Show Tracking Summary</label></td>
 						</tr>
 						<tr>
-							<th><input type="checkbox" name="cy_show_detailed_stats" value="1"<?php if (get_option('cy_show_detailed_stats')) { echo ' checked="checked"'; } ?> /></th>
-							<td>Show Detailed Stats</td>
+							<th><input type="checkbox" name="cy_show_detailed_stats" id="cy_show_detailed_stats" value="1"<?php if (get_option('cy_show_detailed_stats')) { echo ' checked="checked"'; } ?> /></th>
+							<td><label for="cy_show_detailed_stats">Show Detailed Stats</label></td>
 						</tr>
 						<tr>
-							<th><input type="checkbox" name="cy_show_distance_graph" value="1"<?php if (get_option('cy_show_distance_graph')) { echo ' checked="checked"'; } ?> /></th>
-							<td>Show Distance Graph</td>
+							<th><input type="checkbox" name="cy_show_distance_graph" id="cy_show_distance_graph" value="1"<?php if (get_option('cy_show_distance_graph')) { echo ' checked="checked"'; } ?> /></th>
+							<td><label for="cy_show_distance_graph">Show Distance Graph</label></td>
 						</tr>
 						<tr>
-							<th><input type="checkbox" name="cy_show_avg_speed_graph" value="1"<?php if (get_option('cy_show_avg_speed_graph')) { echo ' checked="checked"'; } ?> /></th>
-							<td>Show Average Speed Graph</td>
+							<th><input type="checkbox" name="cy_show_avg_speed_graph" id="cy_show_avg_speed_graph" value="1"<?php if (get_option('cy_show_avg_speed_graph')) { echo ' checked="checked"'; } ?> /></th>
+							<td><label for="cy_show_avg_speed_graph">Show Average Speed Graph</label></td>
 						</tr>
 					</table>
 										
