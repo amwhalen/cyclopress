@@ -1452,6 +1452,7 @@ function cy_admin_css() {
 		}
 		#cy_export_list {
 			background: #fff;
+			padding: 5px;
 		}
 		#cy_export_list a {
 			padding: 5px;
