@@ -1499,17 +1499,17 @@ function cy_admin_css() {
 		#cy_export_list a {
 			padding: 5px;
 			background: #fff;
-			border: 1px solid #eee;
+			border: 1px solid #ddd;
 			border-width: 1px 1px 0 1px;
 			text-decoration: none;
 		}
 		#cy_export_list a.here {
-			background: #eee;
+			background: #ddd;
 			font-weight: bold;
 			color: #000;
 		}
 		#cy_export_desc {
-			background: #eee;
+			background: #ddd;
 		}
 		#cy_export_desc p {
 			margin: 0;
