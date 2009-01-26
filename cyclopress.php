@@ -2054,7 +2054,45 @@ function cy_export($format) {
 	
 	if ($format == 'csv') {
 	
-		$csv = 'This is a CSV export.';
+		$csv = '';
+	
+		foreach ($tables as $table) {
+			
+			$csv .= "\n";
+			
+			$table_name = $wpdb->prefix . $table;
+			
+			// get the rows
+			$sql  = 'select * from '.$table_name;
+			$result = $wpdb->get_results($sql, ARRAY_A);
+			if (!$result) {
+				continue;
+			}
+			
+			// add all rows here
+			$i = 0;
+			foreach ($result as $row) {
+				// add the column labels
+				if ($i == 0) {
+					$j = 0;
+					foreach ($row as $key=>$val) {
+						$csv .= '"'.$key.'"';
+						if ($j < sizeof($row)) ( $csv .= ','; } else { $csv .= "\n" }
+						$j++;
+					}
+				}
+				// add the column values
+				$j = 0;
+				foreach ($row as $key=>$val) {
+					$csv .= '"'.$val.'"';
+					if ($j < sizeof($row)) { $csv .= ','; } else { $csv .= "\n" }
+					$j++;
+				}
+				$csv .= "\n";
+				$i++;
+			}
+						
+		}
 		
 		return $csv;
 	
