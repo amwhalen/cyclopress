@@ -1208,6 +1208,42 @@ function cy_cycling_page() {
 			} else {
 			
 				?>
+				
+				<p><a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id').'&preview=true'; ?>">View cycling page &raquo;</a></p>
+				
+				<form action="" method="get" action="">
+					<input type="hidden" name="page" value="cyclopress" />
+					<input type="hidden" name="cycling" value="1" />
+				
+					<table>
+						<tr>
+							<th>Status</th>
+							<td>
+								<select name="cy_cycling_status">
+									<option value="draft">Draft</option>
+									<option value="publish">Published</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><input type="checkbox" name="cy_show_summary" value="1"<?php if (get_option('cy_show_summary')) { echo ' checked="checked"'; } ?> /></th>
+							<td>Summary</td>
+						</tr>
+						<tr>
+							<th><input type="checkbox" name="cy_show_detailed_stats" value="1"<?php if (get_option('cy_show_detailed_stats')) { echo ' checked="checked"'; } ?> /></th>
+							<td>Stats</td>
+						</tr>
+						<tr>
+							<th><input type="checkbox" name="cy_show_distance_graph" value="1"<?php if (get_option('cy_show_distance_graph')) { echo ' checked="checked"'; } ?> /></th>
+							<td>Distance Graph</td>
+						</tr>
+						<tr>
+							<th><input type="checkbox" name="cy_show_avg_speed_graph" value="1"<?php if (get_option('cy_show_avg_speed_graph')) { echo ' checked="checked"'; } ?> /></th>
+							<td>Average Speed Graph</td>
+						</tr>
+					</table>
+										
+				</form>
 			
 				<p>You've already created a cycling page. <a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id'); ?>">See it</a>.</p>
 				
@@ -1461,7 +1497,6 @@ function cy_admin_css() {
 			width: 600px;
 		}
 		#cy_export_list {
-			background: #fff;
 			padding: 5px 0;
 		}
 		#cy_export_list a {
@@ -1472,12 +1507,12 @@ function cy_admin_css() {
 			text-decoration: none;
 		}
 		#cy_export_list a.here {
-			background: #ccc;
+			background: #eee;
 			font-weight: bold;
 			color: #000;
 		}
 		#cy_export_desc {
-			background: #ccc;
+			background: #eee;
 		}
 		#cy_export_desc p {
 			margin: 0;
