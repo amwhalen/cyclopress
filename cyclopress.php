@@ -1462,6 +1462,8 @@ function cy_admin_css() {
 		}
 		#cy_export_list a.here {
 			background #ccc;
+			font-weight: bold;
+			color: #000;
 		}
 		#cy_export_desc {
 			background: #ccc;
