@@ -1309,11 +1309,14 @@ function cy_export_page() {
 				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=xml"<?php if (!isset($_GET['cy_export_format']) || $_GET['cy_export_format'] == 'xml') echo ' class="here"'; ?>>XML</a>
 				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=csv"<?php if (isset($_GET['cy_export_format']) && $_GET['cy_export_format'] == 'csv') echo ' class="here"'; ?>>CSV</a>
 			</div>
+			<div id="cy_export_desc">
 			<?php if ($_GET['cy_export_format'] == 'csv') { ?>
-				<div id="cy_export_desc"><p>Exporting as <acronym title="Comma Separated Values">CSV</acronym> allows you to open your stats in Excel or other spreadsheet software.</p></div>
+				<p>Exporting as <acronym title="Comma Separated Values">CSV</acronym> allows you to open your stats in Excel or other spreadsheet software.</p>
 			<?php } else { ?>
-				<div id="cy_export_desc"><p>Exporting as <acronym title="Extensible Markup Language">XML</acronym> allows you to <em>eventually</em> (not yet implemented) import your stats and options back into CycloPress. For now you can back up your stats to be safe.</p></div>
+				<p>Exporting as <acronym title="Extensible Markup Language">XML</acronym> allows you to <em>eventually</em> (not yet implemented) import your stats and options back into CycloPress. For now you can back up your stats to be safe.</p>
 			<?php } ?>
+			<p>Copy this text into a plain-text (not Word!) file and save it with a <strong><?php if (isset($_GET['cy_export_format']) && $_GET['cy_export_format'] == 'csv') { echo '.csv'; } else { echo '.xml'; } ?></strong> extension.</p>
+			</div>
 			<textarea id="cy_export_content" rows="20" cols="80"><?php echo htmlentities(cy_export($_GET['cy_export_format'])); ?></textarea>
 		
 		</div>
