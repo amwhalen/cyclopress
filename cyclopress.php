@@ -1219,20 +1219,26 @@ function cy_cycling_page() {
 					<table class="widefat">
 						<tr>
 							<th>Status</th>
-							<th>
+							<td>
 								<select name="cy_cycling_status">
 									<option value="draft"<?php if ($page->post_status == 'draft') { echo ' selected="selected"'; } ?>>Draft</option>
 									<option value="publish"<?php if ($page->post_status == 'publish') { echo ' selected="selected"'; } ?>>Published</option>
 								</select>
-							</th>
+							</td>
 						</tr>
 						<tr>
 							<th><input type="checkbox" name="cy_show_summary" id="cy_show_summary" value="1"<?php if (get_option('cy_show_summary')) { echo ' checked="checked"'; } ?> /></th>
-							<td><label for="cy_show_summary">Show Tracking Summary</label></td>
+							<td>
+								<label for="cy_show_summary">Show Tracking Summary</label>
+								<p><?php echo cy_get_brief_stats(); ?></p>
+							</td>
 						</tr>
 						<tr>
 							<th><input type="checkbox" name="cy_show_detailed_stats" id="cy_show_detailed_stats" value="1"<?php if (get_option('cy_show_detailed_stats')) { echo ' checked="checked"'; } ?> /></th>
-							<td><label for="cy_show_detailed_stats">Show Detailed Stats</label></td>
+							<td>
+								<label for="cy_show_detailed_stats">Show Detailed Stats</label>
+								<p><?php echo cy_get_summary(); ?></p>
+							</td>
 						</tr>
 						<tr>
 							<th><input type="checkbox" name="cy_show_distance_graph" id="cy_show_distance_graph" value="1"<?php if (get_option('cy_show_distance_graph')) { echo ' checked="checked"'; } ?> /></th>
