@@ -1216,7 +1216,7 @@ function cy_cycling_page() {
 					<input type="hidden" name="page" value="cyclopress" />
 					<input type="hidden" name="cycling" value="1" />
 				
-					<table>
+					<table class="widefat">
 						<tr>
 							<th>Status</th>
 							<td>
