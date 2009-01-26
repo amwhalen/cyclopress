@@ -434,7 +434,7 @@ function cy_admin_navigation($current_page='') {
 		),
 		'cycling' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&cycling=1',
-			'title' = 'Cycling Page',
+			'title' => 'Cycling Page',
 		),
 	);
 
@@ -1119,7 +1119,7 @@ function cy_cycling_page() {
 	?>
 	<div class="wrap">
 	
-		cycling page
+		<p>cycling page</p>
 
 	</div>
 	<?PHP
