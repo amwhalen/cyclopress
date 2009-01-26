@@ -1188,7 +1188,16 @@ function cy_cycling_page() {
 		
 			$page = get_post(get_option('cy_page_id'));
 		
-			if ($page->post_status == 'draft') {
+		
+			if(!$page) {
+			
+				?>
+				
+				<p>It looks like you've deleted your cycling page from WordPress. That's OK. Please <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_clear_page=1">tell CycloPress that it's been deleted</a>.</p>
+				
+				<?php
+			 
+			} else if ($page->post_status == 'draft') {
 			
 				?>
 				
@@ -1205,8 +1214,6 @@ function cy_cycling_page() {
 				<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
 				
 				<p>If you'd like to remove your cycling page temporarily from public view, you can <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_draft_page=1">set its status to draft</a>.</p>
-			
-				<p>Did you delete your cycling page from the WordPress menu but CycloPress is still saying you have one? <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_clear_page=1">Tell CycloPress to figure it out</a>.</p>
 			
 				<?php
 		
