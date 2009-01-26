@@ -1299,7 +1299,7 @@ function cy_about_page() {
 function cy_export_page() {
 
 	?>
-	<div class="wrap">
+	<div id="cy_export">
 		
 		<?php echo cy_admin_navigation('export'); ?>
 		
@@ -1308,11 +1308,11 @@ function cy_export_page() {
 			<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=csv"<?php if ($_GET['cy_export_format'] == 'csv') echo ' class="here"'; ?>>CSV</a>
 		</div>
 		<?php if ($_GET['cy_export_format'] == 'csv') { ?>
-			<div><p>Exporting as <acronym title="Comma Separated Values">CSV</acronym> allows you to open your stats in Excel or other spreadsheet software.</p></div>
+			<div id="cy_export_desc"><p>Exporting as <acronym title="Comma Separated Values">CSV</acronym> allows you to open your stats in Excel or other spreadsheet software.</p></div>
 		<?php } else { ?>
-			<div><p>Exporting as <acronym title="Extensible Markup Language">XML</acronym> allows you to <em>eventually</em> (not yet implemented) import your stats and options back into CycloPress. For now you can back up your stats to be safe.</p></div>
+			<div id="cy_export_desc"><p>Exporting as <acronym title="Extensible Markup Language">XML</acronym> allows you to <em>eventually</em> (not yet implemented) import your stats and options back into CycloPress. For now you can back up your stats to be safe.</p></div>
 		<?php } ?>
-		<textarea rows="20" cols="80"><?php echo htmlentities(cy_export($_GET['cy_export_format'])); ?></textarea>
+		<textarea id="cy_export_content" rows="20" cols="80"><?php echo htmlentities(cy_export($_GET['cy_export_format'])); ?></textarea>
 	
 	</div>
 	<?PHP
@@ -1442,6 +1442,26 @@ function cy_admin_css() {
 		}
 		.cy_manage_table th a:hover {
 			color: #666;
+		}
+		#cy_export {
+			width: 600px;
+			border: 1px solid #ccc;
+		}
+		#cy_export_list {
+			
+		}
+		#cy_export_list a {
+			padding: 5px;
+			background: #fff;
+		}
+		#cy_export_list a.here {
+			background #ccc;
+		}
+		#cy_export_desc {
+			
+		}
+		#cy_export_content {
+			width: 600px;
 		}
 	</style>
 	
