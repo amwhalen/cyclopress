@@ -1130,7 +1130,7 @@ function cy_cycling_page() {
 			$post = array(
 				'comment_status' => 'closed',
 				'post_content' => '<?php $stats = cy_db_stats(); if ($stats) { $first_ride_date = cy_get_last_ride_date(); ?><p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p><?php echo cy_get_summary(true); ?><h3>Distance</h3><?php echo cy_get_graph_img_tag("distance"); ?><h3>Average Speed</h3><?php echo cy_get_graph_img_tag("average_speed"); } else { ?><p>No stats! Get out there and ride!</p><?php } ?>',
-				'post_status' => 'publish', // draft, publish, pending
+				'post_status' => 'draft', // draft, publish, pending
 				'post_title' => 'Cycling Stats',
 				'post_type' => 'page',
 			);
@@ -1140,31 +1140,39 @@ function cy_cycling_page() {
 			if ($page_id) {
 				?><p class="cy_ok">Your page was created.<?php
 				update_option('cy_page_id', $page_id);
+				update_option('cy_page_name', 'Cycling Stats');
+				update_option('cy_page_status', 'draft');
+				update_option('cy_show_summary', '1');
+				update_option('cy_show_detailed_stats', '1');
+				update_option('cy_show_distance_graph', '1');
+				update_option('cy_show_avg_speed_graph', '1');
 			} else {
 				?><p class="cy_error">There was an error creating your page.</p><?php
 			}
 			
-		} else if (isset($_GET['cy_draft_page']) && $_GET['cy_draft_page']) {
+		} else if (isset($_GET['cy_update_page']) && $_GET['cy_update_page']) {
 		
 			$post = array(
-				'post_status' => 'draft',
+				'post_status' => $_GET['cy_page_status'],
+				'post_title' => $_GET['cy_page_name'],
 				'ID' => get_option('cy_page_id'),
 			);
 		
 			$page_id = wp_update_post($post);
 			
-			?><p class="cy_ok">Your cycling page is no longer visible to the public.</p><?php
-		
-		} else if (isset($_GET['cy_publish_page']) && $_GET['cy_publish_page']) {
-		
-			$post = array(
-				'post_status' => 'publish',
-				'ID' => get_option('cy_page_id'),
-			);
-		
-			$page_id = wp_update_post($post);
+			$cy_show_summary = (isset($_GET['cy_page_status']) && $_GET['cy_page_status']) ? '1' : '0';
+			$cy_show_detailed_stats = (isset($_GET['cy_show_detailed_stats']) && $_GET['cy_show_detailed_stats']) ? '1' : '0';
+			$cy_show_distance_graph = (isset($_GET['cy_show_distance_graph']) && $_GET['cy_show_distance_graph']) ? '1' : '0';
+			$cy_show_avg_speed_graph = (isset($_GET['cy_show_avg_speed_graph']) && $_GET['cy_show_avg_speed_graph']) ? '1' : '0';
 			
-			?><p class="cy_ok">Your cycling page is once again visible to the public.</p><?php
+			update_option('cy_page_name', $_GET['cy_page_name']);
+			update_option('cy_page_status', $_GET['cy_page_status']);
+			update_option('cy_show_summary', $cy_show_summary);
+			update_option('cy_show_detailed_stats', $cy_show_detailed_stats);
+			update_option('cy_show_distance_graph', $cy_show_distance_graph);
+			update_option('cy_show_avg_speed_graph', $cy_show_avg_speed_graph);
+			
+			?><p class="cy_ok">Your cycling page has been updated.</p><?php
 		
 		} else if (isset($_GET['cy_clear_page']) && $_GET['cy_clear_page']) {
 		
@@ -1174,6 +1182,7 @@ function cy_cycling_page() {
 		
 		}
 		
+		// has there been a page created yet?
 		if (!get_option('cy_page_id')) {
 		
 		?>
@@ -1188,39 +1197,37 @@ function cy_cycling_page() {
 		
 			$page = get_post(get_option('cy_page_id'));
 		
-		
 			if(!$page) {
 			
 				?>
 				
 				<p>It looks like you've deleted your cycling page from WordPress. That's OK. Please <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_clear_page=1">tell CycloPress that it's been deleted</a>.</p>
-				
-				<?php
-			 
-			} else if ($page->post_status == 'draft') {
 			
-				?>
-				
-				<p>You've created a cycling page, but set its status to draft so the public can't see it. <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_publish_page=1">Publish your cycling stats page</a> so you can brag to the world.</p>
-				
 				<?php
-			
+				
 			} else {
 			
 				?>
 				
 				<p><a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id').'&preview=true'; ?>">View cycling page &raquo;</a></p>
 				
-				<form action="plguins.php" method="get" enctype="multipart/form-data">
+				<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
+				
+				<form action="plugins.php" method="get" enctype="multipart/form-data">
 				
 					<input type="hidden" name="page" value="cyclopress" />
 					<input type="hidden" name="cycling" value="1" />
+					<input type="hidden" name="cy_update_page" value="1" />
 				
 					<table class="widefat">
 						<tr>
+							<th>Cycling Page Name</th>
+							<td><input type="text" name="cy_page_name" value="<?php echo get_option('cy_page_name'); ?>" /></td>
+						</tr>
+						<tr>
 							<th>Status</th>
 							<td>
-								<select name="cy_cycling_status">
+								<select name="cy_page_status">
 									<option value="draft"<?php if ($page->post_status == 'draft') { echo ' selected="selected"'; } ?>>Draft</option>
 									<option value="publish"<?php if ($page->post_status == 'publish') { echo ' selected="selected"'; } ?>>Published</option>
 								</select>
@@ -1261,9 +1268,7 @@ function cy_cycling_page() {
 					</table>
 										
 				</form>
-							
-				<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
-							
+														
 				<?php
 		
 			}
