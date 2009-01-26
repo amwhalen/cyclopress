@@ -2090,7 +2090,6 @@ function cy_export($format) {
 					if ($j < sizeof($row)-1) { $csv .= ','; } else { $csv .= "\n"; }
 					$j++;
 				}
-				$csv .= "\n";
 				
 				$i++;
 				
