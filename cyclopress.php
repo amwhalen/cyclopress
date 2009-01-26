@@ -1139,6 +1139,7 @@ function cy_cycling_page() {
 			
 			if ($page_id) {
 				?><p>Your page was created. <a href="<?php echo get_bloginfo('url').'/?p='.$page_id; ?>">See it</a>.</p><?php
+				update_option('cy_page_id', $page_id);
 			} else {
 				?><p>There was an error creating your page.</p><?php
 			}
