@@ -551,7 +551,7 @@ function cy_options_page() {
 	
 	<?php echo cy_admin_navigation('options'); ?>
 	
-	<h2>CycloPress Options</h2>
+	<h3>CycloPress Options</h3>
 	
 	<form method="post" action="options.php">
 		
@@ -692,7 +692,7 @@ function cy_write_page($ride=false) {
 	
 		<?php echo cy_admin_navigation('add'); ?>
 	
-		<h2>CycloPress Ride</h2>
+		<h3>CycloPress Ride</h3>
 	
 		<form name="cycling" action="" method="post" enctype="multipart/form-data">
 			
@@ -900,7 +900,7 @@ function cy_manage_page() {
 		
 			<?php echo cy_admin_navigation('manage'); ?>
 		
-			<h2>Manage Rides</h2>
+			<h3>Manage Rides</h3>
 	
 			<table class="widefat cy_manage_table">
 				
@@ -1009,7 +1009,7 @@ function cy_debug_page() {
 	
 		<?php echo cy_admin_navigation('debug'); ?>
 	
-		<h2>CycloPress Debugging Information</h2>
+		<h3>CycloPress Debugging Information</h3>
 		
 		<table class="widefat">
 			<tr>
@@ -1142,12 +1142,35 @@ function cy_cycling_page() {
 			} else {
 				?><p>There was an error creating your page.</p><?php
 			}
+			
+		} else if (isset($_GET['cy_create_page']) && $_GET['cy_create_page']) {
 		
-		} else {
+			$post = array(
+				'post_status' => 'draft',
+				'ID' => get_option('cy_page_id'),
+			);
+		
+			$page_id = wp_insert_post($post);
+			
+			?><p>Your cycling page is no longer visible to the public.</p><?php
+		
+		}
+		
+		if (!get_option('cy_page_id')) {
 		
 		?>
 		
-			<p>Would you like to <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_create_page=1">create a cycling page</a>?</p>
+			<p>From here you can create a page where your viewers can see your graphs and stats.</p>
+		
+			<p>You haven't created a cycling page yet. Would you like to <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_create_page=1">create a cycling page now</a>?</p>
+		
+		<?php } else { ?>
+		
+			<p>You've already created a cycling page. <a href="<?php echo get_bloginfo('url').'/?p='.$page_id; ?>">See it</a>.</p>
+			
+			<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
+			
+			<p>If you'd like to remove your cycling page temporarily, you can <a href="?page=cyclopress/cyclopress.php&cycling=1&cy_draft_page=1">set its status to draft</a>.</p>
 		
 		<?php } ?>
 
@@ -2013,6 +2036,7 @@ function cy_get_default_options() {
 		'cy_graph_color_bottom' => '777777',
 		'cy_graph_transparency' => '0.7',
 		'cy_unit' => 'mile',
+		'cy_page_id' => '',
 	);
 	
 	return $options;
