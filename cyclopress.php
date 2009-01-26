@@ -1462,9 +1462,10 @@ function cy_admin_css() {
 			background: #fff;
 			border: 1px solid #ccc;
 			border-width: 1px 1px 0 1px;
+			text-decoration: none;
 		}
 		#cy_export_list a.here {
-			background #ccc;
+			background: #ccc;
 			font-weight: bold;
 			color: #000;
 		}
