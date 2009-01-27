@@ -2249,6 +2249,12 @@ function cy_get_default_options() {
 		'cy_graph_transparency' => '0.7',
 		'cy_unit' => 'mile',
 		'cy_page_id' => '',
+		'cy_page_name' => 'Cycling Stats',
+		'cy_page_status' => 'draft',
+		'cy_show_summary' => '1',
+		'cy_show_detailed_stats' => '1',
+		'cy_show_distance_graph' => '1',
+		'cy_show_avg_speed_graph' => '1',
 	);
 	
 	return $options;
