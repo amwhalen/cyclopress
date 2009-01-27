@@ -2178,12 +2178,13 @@ function cy_export($format) {
 	
 	} else {
 	
-		$xml = "<cyclopress>";
-		$xml .= "\n\t<meta>";
-		$xml .= "\n\t\t<version>".$cy_version."</version>";
-		$xml .= "\n\t\t<dbversion>".$cy_db_version."</dbversion>";
-		$xml .= "\n\t\t<exportdate>".date('r')."</exportdate>";
-		$xml .= "\n\t</meta>";
+		$xml = '<cyclopress exportdate="'.date('r').'">';
+		$xml .= "\n\t<options>";
+			$opts = cy_get_default_options();
+			foreach ($opts as $key=>$val) {
+				$xml .= "\n\t\t<".$key.">".get_option($val)."</".$key.">";
+			}
+		$xml .= "\n\t</options>";
 		
 		foreach ($tables as $table) {
 			
