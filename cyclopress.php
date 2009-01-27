@@ -1152,9 +1152,9 @@ function cy_cycling_page() {
 			
 		} else if (isset($_GET['cy_update_page']) && $_GET['cy_update_page']) {
 		
-			$php = '<?php $stats = cy_db_stats(); if ($stats) { ';
+			$php = '<?php $stats = cy_db_stats(); if ($stats) { ?>';
 			if (isset($_GET['cy_show_summary']) && $_GET['cy_show_summary']) {
-				$php .= ' ?><p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p> ';
+				$php .= ' <p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p> ';
 			}
 			if (isset($_GET['cy_show_detailed_stats']) && $_GET['cy_show_detailed_stats']) {
 				$php .= ' <?php echo cy_get_summary(true); ?> ';
@@ -1165,7 +1165,7 @@ function cy_cycling_page() {
 			if (isset($_GET['cy_show_avg_speed_graph']) && $_GET['cy_show_avg_speed_graph']) {
 				$php .= ' <h3>Average Speed</h3><?php echo cy_get_graph_img_tag("average_speed"); ?> ';
 			}
-			$php .= ' } else { echo "<p>No stats! Get out there and ride!</p>"; } ?>';
+			$php .= '<?php } else { echo "<p>No stats! Get out there and ride!</p>"; } ?>';
 		
 			$post = array(
 				'post_status' => $_GET['cy_page_status'],
