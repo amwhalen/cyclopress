@@ -1170,6 +1170,7 @@ function cy_cycling_page() {
 			$post = array(
 				'post_status' => $_GET['cy_page_status'],
 				'post_title' => $_GET['cy_page_name'],
+				'post_content' => $php,
 				'ID' => get_option('cy_page_id'),
 			);
 		
