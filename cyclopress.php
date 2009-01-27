@@ -561,7 +561,7 @@ function cy_options_page() {
 		
 		<input type="hidden" name="page_options" value="cy_unit,cy_graph_type,cy_graph_width,cy_graph_height,cy_graph_color_top,cy_graph_color_bottom,cy_graph_transparency" />
 		
-		<table class="form-table">
+		<table class="widefat">
 			<tr valign="top">
 				<th scope="row">Units</th>
 				<td>
