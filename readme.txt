@@ -3,20 +3,17 @@ Contributors: anukit
 Tags: cycling, graphs, sports, exercise, jpgraph, gd
 Requires at least: 2.5
 Tested up to: 2.7
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 
 Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
 == Description ==
 
 CycloPress allows you to track your cycling statistics from a cyclocomputer with WordPress.
+You can even create a page in your blog to show your cycling stats and graphs.
 
 The GD library must be installed on your web server. After you activate CycloPress
 you can see what version of GD (if any) you have installed by checking the CycloPress Debug page.
-
-To display a 'cycling' page of statistics and graphs, you'll need to install a plugin to enable PHP in posts
-and pages. The CycloPress API contains functions that you can call to show graphs, text statistics, or other
-information about your rides.
 
 == Installation ==
 
@@ -25,7 +22,6 @@ information about your rides.
 * WordPress version 2.5 or higher. CycloPress may work with older versions, but it is not suggested.
 * PHP version 4.3.1 or higher.
 * GD Library.
-* Optional plugin to allow PHP code in pages and posts.
 
 = Installation =
 
@@ -33,7 +29,7 @@ information about your rides.
 1. Make the `/wp-content/plugins/cyclopress/graphs/` directory writable by your web server. (e.g. chmod 775)
 1. Activate the plugin through the `Plugins` menu in WordPress.
 1. Add your stats through the `Write -> Ride` interface.
-1. Place some CycloPress PHP functions in your templates or in your PHP-enabled pages or posts to see your stats.
+1. Create your cycling page in the CycloPress admin to see your stats on your blog.
 
 Find [more instructions and discussion](http://amwhalen.com/blog/projects/cyclopress/) on the CycloPress home page at amwhalen.com.
 
