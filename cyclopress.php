@@ -1253,7 +1253,7 @@ function cy_cycling_page() {
 							<th><input type="checkbox" name="cy_show_summary" id="cy_show_summary" value="1"<?php if (get_option('cy_show_summary')) { echo ' checked="checked"'; } ?> /></th>
 							<td>
 								<label for="cy_show_summary"><strong>Show Tracking Summary:</strong></label>
-								<p><?php echo cy_get_brief_stats(); ?></p>
+								<p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p>
 							</td>
 						</tr>
 						<tr>
