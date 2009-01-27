@@ -1152,6 +1152,7 @@ function cy_cycling_page() {
 			
 		} else if (isset($_GET['cy_update_page']) && $_GET['cy_update_page']) {
 		
+			// create the PHP string for the page
 			$php = '<?php $stats = cy_db_stats(); if ($stats) { ?>';
 			if (isset($_GET['cy_show_summary']) && $_GET['cy_show_summary']) {
 				$php .= ' <p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p> ';
@@ -1167,20 +1168,20 @@ function cy_cycling_page() {
 			}
 			$php .= '<?php } else { echo "<p>No stats! Get out there and ride!</p>"; } ?>';
 		
+			// update the page
 			$post = array(
 				'post_status' => $_GET['cy_page_status'],
 				'post_title' => $_GET['cy_page_name'],
 				'post_content' => $php,
 				'ID' => get_option('cy_page_id'),
 			);
-		
 			$page_id = wp_update_post($post);
 			
+			// update the cyclopress options
 			$cy_show_summary = (isset($_GET['cy_show_summary']) && $_GET['cy_show_summary']) ? '1' : '0';
 			$cy_show_detailed_stats = (isset($_GET['cy_show_detailed_stats']) && $_GET['cy_show_detailed_stats']) ? '1' : '0';
 			$cy_show_distance_graph = (isset($_GET['cy_show_distance_graph']) && $_GET['cy_show_distance_graph']) ? '1' : '0';
 			$cy_show_avg_speed_graph = (isset($_GET['cy_show_avg_speed_graph']) && $_GET['cy_show_avg_speed_graph']) ? '1' : '0';
-			
 			update_option('cy_page_name', $_GET['cy_page_name']);
 			update_option('cy_page_status', $_GET['cy_page_status']);
 			update_option('cy_show_summary', $cy_show_summary);
