@@ -702,7 +702,7 @@ function cy_write_page($ride=false) {
 			<input type="hidden" name="id" value="<?php echo $ride->id; ?>" />
 			<?php } ?>
 			
-			<table class="form-table">
+			<table class="widefat">
 			  <tr>
 				<th width="33%" scope="row" style="text-align: right;">*Date:</th>
 				<td>
