@@ -1278,11 +1278,9 @@ function cy_cycling_page() {
 								<p><?php echo cy_get_graph_img_tag('average_speed'); ?></p>
 							</td>
 						</tr>
-						<tr>
-							<th></th>
-							<td><input type="submit" value="Save Settings" /></td>
-						</tr>
 					</table>
+					
+					<p class="submit"><input type="submit" name="Submit" value="Save" style="font-weight: bold;" /></p>
 										
 				</form>
 														
