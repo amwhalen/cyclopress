@@ -2182,7 +2182,7 @@ function cy_export($format) {
 		$xml .= "\n\t<options>";
 			$opts = cy_get_default_options();
 			foreach ($opts as $key=>$val) {
-				$xml .= "\n\t\t<".$key.">".get_option($val)."</".$key.">";
+				$xml .= "\n\t\t<".$key.">".get_option($key)."</".$key.">";
 			}
 		$xml .= "\n\t</options>";
 		
