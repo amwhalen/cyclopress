@@ -1975,6 +1975,10 @@ function cy_rides_sql() {
 
 	//echo 'checking cy_rides_sql';
 
+	// had to remove:
+	//bike_id INT(10) UNSIGNED INT NULL ,
+	//type_id INT(10) UNSIGNED INT NULL ,
+
 	global $wpdb;
 	
 	$table_name = $wpdb->prefix . "cy_rides";
@@ -1987,8 +1991,6 @@ function cy_rides_sql() {
 				max_speed DOUBLE(4,2) NULL ,
 				minutes INT(4) UNSIGNED NOT NULL ,
 				cadence DOUBLE(5,2) NULL ,
-					bike_id INT(10) UNSIGNED INT NULL ,
-				type_id INT(10) UNSIGNED INT NULL ,
 				notes TEXT NULL,
 				UNIQUE KEY  id (id)
 			);';
