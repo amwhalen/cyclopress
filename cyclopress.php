@@ -672,7 +672,7 @@ function cy_write_page($ride=false) {
 		
 		if (!$saved) {
 			?>
-			<div id="message" class="updated fade" style="margin-top: 1.5em;"><p><?php echo $e; $wpdb->print_error(); ?></p></div>
+			<div id="message" class="updated fade" style="margin-top: 1.5em;"><p>Error: <?php echo $e; $wpdb->print_error(); ?></p></div>
 			<?PHP
 		} else {
 			?>
@@ -1138,7 +1138,7 @@ function cy_cycling_page() {
 			$page_id = wp_insert_post($post);
 			
 			if ($page_id) {
-				?><p class="cy_ok">Your page was created.<?php
+				?><p class="cy_ok">Your page was created, but it is not yet published.<?php
 				update_option('cy_page_id', $page_id);
 				update_option('cy_page_name', 'Cycling Stats');
 				update_option('cy_page_status', 'draft');
@@ -1238,11 +1238,11 @@ function cy_cycling_page() {
 				
 					<table class="widefat">
 						<tr>
-							<th>Cycling Page Name</th>
+							<th align="right">Cycling Page Name</th>
 							<td><input type="text" name="cy_page_name" value="<?php echo get_option('cy_page_name'); ?>" /></td>
 						</tr>
 						<tr>
-							<th>Status</th>
+							<th align="right">Status</th>
 							<td>
 								<select name="cy_page_status">
 									<option value="draft"<?php if ($page->post_status == 'draft') { echo ' selected="selected"'; } ?>>Draft</option>
@@ -1251,28 +1251,28 @@ function cy_cycling_page() {
 							</td>
 						</tr>
 						<tr>
-							<th><input type="checkbox" name="cy_show_summary" id="cy_show_summary" value="1"<?php if (get_option('cy_show_summary')) { echo ' checked="checked"'; } ?> /></th>
+							<th align="right"><input type="checkbox" name="cy_show_summary" id="cy_show_summary" value="1"<?php if (get_option('cy_show_summary')) { echo ' checked="checked"'; } ?> /></th>
 							<td>
 								<label for="cy_show_summary"><strong>Show Tracking Summary:</strong></label>
 								<p>These statistics have been tracked since <?php echo cy_get_first_ride_date(); ?> and were last updated on <?php echo cy_get_last_ride_date(); ?>.</p>
 							</td>
 						</tr>
 						<tr>
-							<th><input type="checkbox" name="cy_show_detailed_stats" id="cy_show_detailed_stats" value="1"<?php if (get_option('cy_show_detailed_stats')) { echo ' checked="checked"'; } ?> /></th>
+							<th align="right"><input type="checkbox" name="cy_show_detailed_stats" id="cy_show_detailed_stats" value="1"<?php if (get_option('cy_show_detailed_stats')) { echo ' checked="checked"'; } ?> /></th>
 							<td>
 								<label for="cy_show_detailed_stats"><strong>Show Detailed Stats:</strong></label>
 								<p><?php echo cy_get_summary(); ?></p>
 							</td>
 						</tr>
 						<tr>
-							<th><input type="checkbox" name="cy_show_distance_graph" id="cy_show_distance_graph" value="1"<?php if (get_option('cy_show_distance_graph')) { echo ' checked="checked"'; } ?> /></th>
+							<th align="right"><input type="checkbox" name="cy_show_distance_graph" id="cy_show_distance_graph" value="1"<?php if (get_option('cy_show_distance_graph')) { echo ' checked="checked"'; } ?> /></th>
 							<td>
 								<label for="cy_show_distance_graph"><strong>Show Distance Graph:</strong></label>
 								<p><?php echo cy_get_graph_img_tag('distance'); ?></p>
 							</td>
 						</tr>
 						<tr>
-							<th><input type="checkbox" name="cy_show_avg_speed_graph" id="cy_show_avg_speed_graph" value="1"<?php if (get_option('cy_show_avg_speed_graph')) { echo ' checked="checked"'; } ?> /></th>
+							<th align="right"><input type="checkbox" name="cy_show_avg_speed_graph" id="cy_show_avg_speed_graph" value="1"<?php if (get_option('cy_show_avg_speed_graph')) { echo ' checked="checked"'; } ?> /></th>
 							<td>
 								<label for="cy_show_avg_speed_graph"><strong>Show Average Speed Graph:</strong></label>
 								<p><?php echo cy_get_graph_img_tag('average_speed'); ?></p>
@@ -2056,12 +2056,12 @@ function cy_install($recreate_graphs=false) {
 	if ( $installed_db_ver != $cy_db_version || $installed_ver != $cy_version ) {
 	
 		// upgrade
-		echo 'upgrading cyclopress<br />';
+		//echo 'upgrading cyclopress<br />';
 	
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
 		// cy_rides
-		echo 'rides: ' . print_r(dbDelta(cy_rides_sql()), true) . '<br />';
+		//echo 'rides: ' . print_r(dbDelta(cy_rides_sql()), true) . '<br />';
 		// cy_bikes
 		dbDelta(cy_bikes_sql());
 		// cy_types
