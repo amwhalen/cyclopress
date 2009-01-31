@@ -366,6 +366,7 @@ function cy_insert_ride($ride) {
 	
 	// error?
 	$saved = ($result === false) ? false : true;
+	if (!$saved) echo $sql;
 	return $saved;
 
 }
