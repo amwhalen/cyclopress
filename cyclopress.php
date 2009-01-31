@@ -2063,6 +2063,7 @@ function cy_install($recreate_graphs=false) {
 
 		// cy_rides
 		//echo 'rides: ' . print_r(dbDelta(cy_rides_sql()), true) . '<br />';
+		dbDelta(cy_rides_sql());
 		// cy_bikes
 		dbDelta(cy_bikes_sql());
 		// cy_types
