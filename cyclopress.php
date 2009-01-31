@@ -356,7 +356,8 @@ function cy_insert_ride($ride) {
 
 	$table_name = $wpdb->prefix . "cy_rides";
 
-	$sql  = 'insert into '.$table_name.'(startdate,miles,avg_speed,max_speed,minutes,cadence,notes,bike_id,type_id) ';
+	$sql  = 'insert into '.$table_name.'(startdate,miles,avg_speed,max_speed,minutes,cadence,notes) ';
+	//$sql  = 'insert into '.$table_name.'(startdate,miles,avg_speed,max_speed,minutes,cadence,notes,bike_id,type_id) ';
 	$sql .= "values('".$wpdb->escape($ride->get_startdate())."','".$wpdb->escape($ride->miles)."','".$wpdb->escape($ride->avg_speed)."'";
 	$sql .= ",'".$wpdb->escape($ride->max_speed)."','".$wpdb->escape($ride->minutes)."'";
 	$sql .= ",'".$wpdb->escape($ride->cadence)."','".$wpdb->escape($ride->notes)."')";
