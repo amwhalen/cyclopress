@@ -2066,7 +2066,7 @@ function cy_install($recreate_graphs=false) {
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
 		// cy_rides
-		//echo 'rides: ' . print_r(dbDelta(cy_rides_sql()), true) . '<br />';
+		echo 'rides: ' . print_r(dbDelta(cy_rides_sql()), true) . '<br />';
 		dbDelta(cy_rides_sql());
 		// cy_bikes
 		dbDelta(cy_bikes_sql());
