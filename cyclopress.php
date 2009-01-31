@@ -1971,7 +1971,7 @@ function cy_check_version($recreate_graphs=false) {
  */
 function cy_rides_sql() {
 
-	echo 'checking cy_rides_sql';
+	//echo 'checking cy_rides_sql';
 
 	global $wpdb;
 	
