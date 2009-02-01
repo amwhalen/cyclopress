@@ -2066,14 +2066,11 @@ function cy_install($recreate_graphs=false) {
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
 		// cy_rides
-		echo 'rides: ' . print_r(dbDelta(cy_rides_sql()), true) . '<br />';
-		//dbDelta(cy_rides_sql());
+		dbDelta(cy_rides_sql());
 		// cy_bikes
-		//echo 'bikes: ' . print_r(dbDelta(cy_bikes_sql()), true) . '<br />';
-		//dbDelta(cy_bikes_sql());
+		dbDelta(cy_bikes_sql());
 		// cy_types
-		//echo 'types: ' . print_r(dbDelta(cy_types_sql()), true) . '<br />';
-		//dbDelta(cy_types_sql());
+		dbDelta(cy_types_sql());
 	
 		// update only CY options, leave user options alone
 		update_option("cy_version", $cy_version);
