@@ -28,7 +28,7 @@ Author URI: http://amwhalen.com
 
 $cy_version = '1.3.7';
 //$cy_db_version = '1.4';
-$cy_db_version = rand(2, 3);
+$cy_db_version = rand(2, 100);
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
 $cy_dir = get_bloginfo('url').'/wp-content/plugins/'.basename(dirname(__FILE__));
@@ -2069,10 +2069,10 @@ function cy_install($recreate_graphs=false) {
 		echo 'rides: ' . print_r(dbDelta(cy_rides_sql()), true) . '<br />';
 		//dbDelta(cy_rides_sql());
 		// cy_bikes
-		echo 'bikes: ' . print_r(dbDelta(cy_bikes_sql()), true) . '<br />';
+		//echo 'bikes: ' . print_r(dbDelta(cy_bikes_sql()), true) . '<br />';
 		//dbDelta(cy_bikes_sql());
 		// cy_types
-		echo 'types: ' . print_r(dbDelta(cy_types_sql()), true) . '<br />';
+		//echo 'types: ' . print_r(dbDelta(cy_types_sql()), true) . '<br />';
 		//dbDelta(cy_types_sql());
 	
 		// update only CY options, leave user options alone
