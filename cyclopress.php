@@ -145,6 +145,7 @@ class CYBike {
 class CYType {
 
 	var $id;
+	var $type;
 	var $label;
 	var $description;
 
@@ -2030,11 +2031,12 @@ function cy_types_sql() {
 	
 	$table_name = $wpdb->prefix . "cy_types";
 
-	$sql  = 'CREATE TABLE '.$table_name.' (
+	$sql  = "CREATE TABLE ".$table_name." (
 				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT  PRIMARY KEY ,
+				type ENUM('bike', 'ride') NOT NULL,
 				label VARCHAR(255) NOT NULL,
 				description TEXT NULL
-			);';
+			);";
 	
 	return $sql;
 
