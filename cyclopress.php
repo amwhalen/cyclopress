@@ -1351,10 +1351,10 @@ function cy_manage_bikes_page() {
 						?>
 						
 						<tr class="<?php echo $c; ?>">
-							<td><strong><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_bike_id=<?php echo $bike['id']; ?>"><?php echo $bike['label']; ?></a></strong></td>
-							<td><?php echo $bike['make']; ?></td>
+							<td><strong><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_bike_id=<?php echo $bike['id']; ?>"><?php echo $bike['make']; ?></a></strong></td>
 							<td><?php echo $bike['model']; ?></td>
 							<td><?php echo $bike['year']; ?></td>
+							<td><?php echo $bike['label']; ?></td>
 							<td><?php echo (strlen(trim(strip_tags($bike['notes']))) > 50) ? substr(trim(strip_tags($bike['notes'])), 0, 50).'...' : trim(strip_tags($bike['notes'])); ?></td>
 						</tr>
 							
