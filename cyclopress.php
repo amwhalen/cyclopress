@@ -1376,7 +1376,7 @@ function cy_manage_bikes_page() {
 						<td>No bikes! What are you riding these days?</td>
 					</tr>
 					<tr>
-						<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1">Add a new bike.</a></th>
+						<td><a href="?page=cyclopress/cyclopress.php&add_bikes=1">Add a new bike.</a></td>
 					</tr>
 					</tbody>
 					<?php
