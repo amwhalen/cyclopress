@@ -1329,10 +1329,10 @@ function cy_manage_bikes_page() {
 					
 					<thead>
 						<tr>
-							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=label&cy_sort=<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Label<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=make&cy_sort=<?php if ($sort_col=='make') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Make<?php if ($sort_col=='make') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=model&cy_sort=<?php if ($sort_col=='model') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Model<?php if ($sort_col=='model') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=year&cy_sort=<?php if ($sort_col=='year') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Year<?php if ($sort_col=='year') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=label&cy_sort=<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Label<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th>Notes</th>
 						</tr>
 					</thead>
