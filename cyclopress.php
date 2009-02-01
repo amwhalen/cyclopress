@@ -1982,7 +1982,7 @@ function cy_rides_sql() {
 	$table_name = $wpdb->prefix . "cy_rides";
 
 	$sql  = 'CREATE TABLE '.$table_name.' (
-				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT  PRIMARY KEY,
 				startdate DATETIME NOT NULL ,
 				miles DOUBLE(6,2) NOT NULL ,
 				avg_speed DOUBLE(4,2) NULL ,
@@ -1991,8 +1991,7 @@ function cy_rides_sql() {
 				cadence DOUBLE(5,2) NULL ,
 				bike_id INT(10) UNSIGNED INT NULL ,
 				type_id INT(10) UNSIGNED INT NULL ,
-				notes TEXT NULL,
-				UNIQUE KEY  id (id)
+				notes TEXT NULL
 			);';
 	
 	return $sql;
@@ -2009,7 +2008,7 @@ function cy_bikes_sql() {
 	$table_name = $wpdb->prefix . "cy_bikes";
 
 	$sql  = 'CREATE TABLE '.$table_name.' (';
-	$sql .= '`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,';
+	$sql .= '`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT  PRIMARY KEY,';
 	$sql .= '`label` VARCHAR(255) NOT NULL ,';
 	$sql .= '`make` VARCHAR(255) NULL ,';
 	$sql .= '`model` VARCHAR(255) NULL ,';
