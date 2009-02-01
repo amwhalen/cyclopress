@@ -2067,11 +2067,13 @@ function cy_install($recreate_graphs=false) {
 
 		// cy_rides
 		echo 'rides: ' . print_r(dbDelta(cy_rides_sql()), true) . '<br />';
-		dbDelta(cy_rides_sql());
+		//dbDelta(cy_rides_sql());
 		// cy_bikes
-		dbDelta(cy_bikes_sql());
+		echo 'bikes: ' . print_r(dbDelta(cy_bikes_sql()), true) . '<br />';
+		//dbDelta(cy_bikes_sql());
 		// cy_types
-		dbDelta(cy_types_sql());
+		echo 'types: ' . print_r(dbDelta(cy_types_sql()), true) . '<br />';
+		//dbDelta(cy_types_sql());
 	
 		// update only CY options, leave user options alone
 		update_option("cy_version", $cy_version);
