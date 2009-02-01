@@ -128,7 +128,7 @@ class CYRide {
 /**
  * The CycloPress Bike object
  */
-class CYBike {
+class CYBike extends CYDBObject {
 
 	var $id;
 	var $label;
@@ -142,12 +142,39 @@ class CYBike {
 /**
  * The CycloPress Type object
  */
-class CYType {
+class CYType extends CYDBObject {
 
 	var $id;
 	var $type;
 	var $label;
 	var $description;
+
+};
+
+/**
+ * The CycloPress DBObject object
+ */
+class CYDBObject {
+
+	/**
+	 * Loads all data from POST
+	 */
+	function load_post() {
+	
+		$this->load($_POST);
+			
+	}
+	
+	/**
+	 * Loads all data from a DB row (associative)
+	 */
+	function load($row) {
+	
+		foreach ($this as $k=>$v) {
+			$this->$k = $row[$k];
+		}
+	
+	}
 
 };
 
@@ -401,6 +428,124 @@ function cy_update_ride($ride) {
 }
 
 /**
+ * Saves a bike in the database
+ */
+function cy_save_bike($bike) {
+
+	if ($bike->id == NULL) {
+		return cy_insert_bike($bike);
+	} else  {
+		return cy_update_bike($bike);
+	}
+
+}
+
+/**
+ * Inserts a bike into the database
+ */
+function cy_insert_bike($bike) {
+
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . "cy_bikes";
+
+	$sql  = 'insert into '.$table_name.'(label,make,model,year,notes) ';
+	$sql .= "values('".$wpdb->escape($bike->label)."','".$wpdb->escape($bike->make)."','".$wpdb->escape($bike->model)."'";
+	$sql .= ",'".$wpdb->escape($bike->year)."','".$wpdb->escape($bike->notes)."')";
+
+	// send the query to the DBMS
+	$result = $wpdb->query($sql);
+	
+	// error?
+	$saved = ($result === false) ? false : true;
+	if (!$saved) echo $sql;
+	return $saved;
+
+}
+
+/**
+ * Updates a bike in the database
+ */
+function cy_update_bike($bike) {
+
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . "cy_bikes";
+	
+	$sql  = 'update '.$table_name.' ';
+	$sql .= "set label='".$wpdb->escape($bike->label)."', make='".$wpdb->escape($bike->make)."'";
+	$sql .= ", model='".$wpdb->escape($bike->model)."', year='".$wpdb->escape($bike->year)."'";
+	$sql .= ", notes='".$wpdb->escape($bike->notes)."'";
+	$sql .= " where id='".$wpdb->escape($bike->id)."'";
+
+	// send the query to the DBMS
+	$result = $wpdb->query($sql);
+	
+	// error?
+	$saved = ($result === false) ? false : true;
+	return $saved;
+
+}
+
+/**
+ * Saves a type in the database
+ */
+function cy_save_type($type) {
+
+	if ($type->id == NULL) {
+		return cy_insert_type($type);
+	} else  {
+		return cy_update_type($type);
+	}
+
+}
+
+/**
+ * Inserts a type into the database
+ */
+function cy_insert_type($type) {
+
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . "cy_types";
+
+	$sql  = 'insert into '.$table_name.'(type,label,description) ';
+	$sql .= "values('".$wpdb->escape($type->type)."','".$wpdb->escape($type->label)."','".$wpdb->escape($type->description)."')";
+
+	// send the query to the DBMS
+	$result = $wpdb->query($sql);
+	
+	// error?
+	$saved = ($result === false) ? false : true;
+	if (!$saved) echo $sql;
+	return $saved;
+
+}
+
+/**
+ * Updates a type in the database
+ */
+function cy_update_type($type) {
+
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . "cy_types";
+	
+	$sql  = 'update '.$table_name.' ';
+	$sql .= "set type='".$wpdb->escape($type->type)."', label='".$wpdb->escape($type->label)."'";
+	$sql .= ", description='".$wpdb->escape($type->description)."'";
+	$sql .= " where id='".$wpdb->escape($type->id)."'";
+
+	// send the query to the DBMS
+	$result = $wpdb->query($sql);
+	
+	// error?
+	$saved = ($result === false) ? false : true;
+	return $saved;
+
+}
+
+/**
  * Returns the admin navigation bar
  */
 function cy_admin_navigation($current_page='') {
@@ -417,6 +562,14 @@ function cy_admin_navigation($current_page='') {
 		'manage' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage=1',
 			'title' => 'Manage Rides',
+		),
+		'add_bikes' => array(
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&add_bikes=1',
+			'title' => 'Add a Bike',
+		),
+		'manage_bikes' => array(
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage_bikes=1',
+			'title' => 'Manage Bikes',
 		),
 		'cycling' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&cycling=1',
@@ -517,6 +670,14 @@ function cy_options_page() {
 	if (isset($_GET['manage']) && $_GET['manage']) {
 	
 		cy_manage_page();
+		return;
+	
+	}
+	
+	// manage bikes
+	if (isset($_GET['manage_bikes']) && $_GET['manage_bikes']) {
+	
+		cy_manage_bikes_page();
 		return;
 	
 	}
@@ -974,6 +1135,240 @@ function cy_manage_page() {
 					<tbody>
 					<tr>
 						<th>No Rides! Get out there on your bike!</th>
+					</tr>
+					</tbody>
+					<?php
+				
+				}
+				
+				?>
+				
+			</table>
+		
+		</div>
+		
+		<?php
+		
+	}
+	
+}
+
+/**
+ * The "Add a Bike" and "Edit a Bike" page.
+ */
+function cy_write_bikes_page($bike=false) {
+	
+	global $wpdb;
+	
+	// processing for when the form is submitted
+	if (isset($_POST['submitted'])) {
+		
+		// load the form data from POST
+		$bike = new CYBike();
+		$bike->load_post();
+		
+		// check that we got required data
+		if (!$_POST['make']) {
+			
+			$saved = false;
+			$e = 'Please fill in all required fields.';
+			
+		} else {
+			
+			$saved = cy_save_bike($bike);
+	
+		}
+		
+		if (!$saved) {
+			?>
+			<div id="message" class="updated fade" style="margin-top: 1.5em;"><p>Error: <?php echo $e; $wpdb->print_error(); ?></p></div>
+			<?PHP
+		} else {
+			?>
+			<div id="message" class="updated fade" style="margin-top: 1.5em;"><p>Your new bike has been saved.</p></div>
+			<?PHP
+			$bike = new CYBike();
+		}
+			
+	} else if ($bike === false || !is_object($bike)) {
+	
+		$bike = new CYBike();
+	
+	}
+
+	?>
+	<div class="wrap">
+	
+		<?php echo cy_admin_navigation('add_bikes'); ?>
+	
+		<h3>CycloPress Bikes</h3>
+	
+		<form name="cycling_bikes" action="" method="post" enctype="multipart/form-data">
+			
+			<input type="hidden" name="submitted" value="1" />
+			
+			<?php if ($bike->id != NULL) { ?>
+			<input type="hidden" name="id" value="<?php echo $bike->id; ?>" />
+			<?php } ?>
+			
+			<table class="widefat">
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">*Make:</th>
+				<td><input type="text" name="make" id="make" size="20" value="<?php echo htmlentities(stripslashes($bike->make)); ?>" /></td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Model:</th>
+				<td><input type="text" name="model" id="model" size="5" value="<?php echo htmlentities(stripslashes($bike->model)); ?>" /></td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Year:</th>
+				<td><input type="text" name="year" id="year" size="5" value="<?php echo htmlentities(stripslashes($bike->year)); ?>" /></td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Label:</th>
+				<td><input type="text" name="label" id="label" size="5" value="<?php echo htmlentities(stripslashes($ride->label)); ?>" /></td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Notes:</th>
+				<td><textarea name="notes" rows="10" cols="50"><?php echo htmlentities(stripslashes($ride->notes)); ?></textarea></td>
+			  </tr>
+			</table>
+			<p class="submit"><input type="submit" name="Submit" value="Save" style="font-weight: bold;" /></p>
+		</form>
+		
+	</div>
+	<?PHP
+
+}
+
+/**
+ * The "Manage Bikes" page.
+ */
+function cy_manage_bikes_page() {
+
+	global $wpdb;
+	$table_name = $wpdb->prefix . "cy_bikes";
+	
+	if ($_POST['submitted']) {
+		
+		cy_write_bikes_page();
+	
+	} else if (isset($_GET['cy_bike_id']) && $_GET['cy_bike_id']) {
+	
+		$sql  = 'select * from '.$table_name.' where id=' . mysql_escape_string($_GET['cy_bike_id']);
+		$bike_result = $wpdb->get_results($sql, ARRAY_A);
+		$db_bike = $bike_result[0];
+	
+		$bike = new CYBike();
+		$bike->load($db_bike);
+	
+		cy_write_bikes_page($bike);
+	
+	} else {
+	
+		if (isset($_GET['cy_sort_col'])) {
+		
+			switch ($_GET['cy_sort_col']) {
+					
+				case "make":
+					$sort_col = 'make';
+					break;
+					
+				case "model":
+					$sort_col = 'model';
+					break;
+					
+				case "year":
+					$sort_col = 'year';
+					break;
+				
+				case "label":
+					$sort_col = 'label';
+					break;
+				
+				default:
+					$sort_col = 'make';
+				
+			}
+		
+			$sort_order = (isset($_GET['cy_sort'])) ? $_GET['cy_sort'] : 'asc';
+		
+		} else {
+			$sort_col = 'make';
+			$sort_order = 'asc';
+		}
+	
+		$sql  = 'select * from '.$table_name.' order by '.mysql_escape_string($sort_col).' '.mysql_escape_string($sort_order);
+		$bikes = $wpdb->get_results($sql, ARRAY_A);
+	
+		?>
+		
+		<div class="wrap">
+		
+			<?php echo cy_admin_navigation('manage_bikes'); ?>
+		
+			<h3>Manage Bikes</h3>
+	
+			<table class="widefat cy_manage_table">
+				
+				<?php
+				
+				if (sizeof($bikes)) {
+					
+					$i = 0;
+					
+					?>
+					
+					<thead>
+						<tr>
+							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=label&cy_sort=<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Label<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=make&cy_sort=<?php if ($sort_col=='make') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Make<?php if ($sort_col=='make') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=model&cy_sort=<?php if ($sort_col=='model') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Model<?php if ($sort_col=='model') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=year&cy_sort=<?php if ($sort_col=='year') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Year<?php if ($sort_col=='year') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th>Notes</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+					<?php
+					
+					foreach ($bikes as $bike) {
+						
+						if ($i%2 == 0) {
+							$c = '';
+						} else {
+							$c = 'alternate';
+						}
+					
+						?>
+						
+						<tr class="<?php echo $c; ?>">
+							<td><strong><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_bike_id=<?php echo $bike['id']; ?>"><?php echo $bike['label']; ?></a></strong></td>
+							<td><?php echo $bike['make']; ?></td>
+							<td><?php echo $bike['model']; ?></td>
+							<td><?php echo $bike['year']; ?></td>
+							<td><?php echo (strlen(trim(strip_tags($bike['notes']))) > 50) ? substr(trim(strip_tags($bike['notes'])), 0, 50).'...' : trim(strip_tags($bike['notes'])); ?></td>
+						</tr>
+							
+						<?php
+				
+						$i++;
+				
+					} // end foreach
+					
+					?>
+					</tbody>
+					<?php
+				
+				} else {
+				
+					?>
+					<tbody>
+					<tr>
+						<td>No bikes! What are you riding these days?</td>
+					</tr>
+					<tr>
+						<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1">Add a new bike.</a></th>
 					</tr>
 					</tbody>
 					<?php
