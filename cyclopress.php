@@ -674,6 +674,14 @@ function cy_options_page() {
 	
 	}
 	
+	// add bikes
+	if (isset($_GET['add_bikes']) && $_GET['add_bikes']) {
+	
+		cy_add_bikes_page();
+		return;
+	
+	}
+	
 	// manage bikes
 	if (isset($_GET['manage_bikes']) && $_GET['manage_bikes']) {
 	
