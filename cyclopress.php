@@ -1989,8 +1989,8 @@ function cy_rides_sql() {
 				max_speed DOUBLE(4,2) NULL ,
 				minutes INT(4) UNSIGNED NOT NULL ,
 				cadence DOUBLE(5,2) NULL ,
-				bike_id INT(10) UNSIGNED INT NULL ,
-				type_id INT(10) UNSIGNED INT NULL ,
+				bike_id INT(10) UNSIGNED NULL ,
+				type_id INT(10) UNSIGNED NULL ,
 				notes TEXT NULL,
 				UNIQUE KEY  id (id)
 			);';
