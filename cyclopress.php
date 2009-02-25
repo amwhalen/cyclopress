@@ -1795,12 +1795,12 @@ function cy_export_page() {
 				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=xml"<?php if (isset($_GET['cy_export_format']) && $_GET['cy_export_format'] == 'xml') echo ' class="here"'; ?>>XML</a>
 			</div>
 			<div id="cy_export_desc">
-			<?php if ($_GET['cy_export_format'] == 'csv') { ?>
+			<?php if (!isset($_GET['cy_export_format']) || $_GET['cy_export_format'] == 'csv') { ?>
 				<p>Exporting as <acronym title="Comma Separated Values">CSV</acronym> allows you to open your stats in Excel or other spreadsheet software.</p>
 			<?php } else { ?>
 				<p>Exporting as <acronym title="Extensible Markup Language">XML</acronym> allows you to <em>eventually</em> (not yet implemented) import your stats and options back into CycloPress. For now you can back up your stats to be safe.</p>
 			<?php } ?>
-			<p>Copy this text into a plain-text (not Word!) file and save it with a <strong><?php if (isset($_GET['cy_export_format']) && $_GET['cy_export_format'] == 'csv') { echo '.csv'; } else { echo '.xml'; } ?></strong> extension.</p>
+			<p>Copy this text into a plain-text (not Word!) file and save it with a <strong><?php if (isset($_GET['cy_export_format']) && $_GET['cy_export_format'] == 'xml') { echo '.xml'; } else { echo '.csv'; } ?></strong> extension.</p>
 			</div>
 			<textarea id="cy_export_content" rows="20" cols="80"><?php echo htmlentities(cy_export($_GET['cy_export_format'])); ?></textarea>
 		
@@ -2525,11 +2525,14 @@ function cy_install($recreate_graphs=false) {
 }
 
 /**
- * Exports all data to an XML format.
+ * Exports all data to an XML or CSV format.
  */
 function cy_export($format) {
 
 	global $wpdb, $cy_db_version, $cy_version;
+
+	// default to CSV
+	if ($format == '') $format = 'csv';
 
 	$tables = array(
 		'cy_rides',
