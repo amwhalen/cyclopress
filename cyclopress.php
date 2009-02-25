@@ -1791,8 +1791,8 @@ function cy_export_page() {
 		<div id="cy_export">
 			
 			<div id="cy_export_list">
-				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=xml"<?php if (!isset($_GET['cy_export_format']) || $_GET['cy_export_format'] == 'xml') echo ' class="here"'; ?>>XML</a>
-				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=csv"<?php if (isset($_GET['cy_export_format']) && $_GET['cy_export_format'] == 'csv') echo ' class="here"'; ?>>CSV</a>
+				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=csv"<?php if (!isset($_GET['cy_export_format']) || $_GET['cy_export_format'] == 'csv') echo ' class="here"'; ?>>CSV</a>
+				<a href="?page=cyclopress/cyclopress.php&export=1&cy_export_format=xml"<?php if (isset($_GET['cy_export_format']) && $_GET['cy_export_format'] == 'xml') echo ' class="here"'; ?>>XML</a>
 			</div>
 			<div id="cy_export_desc">
 			<?php if ($_GET['cy_export_format'] == 'csv') { ?>
@@ -2664,6 +2664,10 @@ function cy_get_default_options() {
 		'cy_show_detailed_stats' => '1',
 		'cy_show_distance_graph' => '1',
 		'cy_show_avg_speed_graph' => '1',
+		// personal stats
+		'cy_birthday' => '',
+		'cy_gender' => '',
+		'cy_' => '',
 	);
 	
 	return $options;
