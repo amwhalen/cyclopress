@@ -8,7 +8,7 @@ Author: Andrew M. Whalen
 Author URI: http://amwhalen.com
 */
 
-/*  Copyright 2008  Andrew M. Whalen  (email : cyclopress@amwhalen.com)
+/*  Copyright 2009  Andrew M. Whalen  (email : cyclopress@amwhalen.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -1176,7 +1176,7 @@ function cy_write_bikes_page($bike=false) {
 		$bike->load_post();
 		
 		// check that we got required data
-		if (!$_POST['make']) {
+		if (!$_POST['label']) {
 			
 			$saved = false;
 			$e = 'Please fill in all required fields.';
@@ -1221,7 +1221,11 @@ function cy_write_bikes_page($bike=false) {
 			
 			<table class="widefat">
 			  <tr valign="top">
-				<th scope="row" style="text-align: right;">*Make:</th>
+				<th scope="row" style="text-align: right;">*Label:</th>
+				<td><input type="text" name="label" id="label" size="20" value="<?php echo htmlentities(stripslashes($ride->label)); ?>" /></td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Make:</th>
 				<td><input type="text" name="make" id="make" size="20" value="<?php echo htmlentities(stripslashes($bike->make)); ?>" /></td>
 			  </tr>
 			  <tr valign="top">
@@ -1231,10 +1235,6 @@ function cy_write_bikes_page($bike=false) {
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Year:</th>
 				<td><input type="text" name="year" id="year" size="5" value="<?php echo htmlentities(stripslashes($bike->year)); ?>" /></td>
-			  </tr>
-			  <tr valign="top">
-				<th scope="row" style="text-align: right;">Label:</th>
-				<td><input type="text" name="label" id="label" size="20" value="<?php echo htmlentities(stripslashes($ride->label)); ?>" /></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Notes:</th>
