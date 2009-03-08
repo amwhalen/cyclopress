@@ -1222,7 +1222,7 @@ function cy_write_bikes_page($bike=false) {
 			<table class="widefat">
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">*Label:</th>
-				<td><input type="text" name="label" id="label" size="20" value="<?php echo htmlentities(stripslashes($ride->label)); ?>" /></td>
+				<td><input type="text" name="label" id="label" size="20" value="<?php echo htmlentities(stripslashes($bike->label)); ?>" /></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Make:</th>
