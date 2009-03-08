@@ -1295,14 +1295,14 @@ function cy_manage_bikes_page() {
 					break;
 				
 				default:
-					$sort_col = 'make';
+					$sort_col = 'label';
 				
 			}
 		
 			$sort_order = (isset($_GET['cy_sort'])) ? $_GET['cy_sort'] : 'asc';
 		
 		} else {
-			$sort_col = 'make';
+			$sort_col = 'label';
 			$sort_order = 'asc';
 		}
 	
