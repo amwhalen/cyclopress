@@ -27,7 +27,7 @@ Author URI: http://amwhalen.com
 
 
 $cy_version = '1.3.8';
-$cy_db_version = '1.4';
+$cy_db_version = '1.5';
 //$cy_db_version = rand(2, 100);
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
@@ -2418,6 +2418,7 @@ function cy_bikes_sql() {
 				make VARCHAR(255) NULL ,
 				model VARCHAR(255) NULL ,
 				year INT(4) UNSIGNED NULL ,
+				default INT(1) UNSIGNED NOT NULL ,
 				notes TEXT NULL
 			);';
 	
@@ -2651,18 +2652,22 @@ function cy_get_default_options() {
 	global $cy_version, $cy_db_version;
 
 	$options = array(
+		// cyclopress
 		'cy_version' => $cy_version,
 		'cy_db_version' =>  $cy_db_version,
+		// graphs
 		'cy_graph_type' => 'line',
 		'cy_graph_width' => '400',
 		'cy_graph_height' => '300',
 		'cy_graph_color_top' => 'cccccc',
 		'cy_graph_color_bottom' => '777777',
 		'cy_graph_transparency' => '0.7',
-		'cy_unit' => 'mile',
+		// page options
 		'cy_page_id' => '',
 		'cy_page_name' => 'Cycling Stats',
 		'cy_page_status' => 'draft',
+		// stat options
+		'cy_unit' => 'mile',
 		'cy_show_summary' => '1',
 		'cy_show_detailed_stats' => '1',
 		'cy_show_distance_graph' => '1',
@@ -2670,7 +2675,6 @@ function cy_get_default_options() {
 		// personal stats
 		'cy_birthday' => '',
 		'cy_gender' => '',
-		'cy_' => '',
 	);
 	
 	return $options;
