@@ -978,15 +978,17 @@ function cy_write_page($ride=false) {
 			  	<th width="33%" scope="row" style="text-align: right;">*Bike:</th>
 			  	<td>
 			  		<select name="bike_id">
-						<option value=""></option>
+						<option value="">None</option>
 						<?PHP
+							$b = new CYBike();
 							foreach ($bikes as $bike) {
-								if ($bike->id == $ride->bike_id) {
+								$b->load($bike);
+								if ($b->id == $ride->bike_id) {
 									$sel = ' selected="selected"';
 								} else {
 									$sel = '';
 								}
-								?><option value="<?php echo $bike->id; ?>"<?php echo $sel; ?>><?php echo $bike->label; ?></option><?PHP
+								?><option value="<?php echo $b->id; ?>"<?php echo $sel; ?>><?php echo $b->label; ?></option><?PHP
 							}
 						?>
 					</select>
