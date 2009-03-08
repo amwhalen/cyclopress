@@ -820,7 +820,7 @@ function cy_write_page($ride=false) {
 	
 	// bikes
 	$sql  = 'select * from '.$bike_table_name.' order by label asc';
-	$bikes = $wpdb->get_results($sql, OBJECT);
+	$bikes = $wpdb->get_results($sql, ARRAY_A);
 	
 	// processing for when the form is submitted
 	if (isset($_POST['submitted'])) {
@@ -976,7 +976,7 @@ function cy_write_page($ride=false) {
 			  </tr>
 			  <tr>
 			  	<th width="33%" scope="row" style="text-align: right;">*Bike:</th>
-			  	<td>
+			  	<td>bikes(<?php echo sizeof($bikes); ?>)
 			  		<select name="bike_id">
 						<option value="">None</option>
 						<?PHP
