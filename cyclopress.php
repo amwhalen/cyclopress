@@ -1352,7 +1352,7 @@ function cy_manage_bikes_page() {
 						?>
 						
 						<tr class="<?php echo $c; ?>">
-							<td><input type="checkbox" name="default_bike" value="<?php echo $bike['id']; ?>"<?php if ($bike['default'] == '1') { echo ' checked="checked"'; } /></td>
+							<td><input type="checkbox" name="default_bike" value="<?php echo $bike['id']; ?>"<?php if ($bike['default'] == '1') { echo ' checked="checked"'; } ?> /></td>
 							<td><strong><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_bike_id=<?php echo $bike['id']; ?>"><?php echo $bike['label']; ?></a></strong></td>
 							<td><?php echo $bike['make']; ?></td>
 							<td><?php echo $bike['model']; ?></td>
