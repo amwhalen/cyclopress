@@ -1329,10 +1329,11 @@ function cy_manage_bikes_page() {
 					
 					<thead>
 						<tr>
+							<th>Default</th>
+							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=label&cy_sort=<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Label<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=make&cy_sort=<?php if ($sort_col=='make') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Make<?php if ($sort_col=='make') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=model&cy_sort=<?php if ($sort_col=='model') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Model<?php if ($sort_col=='model') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=year&cy_sort=<?php if ($sort_col=='year') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Year<?php if ($sort_col=='year') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
-							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=label&cy_sort=<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Label<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th>Notes</th>
 						</tr>
 					</thead>
@@ -1351,10 +1352,11 @@ function cy_manage_bikes_page() {
 						?>
 						
 						<tr class="<?php echo $c; ?>">
-							<td><strong><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_bike_id=<?php echo $bike['id']; ?>"><?php echo $bike['make']; ?></a></strong></td>
+							<td><input type="checkbox" name="default_bike" value="<?php echo $bike['id']; ?>" /></td>
+							<td><strong><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_bike_id=<?php echo $bike['id']; ?>"><?php echo $bike['label']; ?></a></strong></td>
+							<td><?php echo $bike['make']; ?></td>
 							<td><?php echo $bike['model']; ?></td>
 							<td><?php echo $bike['year']; ?></td>
-							<td><?php echo $bike['label']; ?></td>
 							<td><?php echo (strlen(trim(strip_tags($bike['notes']))) > 50) ? substr(trim(strip_tags($bike['notes'])), 0, 50).'...' : trim(strip_tags($bike['notes'])); ?></td>
 						</tr>
 							
