@@ -976,7 +976,7 @@ function cy_write_page($ride=false) {
 			  </tr>
 			  <tr>
 			  	<th width="33%" scope="row" style="text-align: right;">*Bike:</th>
-			  	<td>bikes(<?php echo sizeof($bikes); ?>)
+			  	<td>
 			  		<select name="bike_id">
 						<option value="">None</option>
 						<?PHP
