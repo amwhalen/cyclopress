@@ -815,6 +815,12 @@ function cy_options_page() {
 function cy_write_page($ride=false) {
 	
 	global $wpdb;
+	$table_name = $wpdb->prefix . "cy_rides";
+	$bike_table_name = $wpdb->prefix . "cy_bikes";
+	
+	// bikes
+	$sql  = 'select * from '.$bike_table_name.' order by default desc,label asc';
+	$bikes = $wpdb->get_results($sql, ARRAY_A);
 	
 	// processing for when the form is submitted
 	if (isset($_POST['submitted'])) {
@@ -967,6 +973,24 @@ function cy_write_page($ride=false) {
 						<option value="pm"<?php if ($ride->ampm=='pm') { echo ' selected="selected"'; } ?>>pm</option>
 					</select>
 				</td>
+			  </tr>
+			  <tr>
+			  	<th width="33%" scope="row" style="text-align: right;">*Bike:</th>
+			  	<td>
+			  		<select name="bike_id">
+						<option value=""></option>
+						<?PHP
+							foreach ($bikes as $bike) {
+								if ($bike->id == $ride->bike_id) {
+									$sel = ' selected="selected"';
+								} else {
+									$sel = '';
+								}
+								?><option value="<?php echo $bike->id; ?>"<?php echo $sel; ?>><?php echo $bike->label; ?></option><?PHP
+							}
+						?>
+					</select>
+			  	</td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">*Distance:</th>
