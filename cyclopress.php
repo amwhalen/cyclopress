@@ -819,8 +819,8 @@ function cy_write_page($ride=false) {
 	$bike_table_name = $wpdb->prefix . "cy_bikes";
 	
 	// bikes
-	$sql  = 'select * from '.$bike_table_name.' order by default desc,label asc';
-	$bikes = $wpdb->get_results($sql, ARRAY_A);
+	$sql  = 'select * from '.$bike_table_name.' order by label asc';
+	$bikes = $wpdb->get_results($sql, OBJECT);
 	
 	// processing for when the form is submitted
 	if (isset($_POST['submitted'])) {
