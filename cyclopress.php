@@ -488,6 +488,35 @@ function cy_update_bike($bike) {
 }
 
 /**
+ * Gets a bike.
+ */
+function cy_get_bike($bike_id) {
+
+	global $wpdb;
+	$bike_table_name = $wpdb->prefix . "cy_bikes";
+	
+	$sql  = 'select * from '.$bike_table_name.' where id='.mysql_escape_string($bike_id);
+	$bikes = $wpdb->get_results($sql, ARRAY_A);
+	
+	$bike = new CYBike();
+	$bike->load($bikes[0]);
+
+}
+
+/**
+ * Gets all bikes.
+ */
+function cy_get_bikes($sort_col='label', $sort_order='asc') {
+
+	global $wpdb;
+	$bike_table_name = $wpdb->prefix . "cy_bikes";
+	
+	$sql  = 'select * from '.$bike_table_name.' order by '.mysql_escape_string($sort_col).' '.mysql_escape_string($sort_order);
+	$bikes = $wpdb->get_results($sql, ARRAY_A);
+
+}
+
+/**
  * Saves a type in the database
  */
 function cy_save_type($type) {
@@ -816,11 +845,9 @@ function cy_write_page($ride=false) {
 	
 	global $wpdb;
 	$table_name = $wpdb->prefix . "cy_rides";
-	$bike_table_name = $wpdb->prefix . "cy_bikes";
 	
 	// bikes
-	$sql  = 'select * from '.$bike_table_name.' order by label asc';
-	$bikes = $wpdb->get_results($sql, ARRAY_A);
+	$bikes = cy_get_bikes();
 	
 	// processing for when the form is submitted
 	if (isset($_POST['submitted'])) {
@@ -1121,6 +1148,7 @@ function cy_manage_page() {
 							<th><a href="?page=cyclopress/cyclopress.php&manage=1&cy_sort_col=max_speed&cy_sort=<?php if ($sort_col=='max_speed') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Max Speed<?php if ($sort_col=='max_speed') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th><a href="?page=cyclopress/cyclopress.php&manage=1&cy_sort_col=cadence&cy_sort=<?php if ($sort_col=='cadence') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Cadence<?php if ($sort_col=='cadence') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th><a href="?page=cyclopress/cyclopress.php&manage=1&cy_sort_col=time&cy_sort=<?php if ($sort_col=='minutes') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Time<?php if ($sort_col=='minutes') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
+							<th><a href="?page=cyclopress/cyclopress.php&manage=1&cy_sort_col=bike_id&cy_sort=<?php if ($sort_col=='bike_id') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'desc'; } ?>" class="cy_sort">Bike<?php if ($sort_col=='bike_id') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th>Notes</th>
 						</tr>
 					</thead>
@@ -1134,6 +1162,7 @@ function cy_manage_page() {
 						$minutes = floor($ride['minutes']%60);
 						$h_text = ($hours == 1) ? 'hour' : 'hours';
 						$m_text = ($minutes == 1) ? 'minute' : 'minutes';
+						$bike = cy_get_bike($ride['bike_id']);
 						
 						if ($i%2 == 0) {
 							$c = '';
@@ -1150,6 +1179,7 @@ function cy_manage_page() {
 							<td><?php echo $ride['max_speed'] . ' '. cy_speed_text(); ?></td>
 							<td><?php echo $ride['cadence']; ?> rpm</td>
 							<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' '.$h_text.', ' . $minutes . ' '.$m_text; ?></td>
+							<td><?php echo $bike->label; ?></td>
 							<td><?php echo (strlen(trim(strip_tags($ride['notes']))) > 50) ? substr(trim(strip_tags($ride['notes'])), 0, 50).'...' : trim(strip_tags($ride['notes'])); ?></td>
 						</tr>
 							
@@ -1288,13 +1318,8 @@ function cy_manage_bikes_page() {
 		cy_write_bikes_page();
 	
 	} else if (isset($_GET['cy_bike_id']) && $_GET['cy_bike_id']) {
-	
-		$sql  = 'select * from '.$table_name.' where id=' . mysql_escape_string($_GET['cy_bike_id']);
-		$bike_result = $wpdb->get_results($sql, ARRAY_A);
-		$db_bike = $bike_result[0];
-	
-		$bike = new CYBike();
-		$bike->load($db_bike);
+		
+		$bike = cy_get_bike($_GET['cy_bike_id']);
 	
 		cy_write_bikes_page($bike);
 	
@@ -1332,8 +1357,7 @@ function cy_manage_bikes_page() {
 			$sort_order = 'asc';
 		}
 	
-		$sql  = 'select * from '.$table_name.' order by '.mysql_escape_string($sort_col).' '.mysql_escape_string($sort_order);
-		$bikes = $wpdb->get_results($sql, ARRAY_A);
+		$bikes = cy_get_bikes($sort_col, $sort_order);
 	
 		?>
 		
