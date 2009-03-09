@@ -500,6 +500,8 @@ function cy_get_bike($bike_id) {
 	
 	$bike = new CYBike();
 	$bike->load($bikes[0]);
+	
+	return $bike;
 
 }
 
@@ -513,6 +515,8 @@ function cy_get_bikes($sort_col='label', $sort_order='asc') {
 	
 	$sql  = 'select * from '.$bike_table_name.' order by '.mysql_escape_string($sort_col).' '.mysql_escape_string($sort_order);
 	$bikes = $wpdb->get_results($sql, ARRAY_A);
+
+	return $bikes;
 
 }
 
