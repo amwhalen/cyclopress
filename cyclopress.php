@@ -1110,6 +1110,10 @@ function cy_manage_page() {
 				case "time":
 					$sort_col = 'minutes';
 					break;
+					
+				case "bike_id":
+					$sort_col = 'bike_id';
+					break;
 				
 				default:
 					$sort_col = 'startdate';
