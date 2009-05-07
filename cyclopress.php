@@ -3,7 +3,7 @@
 Plugin Name: CycloPress
 Plugin URI: http://amwhalen.com/blog/projects/cyclopress/
 Description: Keep track of your cycling statistics with WordPress and make pretty graphs.
-Version: 1.3.8
+Version: 1.3.9
 Author: Andrew M. Whalen
 Author URI: http://amwhalen.com
 */
@@ -26,9 +26,8 @@ Author URI: http://amwhalen.com
 */
 
 
-$cy_version = '1.3.8';
-$cy_db_version = '1.5';
-//$cy_db_version = rand(2, 100);
+$cy_version = '1.3.9';
+$cy_db_version = '1.6';
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
 $cy_dir = get_bloginfo('url').'/wp-content/plugins/'.basename(dirname(__FILE__));
@@ -49,9 +48,21 @@ class CYRide {
 	var $cadence = '';
 	var $notes = '';
 	
-	// new stats
+	// 1.3.8
 	var $bike_id = NULL;
 	var $type_id = NULL;
+	
+	// 1.3.9
+	var $avg_hr;
+	var $max_hr;
+	var $avg_watts;
+	var $max_watts;
+	var $est_calories;
+	var $elevation_gain;
+	var $elevation_loss;
+	var $max_elevation;
+	var $min_elevation;
+	var $weight;
 	
 	// form-only
 	var $month = '';
@@ -1009,7 +1020,7 @@ function cy_write_page($ride=false) {
 			  	<th width="33%" scope="row" style="text-align: right;">Bike:</th>
 			  	<td>
 			  		<select name="bike_id">
-						<option value="">None</option>
+						<option value="">Unknown</option>
 						<?PHP
 							$b = new CYBike();
 							foreach ($bikes as $bike) {
@@ -1044,6 +1055,46 @@ function cy_write_page($ride=false) {
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Cadence:</th>
 				<td><input type="text" name="cadence" id="cadence" size="5" value="<?php echo htmlentities(stripslashes($ride->cadence)); ?>" /> rpm</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Average Heart Rate:</th>
+				<td><input type="text" name="avg_hr" id="avg_hr" size="5" value="<?php echo htmlentities(stripslashes($ride->avg_hr)); ?>" /> bpm</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Maximum Heart Rate:</th>
+				<td><input type="text" name="max_hr" id="max_hr" size="5" value="<?php echo htmlentities(stripslashes($ride->max_hr)); ?>" /> bpm</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Average Watts:</th>
+				<td><input type="text" name="avg_watts" id="avg_watts" size="5" value="<?php echo htmlentities(stripslashes($ride->avg_watts)); ?>" /> watts</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Maximum Watts:</th>
+				<td><input type="text" name="max_watts" id="max_watts" size="5" value="<?php echo htmlentities(stripslashes($ride->max_watts)); ?>" /> watts</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Elevation Gain:</th>
+				<td><input type="text" name="elevation_gain" id="elevation_gain" size="7" value="<?php echo htmlentities(stripslashes($ride->elevation_gain)); ?>" /> feet</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Elevation Loss:</th>
+				<td><input type="text" name="elevation_loss" id="elevation_loss" size="7" value="<?php echo htmlentities(stripslashes($ride->elevation_loss)); ?>" /> feet</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Max Elevation:</th>
+				<td><input type="text" name="max_elevation" id="max_elevation" size="7" value="<?php echo htmlentities(stripslashes($ride->max_elevation)); ?>" /> feet</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Min Elevation:</th>
+				<td><input type="text" name="min_elevation" id="min_elevation" size="7" value="<?php echo htmlentities(stripslashes($ride->min_elevation)); ?>" /> feet</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Weight:</th>
+				<td><input type="text" name="weight" id="weight" size="5" value="<?php echo htmlentities(stripslashes($ride->weight)); ?>" /> pounds</td>
+			  </tr>
+			  <tr valign="top">
+				<th scope="row" style="text-align: right;">Estimated Calories Burned:</th>
+				<td><input type="text" name="est_calories" id="est_calories" size="5" value="<?php echo htmlentities(stripslashes($ride->est_calories)); ?>" /> kcal</td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Notes:</th>
@@ -2453,6 +2504,16 @@ function cy_rides_sql() {
 				max_speed DOUBLE(4,2) NULL ,
 				minutes INT(4) UNSIGNED NOT NULL ,
 				cadence DOUBLE(5,2) NULL ,
+				avg_hr DOUBLE(5,2) NULL ,
+				max_hr DOUBLE(5,2) ,
+				avg_watts DOUBLE(5,2) ,
+				max_watts DOUBLE(5,2) ,
+				est_calories INT(5) ,
+				elevation_gain DOUBLE(7,2) ,
+				elevation_loss DOUBLE(7,2) ,
+				max_elevation DOUBLE(7,2) ,
+				min_elevation DOUBLE(7,2) ,
+				weight DOUBLE(5,2) ,
 				bike_id INT(10) UNSIGNED NULL ,
 				type_id INT(10) UNSIGNED NULL ,
 				notes TEXT NULL,
