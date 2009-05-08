@@ -1365,12 +1365,14 @@ function cy_manage_calendar_page() {
 			
 			$i = 0;
 			$month = NULL;
+			$year = NULL;
 			$new_month = true;
 			
 			foreach ($rides as $ride) {
 			
-				if (date('n, Y', strtotime($ride['startdate'])) != $month) {
-					$month = date('n, Y', strtotime($ride['startdate']));
+				if (date('n Y', strtotime($ride['startdate'])) != $month.' '.$year) {
+					$month = date('n', strtotime($ride['startdate']));
+					$year = date('Y', strtotime($ride['startdate']));
 					$new_month = true;
 				} else {
 					$new_month = false;
@@ -1378,10 +1380,18 @@ function cy_manage_calendar_page() {
 				
 				if ($new_month) {
 				
-					?><h3><?php echo $month; ?></h3><?php
+					?>
+					</table>				
+					<table id="cy_month_<?php echo $month.'_'.$year; ?>">
+					
+						<tr>
+							<th colspan="7"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
+						</tr>
+					
+					<?php
 				
 				} else {
-				
+					
 				}
 		
 				$hours = floor($ride['minutes']/60);
@@ -1398,7 +1408,7 @@ function cy_manage_calendar_page() {
 			
 				?>
 				
-				<div>
+				<tr>
 					<td><strong><a href="?page=cyclopress/cyclopress.php&manage=1&cy_ride_id=<?php echo $ride['id']; ?>"><?php echo date('F j, Y g:ia', strtotime($ride['startdate'])); ?></a></strong></td>
 					<td><?php echo $ride['miles'] . ' ' . cy_distance_text(); ?></td>
 					<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
@@ -1406,8 +1416,7 @@ function cy_manage_calendar_page() {
 					<td><?php echo $ride['cadence']; ?> rpm</td>
 					<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' '.$h_text.', ' . $minutes . ' '.$m_text; ?></td>
 					<td><?php echo $bike->label; ?></td>
-					<td><?php echo (strlen(trim(strip_tags($ride['notes']))) > 50) ? substr(trim(strip_tags($ride['notes'])), 0, 50).'...' : trim(strip_tags($ride['notes'])); ?></td>
-				</div>
+				</tr>
 					
 				<?php
 		
