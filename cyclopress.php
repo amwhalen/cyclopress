@@ -680,7 +680,7 @@ function cy_admin_navigation($current_page='', $current_subpage='') {
 		),
 	);
 
-	$str = '<div class="cy_admin_navigation">CycloPress: <ul>';
+	$str = '<h3>CycloPress</h3><div class="cy_admin_navigation"><ul>';
 	$tabs = array();
 	foreach ($links as $k=>$link) {
 	
@@ -1573,7 +1573,7 @@ function cy_write_bikes_page($bike=false) {
 	
 		<?php echo cy_admin_navigation('manage_bikes','add_bikes'); ?>
 	
-		<h3>CycloPress Bikes</h3>
+		<h3>Bikes</h3>
 	
 		<form name="cycling_bikes" action="" method="post" enctype="multipart/form-data">
 			
