@@ -2266,7 +2266,7 @@ function cy_admin_css() {
 			background: #eee;
 		}
 		table.cy_calendar td.has_ride {
-			background: #ddd;
+			background: #eee;
 		}
 		table.cy_calendar td.filler {
 			
