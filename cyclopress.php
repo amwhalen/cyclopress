@@ -1397,8 +1397,13 @@ function cy_manage_calendar_page() {
 						
 							$day_index = $rows*7 + $d - $start_day_of_week + 1;
 						
-							if ($d >= $start_day_of_week || $day_index > ($start_day_of_week - 1 + $days_in_month)) {
+							if (($row == 0 && $d < $start_day_of_week) || $day_index > ($start_day_of_week - 1 + $days_in_month)) {
 						
+								$td_content = 'f';
+								$class = 'filler';
+							
+							} else {
+							
 								if (is_array($days[$day_index])) {
 									$td_content = '';
 									for ($r = 0; $r < sizeof($days[$day_index]); $r++) {
@@ -1411,11 +1416,6 @@ function cy_manage_calendar_page() {
 									$td_content = 'n';
 									$class = 'no_ride';
 								}
-							
-							} else {
-							
-								$td_content = 'f';
-								$class = 'filler';
 							
 							}
 							
