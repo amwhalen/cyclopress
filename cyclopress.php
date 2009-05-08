@@ -2498,7 +2498,7 @@ function cy_rides_sql() {
 	$table_name = $wpdb->prefix . "cy_rides";
 
 	$sql  = 'CREATE TABLE '.$table_name.' (
-				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT  PRIMARY KEY,
 				startdate DATETIME NOT NULL ,
 				miles DOUBLE(6,2) NOT NULL ,
 				avg_speed DOUBLE(4,2) NULL ,
@@ -2517,8 +2517,7 @@ function cy_rides_sql() {
 				est_calories INT(5) ,
 				bike_id INT(10) UNSIGNED NULL ,
 				type_id INT(10) UNSIGNED NULL ,
-				notes TEXT NULL,
-				UNIQUE KEY  id (id)
+				notes TEXT NULL
 			);';
 	
 	return $sql;
