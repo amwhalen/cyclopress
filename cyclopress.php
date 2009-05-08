@@ -1634,7 +1634,7 @@ function cy_manage_bikes_page() {
 					
 					<thead>
 						<tr>
-							<th>Default</th>
+							<!--<th>Default</th>-->
 							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=label&cy_sort=<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Label<?php if ($sort_col=='label') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=make&cy_sort=<?php if ($sort_col=='make') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Make<?php if ($sort_col=='make') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
 							<th><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_sort_col=model&cy_sort=<?php if ($sort_col=='model') { if ($sort_order=='desc') { echo 'asc'; } else { echo 'desc'; } } else  { echo 'asc'; } ?>" class="cy_sort">Model<?php if ($sort_col=='model') { if ($sort_order=='desc') { echo '&nbsp;&darr;'; } else { echo '&nbsp;&uarr;'; } } ?></a></th>
@@ -1657,7 +1657,7 @@ function cy_manage_bikes_page() {
 						?>
 						
 						<tr class="<?php echo $c; ?>">
-							<td><input type="checkbox" name="default_bike" value="<?php echo $bike['id']; ?>"<?php if ($bike['default'] == '1') { echo ' checked="checked"'; } ?> /></td>
+							<!--<td><input type="checkbox" name="default_bike" value="<?php echo $bike['id']; ?>"<?php if ($bike['default'] == '1') { echo ' checked="checked"'; } ?> /></td>-->
 							<td><strong><a href="?page=cyclopress/cyclopress.php&manage_bikes=1&cy_bike_id=<?php echo $bike['id']; ?>"><?php echo $bike['label']; ?></a></strong></td>
 							<td><?php echo $bike['make']; ?></td>
 							<td><?php echo $bike['model']; ?></td>
