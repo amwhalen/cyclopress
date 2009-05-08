@@ -603,7 +603,7 @@ function cy_update_type($type) {
 /**
  * Returns the admin navigation bar
  */
-function cy_admin_navigation($current_page='') {
+function cy_admin_navigation($current_page='', $current_subpage='') {
 
 	cy_check_version();
 
@@ -613,24 +613,101 @@ function cy_admin_navigation($current_page='') {
 		'manage' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage=1',
 			'title' => 'Rides',
+			'subnav' => array(
+				'manage' => array(
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage=1',
+					'title' => 'List',
+				),
+				'manage_calendar' => array(
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage=1',
+					'title' => 'Calendar',
+				),
+				'add' => array(
+					'url' => $wp_url.'/wp-admin/post-new.php?page=cyclopress/cyclopress.php',
+					'title' => 'Add a Ride',
+				),
+			),
 		),
 		'manage_bikes' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage_bikes=1',
 			'title' => 'Bikes',
+			'subnav' => array(
+				'manage_bikes' => array(
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage_bikes=1',
+					'title' => 'List',
+				),
+				'add_bike' => array(
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&add_bike=1',
+					'title' => 'Add',
+				),
+			),
 		),
 		'options' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php',
 			'title' => 'Options',
+			'subnav' => array(
+				'options' => array(
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php',
+					'title' => 'Options',
+				),
+				'cycling' => array(
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&cycling=1',
+					'title' => 'Cycling Page',
+				),
+			),
 		),
 		'export' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&export=1',
 			'title' => 'Tools',
+			'subnav' => array(
+				'export' => array(
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&export=1',
+					'title' => 'Export',
+				),
+				'stats' => array(
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&stats=1',
+					'title' => 'Stats',
+				),
+				'debug' => array(
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&debug=1',
+					'title' => 'Debug',
+				),
+				'about' => array(
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&about=1',
+					'title' => 'About',
+				),
+			),
 		),
 	);
 
 	$str = '<div class="cy_admin_navigation">CycloPress: <ul>';
 	$tabs = array();
 	foreach ($links as $k=>$link) {
+	
+		$class = '';
+		$warning = '';
+	
+		// should an error be reported in the nav?
+		if ($k == 'debug') {
+			if (!cy_check_php() || !cy_check_gd() || !cy_is_cache_writable()) {
+				$class = ' cy_debug';
+				$warning = ' !';
+			}
+		}
+	
+		// make the current page look different
+		if ($current_page == $k) {
+			$tabs[] = '<li class="here'.$class.'"><a href="'.$link['url'].'">'.$link['title'].$warning.'</a></li>';
+		} else {
+			$tabs[] = '<li class="'.$class.'"><a href="'.$link['url'].'">'.$link['title'].$warning.'</a></li>';
+		}
+	}
+	$str .= implode('', $tabs);
+	$str .= '</ul></div>';
+	
+	$str .= '<div class="cy_admin_subnav">';
+	$tabs = array();
+	foreach ($links[$current_page]['subnav'] as $k=>$link) {
 	
 		$class = '';
 		$warning = '';
@@ -1180,7 +1257,7 @@ function cy_manage_page() {
 		
 		<div class="wrap">
 		
-			<?php echo cy_admin_navigation('manage'); ?>
+			<?php echo cy_admin_navigation('manage','manage'); ?>
 		
 			<h3>Manage Rides</h3>
 			
@@ -2176,31 +2253,41 @@ function cy_admin_css() {
 			color: #ddd;
 		}
 		.cy_admin_navigation {
-			margin: 1.5em 0;
+			margin: 1.5em 0 0 0;
 			padding: 4px;
 			border-bottom: 3px solid #ddd;
 		}
-		.cy_admin_navigation ul {
+		.cy_admin_subnav {
+			background: #ddd;
+			padding: 4px;
+			margin: 0 0 1.5em 0;
+		}
+		.cy_admin_navigation ul,
+		.cy_admin_subnav ul {
 			margin: 0;
 			padding: 0;
 			display: inline;
 			background: none;
 		}
-		.cy_admin_navigation ul li {
+		.cy_admin_navigation ul li,
+		.cy_admin_subnav ul li {
 			display: inline;
 			padding: 5px;
 		}
-		.cy_admin_navigation ul li a {
+		.cy_admin_navigation ul li a,
+		.cy_admin_subnav ul li a {
 			padding: 5px;
 			border: 1px solid #eee;
 			border-width: 1px 1px 0 1px;
 			text-decoration: none;
 		}
-		.cy_admin_navigation ul li a:hover {
+		.cy_admin_navigation ul li a:hover,
+		.cy_admin_subnav ul li a:hover {
 			border: 1px solid #ddd;
 			border-width: 1px 1px 0 1px;
 		}
-		.cy_admin_navigation ul li.here a {
+		.cy_admin_navigation ul li.here a,
+		.cy_admin_subnav ul li.here a {
 			background: #ddd;
 			font-weight: bold;
 			color: #000;
