@@ -2291,6 +2291,7 @@ function cy_admin_css() {
 		#cy_export_list,
 		#cy_manage_list {
 			padding: 5px 0;
+			margin-left: 5px;
 		}
 		#cy_export_list a,
 		#cy_manage_list a {
