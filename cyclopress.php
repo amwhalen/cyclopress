@@ -1411,7 +1411,7 @@ function cy_manage_calendar_page() {
 			<?php if (sizeof($rides)) { ?>
 			<tr>
 				<td colspan="7" class="cy_stats_cell">
-					<table>
+					<table width="100%">
 						<tr>
 							<td align="center" valign="top">
 								Distance: <?php echo round($stats['m'],2) .' '.cy_distance_text();; ?>
