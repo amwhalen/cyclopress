@@ -1396,17 +1396,17 @@ function cy_manage_calendar_page() {
 						<?php
 						for ($d = 0; $d < 7; $d++) {
 						
-							$day_index = $rows*7 + $d - 1 - $start_day_of_week;
+							$day_index = $rows*7 + $d - $start_day_of_week + 1;
 						
-							if ($day_index < $start_day_of_week || $day_index > ($start_day_of_week + $days_in_month)) {
+							if ($d >= $start_day_of_week || $day_index > ($start_day_of_week - 1 + $days_in_month)) {
 						
 								if (is_array($days[$day_index])) {
-									$td_content = '';
-									for ($r = 0; $r < sizeof($days[$day_index]); $r++) {
+									$td_content = 'yes';
+									/*for ($r = 0; $r < sizeof($days[$day_index]); $r++) {
 										$day_ride = $days[$day_index][$r];
 										$td_content .= date('h:ia', strtotime($day_ride['startdate'])) . '<br />';
 									}
-									$td_content = trim($td_content, '<br />');
+									$td_content = trim($td_content, '<br />');*/
 									$class = 'has_ride';
 								} else {
 									$td_content = '&nbsp;';
