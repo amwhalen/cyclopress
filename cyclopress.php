@@ -2289,7 +2289,7 @@ function cy_admin_css() {
 			background: #eee;
 		}
 		table.cy_calendar td.filler {
-			
+			background: #f5f5f5;
 		}
 		.cy_calendar_day {
 			font-weight: bold;
