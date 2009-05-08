@@ -1408,13 +1408,13 @@ function cy_manage_calendar_page() {
 									$td_content = trim($td_content, '<br />');
 									$class = 'has_ride';
 								} else {
-									$td_content = '&nbsp;';
+									$td_content = 'n';
 									$class = 'no_ride';
 								}
 							
 							} else {
 							
-								$td_content = '&nbsp;';
+								$td_content = 'f';
 								$class = 'filler';
 							
 							}
