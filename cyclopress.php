@@ -841,9 +841,7 @@ function cy_options_page() {
 	<div class="wrap">
 	
 	<?php echo cy_admin_navigation('options','options'); ?>
-	
-	<h3>CycloPress Options</h3>
-	
+		
 	<form method="post" action="options.php">
 		
 		<?php wp_nonce_field('update-options'); ?>
@@ -986,9 +984,7 @@ function cy_write_page($ride=false) {
 	<div class="wrap">
 	
 		<?php echo cy_admin_navigation('manage','add'); ?>
-	
-		<h3>CycloPress Ride</h3>
-	
+		
 		<form name="cycling" action="" method="post" enctype="multipart/form-data">
 			
 			<input type="hidden" name="submitted" value="1" />
@@ -1258,13 +1254,6 @@ function cy_manage_page() {
 		<div class="wrap">
 		
 			<?php echo cy_admin_navigation('manage','manage'); ?>
-		
-			<h3>Manage Rides</h3>
-			
-			<div id="cy_manage_list">
-				<a href="?page=cyclopress/cyclopress.php&manage=1" class="here">List</a>
-				<a href="?page=cyclopress/cyclopress.php&manage_calendar=1">Calendar</a>
-			</div>
 	
 			<table class="widefat cy_manage_table">
 				
@@ -1430,9 +1419,7 @@ function cy_manage_calendar_page() {
 		<div class="wrap">
 		
 			<?php echo cy_admin_navigation('manage','manage_calendar'); ?>
-		
-			<h3>Manage Rides</h3>
-	
+			
 			<div id="cy_manage_list">
 				<a href="?page=cyclopress/cyclopress.php&manage=1">List</a>
 				<a href="?page=cyclopress/cyclopress.php&manage_calendar=1" class="here">Calendar</a>
@@ -1572,9 +1559,7 @@ function cy_write_bikes_page($bike=false) {
 	<div class="wrap">
 	
 		<?php echo cy_admin_navigation('manage_bikes','add_bikes'); ?>
-	
-		<h3>Bikes</h3>
-	
+		
 		<form name="cycling_bikes" action="" method="post" enctype="multipart/form-data">
 			
 			<input type="hidden" name="submitted" value="1" />
@@ -1672,9 +1657,7 @@ function cy_manage_bikes_page() {
 		<div class="wrap">
 		
 			<?php echo cy_admin_navigation('manage_bikes','manage_bikes'); ?>
-		
-			<h3>Manage Bikes</h3>
-	
+			
 			<table class="widefat cy_manage_table">
 				
 				<?php
@@ -1777,9 +1760,7 @@ function cy_debug_page() {
 	<div class="wrap">
 	
 		<?php echo cy_admin_navigation('export','debug'); ?>
-	
-		<h3>CycloPress Debugging Information</h3>
-		
+			
 		<table class="widefat">
 			<tr>
 				<th>PHP</th>
@@ -1889,9 +1870,7 @@ function cy_cycling_page() {
 	<div class="wrap">
 
 		<?php echo cy_admin_navigation('options','cycling'); ?>
-	
-		<h3>Cycling Page</h3>
-	
+		
 		<?php
 		
 		if (isset($_GET['cy_create_page']) && $_GET['cy_create_page']) {
