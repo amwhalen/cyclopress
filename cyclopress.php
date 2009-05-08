@@ -1142,23 +1142,23 @@ function cy_write_page($ride=false) {
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Elevation Gain:</th>
-				<td><input type="text" name="elevation_gain" id="elevation_gain" size="7" value="<?php echo htmlentities(stripslashes($ride->elevation_gain)); ?>" /> feet</td>
+				<td><input type="text" name="elevation_gain" id="elevation_gain" size="7" value="<?php echo htmlentities(stripslashes($ride->elevation_gain)); ?>" /> <?php echo cy_elevation_text($ride->elevation_gain); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Elevation Loss:</th>
-				<td><input type="text" name="elevation_loss" id="elevation_loss" size="7" value="<?php echo htmlentities(stripslashes($ride->elevation_loss)); ?>" /> feet</td>
+				<td><input type="text" name="elevation_loss" id="elevation_loss" size="7" value="<?php echo htmlentities(stripslashes($ride->elevation_loss)); ?>" /> <?php echo cy_elevation_text($ride->elevation_loss); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Max Elevation:</th>
-				<td><input type="text" name="max_elevation" id="max_elevation" size="7" value="<?php echo htmlentities(stripslashes($ride->max_elevation)); ?>" /> feet</td>
+				<td><input type="text" name="max_elevation" id="max_elevation" size="7" value="<?php echo htmlentities(stripslashes($ride->max_elevation)); ?>" /> <?php echo cy_elevation_text($ride->max_elevation); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Min Elevation:</th>
-				<td><input type="text" name="min_elevation" id="min_elevation" size="7" value="<?php echo htmlentities(stripslashes($ride->min_elevation)); ?>" /> feet</td>
+				<td><input type="text" name="min_elevation" id="min_elevation" size="7" value="<?php echo htmlentities(stripslashes($ride->min_elevation)); ?>" /> <?php echo cy_elevation_text($ride->min_elevation); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Weight:</th>
-				<td><input type="text" name="weight" id="weight" size="5" value="<?php echo htmlentities(stripslashes($ride->weight)); ?>" /> pounds</td>
+				<td><input type="text" name="weight" id="weight" size="5" value="<?php echo htmlentities(stripslashes($ride->weight)); ?>" /> <?php echo cy_weight_text($ride->weight); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Estimated Calories Burned:</th>
@@ -2368,6 +2368,36 @@ function cy_speed_text($num=2) {
 		return 'kmh';
 	} else {
 		return 'mph';
+	}
+	
+}
+
+/**
+ * Returns the current unit for weight.
+ */
+function cy_weight_text($num=2) {
+
+	if (get_option('cy_unit') == 'mile') {
+		return 'lbs';
+	} else if (get_option('cy_unit') == 'kilometer') {
+		return 'kg';
+	} else {
+		return 'lbs';
+	}
+	
+}
+
+/**
+ * Returns the current unit for elevation.
+ */
+function cy_elevation_text($num=2) {
+
+	if (get_option('cy_unit') == 'mile') {
+		return ($num != 1) ? 'feet': 'foot';
+	} else if (get_option('cy_unit') == 'kilometer') {
+		return ($num != 1) ? 'meters': 'meter';
+	} else {
+		return ($num != 1) ? 'feet': 'foot';
 	}
 	
 }
