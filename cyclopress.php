@@ -1377,69 +1377,62 @@ function cy_manage_calendar_page() {
 		
 			}
 			
-			$days_in_month = date('t', strtotime($month.'/1/'.$year));
-			$start_day_of_week = date('w', strtotime($month.'/1/'.$year));
-			$rows_in_month = ceil( ($start_day_of_week + $days_in_month) / 7);
-			
-			?>
-			<table class="cy_calendar" id="cy_month_<?php echo $month.'_'.$year; ?>">
-				<tr>
-					<th colspan="7"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
-				</tr>
-				<?php
-				for ($rows = 0; $rows < $rows_in_month; $rows++) {
-				
-					?>
-				
-					<tr>
-						<?php
-						for ($d = 0; $d < 7; $d++) {
-						
-							$day_index = $rows*7 + $d - $start_day_of_week + 1;
-						
-							if (($rows == 0 && $d < $start_day_of_week) || $day_index > ($start_day_of_week - 1 + $days_in_month)) {
-						
-								$td_content = '&nbsp;';
-								$class = 'filler';
-							
-							} else {
-							
-								if (is_array($days[$day_index])) {
-									$td_content = '<span class="cy_calendar_day">'.$day_index.'</span>';
-									for ($r = 0; $r < sizeof($days[$day_index]); $r++) {
-										$day_ride = $days[$day_index][$r];
-										$td_content .= '<br /><a href="?page=cyclopress/cyclopress.php&manage=1&cy_ride_id='.$day_ride['id'].'">'.date('g:ia', strtotime($day_ride['startdate'])).'</a>';
-									}
-									$class = 'has_ride';
-								} else {
-									$td_content = '<span class="cy_calendar_day">'.$day_index.'</span>';
-									$class = 'no_ride';
-								}
-							
-							}
-							
-							?>
-							<td align="left" valign="top" class="<?php echo $class; ?>"><?php echo $td_content; ?></td>
-							
-						<?php
-						}
-						?>
-					</tr>
-					
-					<?php
-				
-				}
-				?>
-			</table>
-			<?php
-		
-		} else {
-		
-			?><p><strong>No Rides! Get out there on your bike!</strong></p><?php
-		
 		}
+			
+		$days_in_month = date('t', strtotime($month.'/1/'.$year));
+		$start_day_of_week = date('w', strtotime($month.'/1/'.$year));
+		$rows_in_month = ceil( ($start_day_of_week + $days_in_month) / 7);
 		
 		?>
+		<table class="cy_calendar" id="cy_month_<?php echo $month.'_'.$year; ?>">
+			<tr>
+				<th colspan="7"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
+			</tr>
+			<?php
+			for ($rows = 0; $rows < $rows_in_month; $rows++) {
+			
+				?>
+			
+				<tr>
+					<?php
+					for ($d = 0; $d < 7; $d++) {
+					
+						$day_index = $rows*7 + $d - $start_day_of_week + 1;
+					
+						if (($rows == 0 && $d < $start_day_of_week) || $day_index > ($start_day_of_week - 1 + $days_in_month)) {
+					
+							$td_content = '&nbsp;';
+							$class = 'filler';
+						
+						} else {
+						
+							if (is_array($days[$day_index])) {
+								$td_content = '<span class="cy_calendar_day">'.$day_index.'</span>';
+								for ($r = 0; $r < sizeof($days[$day_index]); $r++) {
+									$day_ride = $days[$day_index][$r];
+									$td_content .= '<br /><a href="?page=cyclopress/cyclopress.php&manage=1&cy_ride_id='.$day_ride['id'].'">'.date('g:ia', strtotime($day_ride['startdate'])).'</a>';
+								}
+								$class = 'has_ride';
+							} else {
+								$td_content = '<span class="cy_calendar_day">'.$day_index.'</span>';
+								$class = 'no_ride';
+							}
+						
+						}
+						
+						?>
+						<td align="left" valign="top" class="<?php echo $class; ?>"><?php echo $td_content; ?></td>
+						
+					<?php
+					}
+					?>
+				</tr>
+				
+				<?php
+			
+			}
+			?>
+		</table>
 						
 	</div>
 	
@@ -2252,7 +2245,7 @@ function cy_admin_css() {
 			margin: 0;
 		}
 		table.cy_calendar {
-			width: 588px;
+			width: 616px;
 			border: 1px solid #ccc;
 		}
 		table.cy_calendar {
@@ -2261,6 +2254,7 @@ function cy_admin_css() {
 		table.cy_calendar td {
 			width: 80px;
 			height: 80px;
+			padding: 2px;
 		}
 		table.cy_calendar td.no_ride {
 			background: #eee;
