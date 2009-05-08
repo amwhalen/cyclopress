@@ -1776,7 +1776,7 @@ function cy_debug_page() {
 	
 	<div class="wrap">
 	
-		<?php echo cy_admin_navigation('tools','debug'); ?>
+		<?php echo cy_admin_navigation('export','debug'); ?>
 	
 		<h3>CycloPress Debugging Information</h3>
 		
