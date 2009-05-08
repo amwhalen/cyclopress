@@ -1382,7 +1382,7 @@ function cy_manage_calendar_page() {
 			$rows_in_month = ceil( ($start_day_of_week + $days_in_month) / 7);
 			
 			?>
-			<table id="cy_month_<?php echo $month.'_'.$year; ?>" width="100%" border="1">
+			<table class="cy_calendar" id="cy_month_<?php echo $month.'_'.$year; ?>" width="100%" border="1">
 				<tr>
 					<th colspan="7"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
 				</tr>
@@ -1399,7 +1399,7 @@ function cy_manage_calendar_page() {
 						
 							if (($rows == 0 && $d < $start_day_of_week) || $day_index > ($start_day_of_week - 1 + $days_in_month)) {
 						
-								$td_content = 'f';
+								$td_content = '&nbsp;';
 								$class = 'filler';
 							
 							} else {
@@ -1413,7 +1413,7 @@ function cy_manage_calendar_page() {
 									$td_content = trim($td_content, '<br />');
 									$class = 'has_ride';
 								} else {
-									$td_content = 'n';
+									$td_content = '&nbsp;';
 									$class = 'no_ride';
 								}
 							
@@ -2251,6 +2251,21 @@ function cy_admin_css() {
 		#cy_export_content {
 			width: 600px;
 			margin: 0;
+		}
+		table.cy_calendar {
+			border: 1px solid #ccc;
+		}
+		table.cy_calendar {
+			border: 1px solid #ccc;
+		}
+		table.cy_calendar td.no_ride {
+			background: #eee;
+		}
+		table.cy_calendar td.has_ride {
+			background: #ddd;
+		}
+		table.cy_calendar td.filler {
+			
 		}
 	</style>
 	
