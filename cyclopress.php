@@ -1382,7 +1382,7 @@ function cy_manage_calendar_page() {
 			$rows_in_month = ceil( ($start_day_of_week + $days_in_month) / 7);
 			
 			?>
-			<table id="cy_month_<?php echo $month.'_'.$year; ?>">
+			<table id="cy_month_<?php echo $month.'_'.$year; ?>" width="auto" border="1">
 				<tr>
 					<th colspan="7"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
 				</tr>
