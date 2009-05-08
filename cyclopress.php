@@ -1350,7 +1350,7 @@ function cy_manage_calendar_page() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . "cy_rides";
 
-	$sql  = 'select * from '.$table_name.' order by startdate desc';
+	$sql  = 'select * from '.$table_name.' where month(startdate)='.date('n').' order by startdate desc';
 	$rides = $wpdb->get_results($sql, ARRAY_A);
 
 	?>
@@ -1367,12 +1367,14 @@ function cy_manage_calendar_page() {
 			$month = NULL;
 			$year = NULL;
 			$new_month = true;
+			$days_in_month = NULL;
 			
 			foreach ($rides as $ride) {
 			
 				if (date('n Y', strtotime($ride['startdate'])) != $month.' '.$year) {
 					$month = date('n', strtotime($ride['startdate']));
 					$year = date('Y', strtotime($ride['startdate']));
+					$days_in_month = date('t', strtotime($ride['startdate']));
 					$new_month = true;
 				} else {
 					$new_month = false;
@@ -1423,6 +1425,8 @@ function cy_manage_calendar_page() {
 				$i++;
 		
 			}
+			
+			?></table><?php
 		
 		} else {
 		
