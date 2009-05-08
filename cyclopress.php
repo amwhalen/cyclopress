@@ -1200,7 +1200,7 @@ function cy_manage_page() {
 			
 			<div id="cy_manage_list">
 				<a href="?page=cyclopress/cyclopress.php&manage=1" class="here">List</a>
-				<a href="?page=cyclopress/cyclopress.php&manage_calendar=1" class="here">Calendar</a>
+				<a href="?page=cyclopress/cyclopress.php&manage_calendar=1">Calendar</a>
 			</div>
 	
 			<table class="widefat cy_manage_table">
@@ -1371,7 +1371,7 @@ function cy_manage_calendar_page() {
 			<h3>Manage Rides</h3>
 	
 			<div id="cy_manage_list">
-				<a href="?page=cyclopress/cyclopress.php&manage=1" class="here">List</a>
+				<a href="?page=cyclopress/cyclopress.php&manage=1">List</a>
 				<a href="?page=cyclopress/cyclopress.php&manage_calendar=1" class="here">Calendar</a>
 			</div>
 	
@@ -2234,6 +2234,9 @@ function cy_admin_css() {
 		}
 		#cy_export {
 			width: 600px;
+		}
+		#cy_manage_list {
+			margin-left: 5px;
 		}
 		#cy_export_list,
 		#cy_manage_list {
