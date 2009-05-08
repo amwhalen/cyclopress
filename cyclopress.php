@@ -1414,15 +1414,15 @@ function cy_manage_calendar_page() {
 					<table width="100%">
 						<tr>
 							<td align="left" valign="top">
-								Distance: <?php echo round($stats['m'],2) .' '.cy_distance_text(); ?><br />
-								Calories: <?php echo round($stats['c'],2) .' kcal' ?>
+								<strong>Distance:</strong> <?php echo round($stats['m'],2) .' '.cy_distance_text(); ?><br />
+								<strong>Calories:</strong> <?php echo round($stats['c'],2) .' kcal' ?>
 							</td>
 							<td align="left" valign="top" class="cy_stats_cell">
-								Avg Speed: <?php echo round($stats['s'],1) .' '.cy_speed_text(); ?><br />
-								Max Speed: <?php echo round($stats['ms'],1) .' '.cy_speed_text(); ?>
+								<strong>Avg Speed:</strong> <?php echo round($stats['s'],1) .' '.cy_speed_text(); ?><br />
+								<strong>Max Speed:</strong> <?php echo round($stats['ms'],1) .' '.cy_speed_text(); ?>
 							</td>
 							<td align="left" valign="top" class="cy_stats_cell">
-								Time: <?php echo ($stats['min'] > 60) ? round($stats['min']/60 ,2).' hrs' : round($stats['min'],2).' min'; ?>
+								<strong>Time:</strong> <?php echo ($stats['min'] > 60) ? round($stats['min']/60 ,2).' hrs' : round($stats['min'],2).' min'; ?>
 							</td>
 						</tr>
 					</table>
