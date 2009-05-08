@@ -2267,10 +2267,12 @@ function cy_admin_css() {
 			padding: 5px;
 		}
 		table.cy_calendar th a {
-			color: #fff;
+			color: #ccc;
+			text-decoration: none;
 		}
 		table.cy_calendar th a:hover {
-			color: #000;
+			color: #fff;
+			text-decoration: underline;
 		}
 		table.cy_calendar th.cy_calendar_nav {
 			font-weight: normal;
