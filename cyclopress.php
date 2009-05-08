@@ -2259,7 +2259,7 @@ function cy_admin_css() {
 		}
 		.cy_admin_subnav {
 			background: #ddd;
-			padding: 8px 4px 0 4px;
+			padding: 8px 4px 4px 4px;
 			margin: 0 0 1.5em 0;
 		}
 		.cy_admin_navigation ul,
