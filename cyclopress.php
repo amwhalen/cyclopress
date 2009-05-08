@@ -2269,6 +2269,9 @@ function cy_admin_css() {
 		table.cy_calendar th a {
 			color: #fff;
 		}
+		table.cy_calendar th a:hover {
+			color: #000;
+		}
 		table.cy_calendar th.cy_calendar_nav {
 			font-weight: normal;
 		}
