@@ -1379,14 +1379,23 @@ function cy_manage_calendar_page() {
 			
 		}
 			
+		// for the calendar
 		$days_in_month = date('t', strtotime($month.'/1/'.$year));
 		$start_day_of_week = date('w', strtotime($month.'/1/'.$year));
 		$rows_in_month = ceil( ($start_day_of_week + $days_in_month) / 7);
 		
+		// nav dates
+		$prev_month = ($month == 1) ? 12 : ($month-1);
+		$prev_year = ($month == 1) ? ($year-1) : $year;
+		$next_month = ($month == 12) ? 1 : ($month+1);
+		$next_year = ($month == 12) ? ($year+1) : $year;
+		
 		?>
 		<table class="cy_calendar" id="cy_month_<?php echo $month.'_'.$year; ?>">
 			<tr>
-				<th colspan="7"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
+				<th><a href="?page=cyclopress/cyclopress.php&manage_calendar=1&cy_month=<?php echo $prev_month; ?>&cy_year=<?php echo $prev_year; ?>">&laquo;</a></th>
+				<th colspan="5"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
+				<th><a href="?page=cyclopress/cyclopress.php&manage_calendar=1&cy_month=<?php echo $next_month; ?>&cy_year=<?php echo $next_year; ?>">&raquo;</a></th>
 			</tr>
 			<?php
 			for ($rows = 0; $rows < $rows_in_month; $rows++) {
