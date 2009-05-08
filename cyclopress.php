@@ -1421,7 +1421,7 @@ function cy_manage_calendar_page() {
 							}
 							
 							?>
-							<td class=""><?php echo $td_content; ?></td>
+							<td class="<?php echo $class; ?>"><?php echo $td_content; ?></td>
 							
 						<?php
 						}
