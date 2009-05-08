@@ -1361,7 +1361,7 @@ function cy_manage_calendar_page() {
 	$rides = $wpdb->get_results($sql, ARRAY_A);
 
 	// sql for total miles this month
-	$sql  = 'select sum(miles) as m, avg(avg_speed) as s, avg(minutes) as min from '.$table_name.' where month(startdate)='.$month.' and year(startdate)='.$year;
+	$sql  = 'select sum(miles) as m, avg(avg_speed) as s, avg(minutes) as min, sum(est_calories) as c, max(max_speed) as ms from '.$table_name.' where month(startdate)='.$month.' and year(startdate)='.$year;
 	$stats_array = $wpdb->get_results($sql, ARRAY_A);
 
 	?>
@@ -1414,10 +1414,12 @@ function cy_manage_calendar_page() {
 					<table width="100%">
 						<tr>
 							<td align="left" valign="top">
-								Distance: <?php echo round($stats['m'],2) .' '.cy_distance_text();; ?>
+								Distance: <?php echo round($stats['m'],2) .' '.cy_distance_text(); ?>
+								Calories: <?php echo round($stats['c'],2) .' kcal' ?>
 							</td>
 							<td align="left" valign="top" class="cy_stats_cell">
-								Speed: <?php echo round($stats['s'],1) .' '.cy_speed_text();; ?>
+								Avg Speed: <?php echo round($stats['s'],1) .' '.cy_speed_text(); ?>
+								Max Speed: <?php echo round($stats['ms'],1) .' '.cy_speed_text(); ?>
 							</td>
 							<td align="left" valign="top" class="cy_stats_cell">
 								Time: <?php echo ($stats['min'] > 60) ? round($stats['min']/60 ,2).' hrs' : round($stats['min'],2).' min'; ?>
