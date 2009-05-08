@@ -2321,7 +2321,7 @@ function cy_admin_css() {
 			height: 1.5em;
 			vertical-align: middle;
 			text-align: center;
-			background: #999;
+			background: #bbb;
 		}
 		table.cy_calendar td.no_ride {
 			background: #eee;
