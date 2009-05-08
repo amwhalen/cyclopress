@@ -1408,14 +1408,14 @@ function cy_manage_calendar_page() {
 			</tr>
 			<?php if (sizeof($rides)) { ?>
 			<tr>
-				<td align="left" valign="top" class="cy_stats_cell" colspan="3">
+				<td align="left" valign="top" class="cy_stats_cell" colspan="2">
 					Distance: <?php echo round($stats['m'],2); ?><br />
 					Time: <?php echo round($stats['min'],2); ?>
 				</td>
-				<td class="cy_stats_cell" colspan="1">&nbsp;</td>
-				<td align="left" valign="top" class="cy_stats_cell" colspan="3">
+				<td align="left" valign="top" class="cy_stats_cell" colspan="2">
 					Speed: <?php echo round($stats['s'],1); ?>
 				</td>
+				<td class="cy_stats_cell" colspan="3">&nbsp;</td>
 			</tr>
 			<?php } ?>
 			<tr>
