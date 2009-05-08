@@ -2252,15 +2252,15 @@ function cy_admin_css() {
 			margin: 0;
 		}
 		table.cy_calendar {
-			width: 450px;
+			width: 588px;
 			border: 1px solid #ccc;
 		}
 		table.cy_calendar {
 			border: 1px solid #ccc;
 		}
 		table.cy_calendar td {
-			width: 60px;
-			height: 60px;
+			width: 80px;
+			height: 80px;
 		}
 		table.cy_calendar td.no_ride {
 			background: #eee;
