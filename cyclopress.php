@@ -2262,7 +2262,7 @@ function cy_admin_css() {
 		}
 		table.cy_calendar th {
 			height: 2em;
-			background: #666;
+			background: #555;
 			color: #fff;
 			padding: 5px;
 		}
