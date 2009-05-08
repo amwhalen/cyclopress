@@ -1410,14 +1410,20 @@ function cy_manage_calendar_page() {
 			</tr>
 			<?php if (sizeof($rides)) { ?>
 			<tr>
-				<td align="left" valign="top" class="cy_stats_cell" colspan="2">
-					Distance: <?php echo round($stats['m'],2) .' '.cy_distance_text();; ?>
-				</td>
-				<td align="left" valign="top" class="cy_stats_cell" colspan="2">
-					Speed: <?php echo round($stats['s'],1) .' '.cy_speed_text();; ?>
-				</td>
-				<td align="left" valign="top" class="cy_stats_cell" colspan="3">
-					Time: <?php echo ($stats['min'] > 60) ? round($stats['min']/60 ,2).' hrs' : round($stats['min'],2).' min'; ?>
+				<td colspan="7" class="cy_stats_cell">
+					<table>
+						<tr>
+							<td align="center" valign="top">
+								Distance: <?php echo round($stats['m'],2) .' '.cy_distance_text();; ?>
+							</td>
+							<td align="center" valign="top" class="cy_stats_cell">
+								Speed: <?php echo round($stats['s'],1) .' '.cy_speed_text();; ?>
+							</td>
+							<td align="center" valign="top" class="cy_stats_cell">
+								Time: <?php echo ($stats['min'] > 60) ? round($stats['min']/60 ,2).' hrs' : round($stats['min'],2).' min'; ?>
+							</td>
+						</tr>
+					</table>
 				</td>
 			</tr>
 			<?php } ?>
