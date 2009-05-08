@@ -2262,6 +2262,12 @@ function cy_admin_css() {
 		}
 		table.cy_calendar th {
 			height: 2em;
+			background: #666;
+			color: #fff;
+			padding: 5px;
+		}
+		table.cy_calendar th a {
+			color: #fff;
 		}
 		table.cy_calendar th.cy_calendar_nav {
 			font-weight: normal;
