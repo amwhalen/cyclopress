@@ -398,10 +398,15 @@ function cy_insert_ride($ride) {
 	$table_name = $wpdb->prefix . "cy_rides";
 
 	//$sql  = 'insert into '.$table_name.'(startdate,miles,avg_speed,max_speed,minutes,cadence,notes) ';
-	$sql  = 'insert into '.$table_name.'(startdate,miles,avg_speed,max_speed,minutes,cadence,notes,bike_id,type_id) ';
+	$sql  = 'insert into '.$table_name.'(startdate,miles,avg_speed,max_speed,minutes,cadence,notes,avg_hr,max_hr,avg_watts,max_watts,elevation_gain,elevation_loss,max_elevation,min_elevation,weight,est_calories,bike_id,type_id) ';
 	$sql .= "values('".$wpdb->escape($ride->get_startdate())."','".$wpdb->escape($ride->miles)."','".$wpdb->escape($ride->avg_speed)."'";
 	$sql .= ",'".$wpdb->escape($ride->max_speed)."','".$wpdb->escape($ride->minutes)."'";
 	$sql .= ",'".$wpdb->escape($ride->cadence)."','".$wpdb->escape($ride->notes)."'";
+	$sql .= ",'".$wpdb->escape($ride->avg_hr)."','".$wpdb->escape($ride->max_hr)."'";
+	$sql .= ",'".$wpdb->escape($ride->avg_watts)."','".$wpdb->escape($ride->max_watts)."'";
+	$sql .= ",'".$wpdb->escape($ride->elevation_gain)."','".$wpdb->escape($ride->elevation_loss)."'";
+	$sql .= ",'".$wpdb->escape($ride->max_elevation)."','".$wpdb->escape($ride->min_elevation)."'";
+	$sql .= ",'".$wpdb->escape($ride->weight)."','".$wpdb->escape($ride->est_calories)."'";
 	$sql .= ",'".$wpdb->escape($ride->bike_id)."','".$wpdb->escape($ride->ride_id)."')";
 
 	// send the query to the DBMS
@@ -428,6 +433,11 @@ function cy_update_ride($ride) {
 	$sql .= ", max_speed='".$wpdb->escape($ride->max_speed)."', minutes='".$wpdb->escape($ride->minutes)."'";
 	$sql .= ", cadence='".$wpdb->escape($ride->cadence)."', notes='".$wpdb->escape($ride->notes)."'";
 	$sql .= ", bike_id='".$wpdb->escape($ride->bike_id)."', type_id='".$wpdb->escape($ride->type_id)."'";
+	$sql .= ", avg_hr='".$wpdb->escape($ride->avg_hr)."', max_hr='".$wpdb->escape($ride->max_hr)."'";
+	$sql .= ", avg_watts='".$wpdb->escape($ride->avg_watts)."', max_watts='".$wpdb->escape($ride->max_watts)."'";
+	$sql .= ", elevation_gain='".$wpdb->escape($ride->elevation_gain)."', elevation_loss='".$wpdb->escape($ride->elevation_loss)."'";
+	$sql .= ", max_elevation='".$wpdb->escape($ride->max_elevation)."', min_elevation='".$wpdb->escape($ride->min_elevation)."'";
+	$sql .= ", weight='".$wpdb->escape($ride->weight)."', est_calories='".$wpdb->escape($ride->est_calories)."'";
 	$sql .= " where id='".$wpdb->escape($ride->id)."'";
 
 	// send the query to the DBMS
