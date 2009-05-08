@@ -610,45 +610,21 @@ function cy_admin_navigation($current_page='') {
 	$wp_url = get_bloginfo('url');
 
 	$links = array(
-		'add' => array(
-			'url' => $wp_url.'/wp-admin/post-new.php?page=cyclopress/cyclopress.php',
-			'title' => 'Add a Ride',
-		),
 		'manage' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage=1',
-			'title' => 'Manage Rides',
-		),
-		'add_bikes' => array(
-			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&add_bikes=1',
-			'title' => 'Add a Bike',
+			'title' => 'Rides',
 		),
 		'manage_bikes' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage_bikes=1',
-			'title' => 'Manage Bikes',
-		),
-		'cycling' => array(
-			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&cycling=1',
-			'title' => 'Cycling Page',
-		),
-		'export' => array(
-			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&export=1',
-			'title' => 'Export',
+			'title' => 'Bikes',
 		),
 		'options' => array(
 			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php',
 			'title' => 'Options',
 		),
-		'stats' => array(
-			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&stats=1',
-			'title' => 'Stats',
-		),
-		'debug' => array(
-			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&debug=1',
-			'title' => 'Debug',
-		),
-		'about' => array(
-			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&about=1',
-			'title' => 'About',
+		'export' => array(
+			'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&export=1',
+			'title' => 'Tools',
 		),
 	);
 
