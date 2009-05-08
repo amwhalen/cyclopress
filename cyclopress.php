@@ -1350,11 +1350,17 @@ function cy_manage_calendar_page() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . "cy_rides";
 	
+	// month and year for this calendar
 	$month = (isset($_GET['cy_month'])) ? mysql_escape_string($_GET['cy_month']) : date('n');
 	$year = (isset($_GET['cy_year'])) ? mysql_escape_string($_GET['cy_year']) : date('Y');
-
+	
+	// rides sql
 	$sql  = 'select * from '.$table_name.' where month(startdate)='.$month.' and year(startdate)='.$year.' order by startdate asc';
 	$rides = $wpdb->get_results($sql, ARRAY_A);
+
+	// sql for total miles this month
+	$sql  = 'select sum(miles) as m, avg(avg_speed) as s, avg(minutes) as min from '.$table_name.' where month(startdate)='.$month.' and year(startdate)='.$year;
+	$stats_array = $wpdb->get_results($sql, ARRAY_A);
 
 	?>
 		
@@ -1377,6 +1383,9 @@ function cy_manage_calendar_page() {
 		
 			}
 			
+			// do the monthly stats
+			$stats = $stats_array[0];
+			
 		}
 			
 		// for the calendar
@@ -1396,6 +1405,25 @@ function cy_manage_calendar_page() {
 				<th align="left" valign="top" class="cy_calendar_nav"><a href="?page=cyclopress/cyclopress.php&manage_calendar=1&cy_month=<?php echo $prev_month; ?>&cy_year=<?php echo $prev_year; ?>">&laquo; previous</a></th>
 				<th align="center" valign="top" colspan="5"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
 				<th align="right" valign="top" class="cy_calendar_nav"><a href="?page=cyclopress/cyclopress.php&manage_calendar=1&cy_month=<?php echo $next_month; ?>&cy_year=<?php echo $next_year; ?>">next &raquo;</a></th>
+			</tr>
+			<?php if (sizeof($rides)) { ?>
+			<tr>
+				<td align="left" valign="top" class="cy_stats_cell" colspan="3">
+					Total Miles: <?php echo $stats['m']; ?><br />
+					Total Time: <?php echo $stats['min']; ?>
+				</td>
+				<td class="cy_stats_cell" colspan="1">&nbsp;</td>
+				<td align="left" valign="top" class="cy_stats_cell" colspan="3">Average Speed: <?php echo $stats['s']; ?></td>
+			</tr>
+			<?php } ?>
+			<tr>
+				<td class="cy_day">Sun</td>
+				<td class="cy_day">Mon</td>
+				<td class="cy_day">Tue</td>
+				<td class="cy_day">Wed</td>
+				<td class="cy_day">Thu</td>
+				<td class="cy_day">Fri</td>
+				<td class="cy_day">Sat</td>
 			</tr>
 			<?php
 			for ($rows = 0; $rows < $rows_in_month; $rows++) {
@@ -2281,6 +2309,15 @@ function cy_admin_css() {
 			width: 80px;
 			height: 80px;
 			padding: 2px;
+		}
+		table.cy_calendar td.cy_stats_cell {
+			height: 1.5em;
+		}
+		table.cy_calendar td.cy_day {
+			height: 1.5em;
+			vertical-align: middle;
+			text-align: center;
+			background: #999;
 		}
 		table.cy_calendar td.no_ride {
 			background: #eee;
