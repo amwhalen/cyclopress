@@ -636,8 +636,8 @@ function cy_admin_navigation($current_page='', $current_subpage='') {
 					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage_bikes=1',
 					'title' => 'List',
 				),
-				'add_bike' => array(
-					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&add_bike=1',
+				'add_bikes' => array(
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&add_bikes=1',
 					'title' => 'Add',
 				),
 			),
@@ -705,7 +705,7 @@ function cy_admin_navigation($current_page='', $current_subpage='') {
 	$str .= implode('', $tabs);
 	$str .= '</ul></div>';
 	
-	$str .= '<div class="cy_admin_subnav">';
+	$str .= '<div class="cy_admin_subnav"><ul>';
 	$tabs = array();
 	foreach ($links[$current_page]['subnav'] as $k=>$link) {
 	
@@ -840,7 +840,7 @@ function cy_options_page() {
 	?>
 	<div class="wrap">
 	
-	<?php echo cy_admin_navigation('options'); ?>
+	<?php echo cy_admin_navigation('options','options'); ?>
 	
 	<h3>CycloPress Options</h3>
 	
@@ -985,7 +985,7 @@ function cy_write_page($ride=false) {
 	?>
 	<div class="wrap">
 	
-		<?php echo cy_admin_navigation('add'); ?>
+		<?php echo cy_admin_navigation('manage','add'); ?>
 	
 		<h3>CycloPress Ride</h3>
 	
@@ -1429,7 +1429,7 @@ function cy_manage_calendar_page() {
 		
 		<div class="wrap">
 		
-			<?php echo cy_admin_navigation('manage'); ?>
+			<?php echo cy_admin_navigation('manage','manage_calendar'); ?>
 		
 			<h3>Manage Rides</h3>
 	
@@ -1571,7 +1571,7 @@ function cy_write_bikes_page($bike=false) {
 	?>
 	<div class="wrap">
 	
-		<?php echo cy_admin_navigation('add_bikes'); ?>
+		<?php echo cy_admin_navigation('manage_bikes','add_bikes'); ?>
 	
 		<h3>CycloPress Bikes</h3>
 	
@@ -1671,7 +1671,7 @@ function cy_manage_bikes_page() {
 		
 		<div class="wrap">
 		
-			<?php echo cy_admin_navigation('manage_bikes'); ?>
+			<?php echo cy_admin_navigation('manage_bikes','manage_bikes'); ?>
 		
 			<h3>Manage Bikes</h3>
 	
@@ -1776,7 +1776,7 @@ function cy_debug_page() {
 	
 	<div class="wrap">
 	
-		<?php echo cy_admin_navigation('debug'); ?>
+		<?php echo cy_admin_navigation('tools','debug'); ?>
 	
 		<h3>CycloPress Debugging Information</h3>
 		
@@ -1888,7 +1888,7 @@ function cy_cycling_page() {
 	?>
 	<div class="wrap">
 
-		<?php echo cy_admin_navigation('cycling'); ?>
+		<?php echo cy_admin_navigation('options','cycling'); ?>
 	
 		<h3>Cycling Page</h3>
 	
@@ -2077,7 +2077,7 @@ function cy_stats_page() {
 	
 		<?php
 		
-		echo cy_admin_navigation('stats');
+		echo cy_admin_navigation('export','stats');
 		
 		$stats = cy_db_stats();
 		
@@ -2122,7 +2122,7 @@ function cy_about_page() {
 	?>
 	<div class="wrap">
 	
-		<?php echo cy_admin_navigation('about'); ?>
+		<?php echo cy_admin_navigation('export','about'); ?>
 	
 		<p>CycloPress was created by <a href="http://amwhalen.com">Andrew M. Whalen</a>.</p>
 		
@@ -2146,7 +2146,7 @@ function cy_export_page() {
 	?>
 	<div class="wrap">
 		
-		<?php echo cy_admin_navigation('export'); ?>
+		<?php echo cy_admin_navigation('export','export'); ?>
 		
 		<div id="cy_export">
 			
