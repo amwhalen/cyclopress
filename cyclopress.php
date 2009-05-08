@@ -1387,7 +1387,6 @@ function cy_manage_calendar_page() {
 					<th colspan="7"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
 				</tr>
 				<?php
-				$current_day = 1;
 				for ($rows = 0; $rows < $rows_in_month; $rows++) {
 				
 					?>
@@ -1401,12 +1400,12 @@ function cy_manage_calendar_page() {
 							if ($d >= $start_day_of_week || $day_index > ($start_day_of_week - 1 + $days_in_month)) {
 						
 								if (is_array($days[$day_index])) {
-									$td_content = 'yes';
-									/*for ($r = 0; $r < sizeof($days[$day_index]); $r++) {
+									$td_content = '';
+									for ($r = 0; $r < sizeof($days[$day_index]); $r++) {
 										$day_ride = $days[$day_index][$r];
 										$td_content .= date('h:ia', strtotime($day_ride['startdate'])) . '<br />';
 									}
-									$td_content = trim($td_content, '<br />');*/
+									$td_content = trim($td_content, '<br />');
 									$class = 'has_ride';
 								} else {
 									$td_content = '&nbsp;';
@@ -1421,7 +1420,7 @@ function cy_manage_calendar_page() {
 							}
 							
 							?>
-							<td class="<?php echo $class; ?>"><?php echo $td_content; ?></td>
+							<td class="<?php echo $class; ?>"><?php echo $day_index.': '.$td_content; ?></td>
 							
 						<?php
 						}
