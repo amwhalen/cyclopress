@@ -1409,11 +1409,13 @@ function cy_manage_calendar_page() {
 			<?php if (sizeof($rides)) { ?>
 			<tr>
 				<td align="left" valign="top" class="cy_stats_cell" colspan="3">
-					Total Miles: <?php echo $stats['m']; ?><br />
-					Total Time: <?php echo $stats['min']; ?>
+					Total Miles: <?php echo round($stats['m'],2); ?><br />
+					Total Time: <?php echo round($stats['min'],2); ?>
 				</td>
 				<td class="cy_stats_cell" colspan="1">&nbsp;</td>
-				<td align="left" valign="top" class="cy_stats_cell" colspan="3">Average Speed: <?php echo $stats['s']; ?></td>
+				<td align="left" valign="top" class="cy_stats_cell" colspan="3">
+					Average Speed: <?php echo round($stats['s'],1); ?>
+				</td>
 			</tr>
 			<?php } ?>
 			<tr>
