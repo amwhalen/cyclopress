@@ -2271,6 +2271,9 @@ function cy_admin_css() {
 		table.cy_calendar td.filler {
 			
 		}
+		.cy_calendar_day {
+			font-weight: bold;
+		}
 	</style>
 	
 	<?PHP
