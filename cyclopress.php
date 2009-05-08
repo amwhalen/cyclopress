@@ -1408,7 +1408,7 @@ function cy_manage_calendar_page() {
 									$td_content = '<span class="cy_calendar_day">'.$day_index.'</span>';
 									for ($r = 0; $r < sizeof($days[$day_index]); $r++) {
 										$day_ride = $days[$day_index][$r];
-										$td_content .= '<br />' . date('h:ia', strtotime($day_ride['startdate']));
+										$td_content .= '<br /><a href="?page=cyclopress/cyclopress.php&manage=1&cy_ride_id='.$day_ride['id'].'">'.date('g:ia', strtotime($day_ride['startdate'])).'</a>';
 									}
 									$class = 'has_ride';
 								} else {
