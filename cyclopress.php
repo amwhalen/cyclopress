@@ -1353,7 +1353,7 @@ function cy_manage_calendar_page() {
 	$month = (isset($_GET['cy_month'])) ? mysql_escape_string($_GET['cy_month']) : date('n');
 	$year = (isset($_GET['cy_year'])) ? mysql_escape_string($_GET['cy_year']) : date('Y');
 
-	$sql  = 'select * from '.$table_name.' where month(startdate)='.$month.' and year(startdate)='.$year.' order by startdate desc';
+	$sql  = 'select * from '.$table_name.' where month(startdate)='.$month.' and year(startdate)='.$year.' order by startdate asc';
 	$rides = $wpdb->get_results($sql, ARRAY_A);
 
 	?>
