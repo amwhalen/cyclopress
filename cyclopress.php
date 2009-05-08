@@ -2325,6 +2325,10 @@ function cy_admin_css() {
 			height: 1.5em;
 			background: #999;
 		}
+		td.cy_stats_cell table td {
+			width: 33%;
+			height: auto;
+		}
 		table.cy_calendar td.cy_day {
 			height: 1.5em;
 			vertical-align: middle;
