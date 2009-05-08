@@ -1393,9 +1393,9 @@ function cy_manage_calendar_page() {
 		?>
 		<table class="cy_calendar" id="cy_month_<?php echo $month.'_'.$year; ?>">
 			<tr>
-				<th><a href="?page=cyclopress/cyclopress.php&manage_calendar=1&cy_month=<?php echo $prev_month; ?>&cy_year=<?php echo $prev_year; ?>">&laquo;</a></th>
-				<th colspan="5"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
-				<th><a href="?page=cyclopress/cyclopress.php&manage_calendar=1&cy_month=<?php echo $next_month; ?>&cy_year=<?php echo $next_year; ?>">&raquo;</a></th>
+				<th align="left" valign="top"><a href="?page=cyclopress/cyclopress.php&manage_calendar=1&cy_month=<?php echo $prev_month; ?>&cy_year=<?php echo $prev_year; ?>">&laquo;</a></th>
+				<th align="center" valign="top" colspan="5"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
+				<th align="right" valign="top"><a href="?page=cyclopress/cyclopress.php&manage_calendar=1&cy_month=<?php echo $next_month; ?>&cy_year=<?php echo $next_year; ?>">&raquo;</a></th>
 			</tr>
 			<?php
 			for ($rows = 0; $rows < $rows_in_month; $rows++) {
@@ -2259,6 +2259,9 @@ function cy_admin_css() {
 		}
 		table.cy_calendar {
 			border: 1px solid #ccc;
+		}
+		table.cy_calendar th {
+			height: 2em;
 		}
 		table.cy_calendar td {
 			width: 80px;
