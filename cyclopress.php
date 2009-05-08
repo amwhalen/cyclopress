@@ -2258,6 +2258,9 @@ function cy_admin_css() {
 		table.cy_calendar {
 			border: 1px solid #ccc;
 		}
+		table.cy_calendar td {
+			height: 5em;
+		}
 		table.cy_calendar td.no_ride {
 			background: #eee;
 		}
