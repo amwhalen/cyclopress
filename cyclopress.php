@@ -1413,13 +1413,13 @@ function cy_manage_calendar_page() {
 				<td colspan="7" class="cy_stats_cell">
 					<table width="100%">
 						<tr>
-							<td align="center" valign="top">
+							<td align="left" valign="top">
 								Distance: <?php echo round($stats['m'],2) .' '.cy_distance_text();; ?>
 							</td>
-							<td align="center" valign="top" class="cy_stats_cell">
+							<td align="left" valign="top" class="cy_stats_cell">
 								Speed: <?php echo round($stats['s'],1) .' '.cy_speed_text();; ?>
 							</td>
-							<td align="center" valign="top" class="cy_stats_cell">
+							<td align="left" valign="top" class="cy_stats_cell">
 								Time: <?php echo ($stats['min'] > 60) ? round($stats['min']/60 ,2).' hrs' : round($stats['min'],2).' min'; ?>
 							</td>
 						</tr>
