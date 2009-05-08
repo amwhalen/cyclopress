@@ -1414,11 +1414,11 @@ function cy_manage_calendar_page() {
 					<table width="100%">
 						<tr>
 							<td align="left" valign="top">
-								Distance: <?php echo round($stats['m'],2) .' '.cy_distance_text(); ?>
+								Distance: <?php echo round($stats['m'],2) .' '.cy_distance_text(); ?><br />
 								Calories: <?php echo round($stats['c'],2) .' kcal' ?>
 							</td>
 							<td align="left" valign="top" class="cy_stats_cell">
-								Avg Speed: <?php echo round($stats['s'],1) .' '.cy_speed_text(); ?>
+								Avg Speed: <?php echo round($stats['s'],1) .' '.cy_speed_text(); ?><br />
 								Max Speed: <?php echo round($stats['ms'],1) .' '.cy_speed_text(); ?>
 							</td>
 							<td align="left" valign="top" class="cy_stats_cell">
