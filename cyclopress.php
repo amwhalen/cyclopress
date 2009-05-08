@@ -1419,11 +1419,6 @@ function cy_manage_calendar_page() {
 		<div class="wrap">
 		
 			<?php echo cy_admin_navigation('manage','manage_calendar'); ?>
-			
-			<div id="cy_manage_list">
-				<a href="?page=cyclopress/cyclopress.php&manage=1">List</a>
-				<a href="?page=cyclopress/cyclopress.php&manage_calendar=1" class="here">Calendar</a>
-			</div>
 	
 			<table class="widefat cy_manage_table">
 				
