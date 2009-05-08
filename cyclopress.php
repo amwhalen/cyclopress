@@ -855,8 +855,8 @@ function cy_options_page() {
 				<th scope="row">Units</th>
 				<td>
 					<select name="cy_unit">
-						<option value="miles"<?php if (get_option('cy_unit')=='mile') { echo ' selected="selected"'; } ?>>Miles</option>
-						<option value="kilometer"<?php if (get_option('cy_unit')=='kilometer') { echo ' selected="selected"'; } ?>>Kilometers</option>
+						<option value="miles"<?php if (get_option('cy_unit')=='mile') { echo ' selected="selected"'; } ?>>US (miles, feet, etc.)</option>
+						<option value="kilometer"<?php if (get_option('cy_unit')=='kilometer') { echo ' selected="selected"'; } ?>>SI (kilometers, meters, etc.)</option>
 					</select>
 					<br /><small>This doesn't convert your numbers, it just changes the text 'miles' to 'kilometers' and vice versa.</small>
 				</td>
