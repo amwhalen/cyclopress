@@ -1,0 +1,158 @@
+.cy_ok {
+	background: #cfc;
+	color: #060;
+	font-weight: bold;
+}
+.cy_warning {
+	background: #fec;
+	color: #000;
+	font-weight: bold;
+}
+.cy_error {
+	background: #fcc;
+	color: #c00;
+	font-weight: bold;
+}
+.cy_sort {
+	color: #ddd;
+}
+.cy_admin_navigation {
+	margin: 1.5em 0 0 0;
+	padding: 4px;
+	border-bottom: 3px solid #ddd;
+}
+.cy_admin_subnav {
+	background: #ddd;
+	padding: 4px;
+	margin: 0 0 1.5em 0;
+}
+.cy_admin_navigation ul,
+.cy_admin_subnav ul {
+	margin: 0;
+	padding: 0;
+	display: inline;
+	background: none;
+}
+.cy_admin_navigation ul li,
+.cy_admin_subnav ul li {
+	display: inline;
+	padding: 5px;
+}
+.cy_admin_navigation ul li a,
+.cy_admin_subnav ul li a {
+	padding: 5px;
+	border: 1px solid #eee;
+	border-width: 1px 1px 0 1px;
+	text-decoration: none;
+}
+.cy_admin_subnav ul li a {
+	border-color: #ddd;
+}
+.cy_admin_navigation ul li a:hover,
+.cy_admin_subnav ul li a:hover {
+	border: 1px solid #ddd;
+	border-width: 1px 1px 0 1px;
+}
+.cy_admin_navigation ul li.here a,
+.cy_admin_subnav ul li.here a {
+	background: #ddd;
+	font-weight: bold;
+	color: #000;
+	border: 1px solid #ddd;
+	border-width: 1px 1px 0 1px;
+}
+.cy_admin_navigation ul li.cy_debug a {
+	background: #fcc;
+	color: #000;
+	font-weight: bold;
+}
+.cy_manage_table th a {
+	color: #000;
+}
+.cy_manage_table th a:hover {
+	color: #666;
+}
+#cy_export {
+	width: 600px;
+}
+#cy_export_list {
+	padding: 5px;
+}
+#cy_export_list a {
+	padding: 5px;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-width: 1px 1px 0 1px;
+	text-decoration: none;
+}
+#cy_export_list a.here {
+	background: #ddd;
+	font-weight: bold;
+	color: #000;
+}
+#cy_export_desc {
+	background: #ddd;
+}
+#cy_export_desc p {
+	margin: 0;
+	padding: 5px;
+}
+#cy_export_content {
+	width: 600px;
+	margin: 0;
+}
+table.cy_calendar {
+	width: 616px;
+	border: 1px solid #ccc;
+}
+table.cy_calendar {
+	border: 1px solid #ccc;
+}
+table.cy_calendar th {
+	height: 2em;
+	background: #555;
+	color: #fff;
+	padding: 5px;
+}
+table.cy_calendar th a {
+	color: #ccc;
+	text-decoration: none;
+}
+table.cy_calendar th a:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+table.cy_calendar th.cy_calendar_nav {
+	font-weight: normal;
+}
+table.cy_calendar td {
+	width: 80px;
+	height: 80px;
+	padding: 2px;
+}
+table.cy_calendar td.cy_stats_cell {
+	height: 1.5em;
+	background: #fff;
+}
+td.cy_stats_cell table td {
+	width: 33%;
+	height: auto;
+}
+table.cy_calendar td.cy_day {
+	height: 1.5em;
+	vertical-align: middle;
+	text-align: center;
+	background: #bbb;
+}
+table.cy_calendar td.no_ride {
+	background: #eee;
+}
+table.cy_calendar td.has_ride {
+	background: #eee;
+}
+table.cy_calendar td.filler {
+	background: #f3f3f3;
+}
+.cy_calendar_day {
+	font-weight: bold;
+}

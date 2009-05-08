@@ -2157,6 +2157,12 @@ function cy_get_month($number) {
  */
 function cy_css() {
 
+	global $cy_dir;
+
+	echo '<link href="'.$cy_dir.'cyclopress.css" type="text/css" rel="stylesheet" media="screen" />';
+
+	return;
+
 	?>
 	
 	<style type="text/css">
@@ -2187,6 +2193,12 @@ function cy_css() {
  * Cycling CSS for the admin page.
  */
 function cy_admin_css() {	
+	
+	global $cy_dir;
+
+	echo '<link href="'.$cy_dir.'cyclopress_admin.css" type="text/css" rel="stylesheet" media="screen" />';
+
+	return;
 
 	?>
 	

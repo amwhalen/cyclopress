@@ -1,0 +1,17 @@
+dl.cy {
+	margin: 20px 0;
+}
+dl.cy dt {
+	clear: left;
+	float: left;
+	width: 180px;
+	font-weight: bold;
+	text-align: right;
+}
+dl.cy dd {
+	margin-left: 200px;
+	margin-bottom: 10px;
+}
+dl.cy dd small{
+	color: #666;
+}
