@@ -1398,7 +1398,7 @@ function cy_manage_calendar_page() {
 			
 				?>
 				
-				<tr class="<?php echo $c; ?>">
+				<div>
 					<td><strong><a href="?page=cyclopress/cyclopress.php&manage=1&cy_ride_id=<?php echo $ride['id']; ?>"><?php echo date('F j, Y g:ia', strtotime($ride['startdate'])); ?></a></strong></td>
 					<td><?php echo $ride['miles'] . ' ' . cy_distance_text(); ?></td>
 					<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
@@ -1407,7 +1407,7 @@ function cy_manage_calendar_page() {
 					<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' '.$h_text.', ' . $minutes . ' '.$m_text; ?></td>
 					<td><?php echo $bike->label; ?></td>
 					<td><?php echo (strlen(trim(strip_tags($ride['notes']))) > 50) ? substr(trim(strip_tags($ride['notes'])), 0, 50).'...' : trim(strip_tags($ride['notes'])); ?></td>
-				</tr>
+				</div>
 					
 				<?php
 		
