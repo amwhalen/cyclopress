@@ -1382,7 +1382,7 @@ function cy_manage_calendar_page() {
 			$rows_in_month = ceil( ($start_day_of_week + $days_in_month) / 7);
 			
 			?>
-			<table class="cy_calendar" id="cy_month_<?php echo $month.'_'.$year; ?>" width="100%" border="1">
+			<table class="cy_calendar" id="cy_month_<?php echo $month.'_'.$year; ?>">
 				<tr>
 					<th colspan="7"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
 				</tr>
@@ -1405,15 +1405,14 @@ function cy_manage_calendar_page() {
 							} else {
 							
 								if (is_array($days[$day_index])) {
-									$td_content = '';
+									$td_content = '<span class="cy_calendar_day">'.$day_index.'</span>';
 									for ($r = 0; $r < sizeof($days[$day_index]); $r++) {
 										$day_ride = $days[$day_index][$r];
-										$td_content .= date('h:ia', strtotime($day_ride['startdate'])) . '<br />';
+										$td_content .= '<br />' . date('h:ia', strtotime($day_ride['startdate']));
 									}
-									$td_content = trim($td_content, '<br />');
 									$class = 'has_ride';
 								} else {
-									$td_content = '&nbsp;';
+									$td_content = '<span class="cy_calendar_day">'.$day_index.'</span>';
 									$class = 'no_ride';
 								}
 							
@@ -2253,14 +2252,15 @@ function cy_admin_css() {
 			margin: 0;
 		}
 		table.cy_calendar {
+			width: 450px;
 			border: 1px solid #ccc;
 		}
 		table.cy_calendar {
 			border: 1px solid #ccc;
 		}
 		table.cy_calendar td {
-			width: 5em;
-			height: 5em;
+			width: 60px;
+			height: 60px;
 		}
 		table.cy_calendar td.no_ride {
 			background: #eee;
