@@ -1369,7 +1369,7 @@ function cy_manage_calendar_page() {
 			// add all the rides into a 'days' array
 			foreach ($rides as $ride) {
 				
-				$ride_day = date('j', strtotime($ride['startdate']))]
+				$ride_day = date('j', strtotime($ride['startdate']));
 			
 				// add this ride to a day
 				if (!is_array($days[$ride_day])) $days[$ride_day] = array();
