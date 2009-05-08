@@ -624,7 +624,7 @@ function cy_admin_navigation($current_page='', $current_subpage='') {
 				),
 				'add' => array(
 					'url' => $wp_url.'/wp-admin/post-new.php?page=cyclopress/cyclopress.php',
-					'title' => 'Add a Ride',
+					'title' => 'Add',
 				),
 			),
 		),
