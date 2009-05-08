@@ -2325,7 +2325,7 @@ function cy_admin_css() {
 		}
 		table.cy_calendar td.cy_stats_cell {
 			height: 1.5em;
-			background: #999;
+			background: #fff;
 		}
 		td.cy_stats_cell table td {
 			width: 33%;
