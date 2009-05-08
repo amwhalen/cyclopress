@@ -1396,7 +1396,7 @@ function cy_manage_calendar_page() {
 						<?php
 						for ($d = 0; $d < 7; $d++) {
 						
-							$day_index = $rows*7 + $d + $start_day_of_week;
+							$day_index = $rows*7 + $d - 1 - $start_day_of_week;
 						
 							if ($day_index < $start_day_of_week || $day_index > ($start_day_of_week + $days_in_month)) {
 						
