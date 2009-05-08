@@ -2235,17 +2235,20 @@ function cy_admin_css() {
 		#cy_export {
 			width: 600px;
 		}
-		#cy_export_list {
+		#cy_export_list,
+		#cy_manage_list {
 			padding: 5px 0;
 		}
-		#cy_export_list a {
+		#cy_export_list a,
+		#cy_manage_list a {
 			padding: 5px;
 			background: #fff;
 			border: 1px solid #ddd;
 			border-width: 1px 1px 0 1px;
 			text-decoration: none;
 		}
-		#cy_export_list a.here {
+		#cy_export_list a.here,
+		#cy_manage_list a.here {
 			background: #ddd;
 			font-weight: bold;
 			color: #000;
