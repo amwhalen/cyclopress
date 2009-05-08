@@ -2159,7 +2159,7 @@ function cy_css() {
 
 	global $cy_dir;
 
-	echo '<link href="'.$cy_dir.'cyclopress.css" type="text/css" rel="stylesheet" media="screen" />';
+	echo '<link href="'.$cy_dir.'/cyclopress.css" type="text/css" rel="stylesheet" media="screen" />';
 
 	return;
 
@@ -2196,7 +2196,7 @@ function cy_admin_css() {
 	
 	global $cy_dir;
 
-	echo '<link href="'.$cy_dir.'cyclopress_admin.css" type="text/css" rel="stylesheet" media="screen" />';
+	echo '<link href="'.$cy_dir.'/cyclopress_admin.css" type="text/css" rel="stylesheet" media="screen" />';
 
 	return;
 
