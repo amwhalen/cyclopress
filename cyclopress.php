@@ -721,7 +721,7 @@ function cy_admin_navigation($current_page='', $current_subpage='') {
 		}
 	
 		// make the current page look different
-		if ($current_page == $k) {
+		if ($current_subpage == $k) {
 			$tabs[] = '<li class="here'.$class.'"><a href="'.$link['url'].'">'.$link['title'].$warning.'</a></li>';
 		} else {
 			$tabs[] = '<li class="'.$class.'"><a href="'.$link['url'].'">'.$link['title'].$warning.'</a></li>';
@@ -2259,7 +2259,7 @@ function cy_admin_css() {
 		}
 		.cy_admin_subnav {
 			background: #ddd;
-			padding: 4px;
+			padding: 8px 4px 0 4px;
 			margin: 0 0 1.5em 0;
 		}
 		.cy_admin_navigation ul,
@@ -2280,6 +2280,9 @@ function cy_admin_css() {
 			border: 1px solid #eee;
 			border-width: 1px 1px 0 1px;
 			text-decoration: none;
+		}
+		.cy_admin_subnav ul li a {
+			border-color: #ddd;
 		}
 		.cy_admin_navigation ul li a:hover,
 		.cy_admin_subnav ul li a:hover {
