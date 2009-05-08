@@ -1349,8 +1349,11 @@ function cy_manage_calendar_page() {
 
 	global $wpdb;
 	$table_name = $wpdb->prefix . "cy_rides";
+	
+	$month = (isset($_GET['cy_month'])) ? mysql_escape_string($_GET['cy_month']) : date('n');
+	$year = (isset($_GET['cy_year'])) ? mysql_escape_string($_GET['cy_year']) : date('Y');
 
-	$sql  = 'select * from '.$table_name.' where month(startdate)='.date('n').' order by startdate desc';
+	$sql  = 'select * from '.$table_name.' where month(startdate)='.$month.' and year(startdate)='.$year.' order by startdate desc';
 	$rides = $wpdb->get_results($sql, ARRAY_A);
 
 	?>
@@ -1363,70 +1366,74 @@ function cy_manage_calendar_page() {
 		
 		if (sizeof($rides)) {
 			
-			$i = 0;
-			$month = NULL;
-			$year = NULL;
-			$new_month = true;
-			$days_in_month = NULL;
-			
+			// add all the rides into a 'days' array
 			foreach ($rides as $ride) {
+				
+				$ride_day = date('j', strtotime($ride['startdate']))]
 			
-				if (date('n Y', strtotime($ride['startdate'])) != $month.' '.$year) {
-					$month = date('n', strtotime($ride['startdate']));
-					$year = date('Y', strtotime($ride['startdate']));
-					$days_in_month = date('t', strtotime($ride['startdate']));
-					$new_month = true;
-				} else {
-					$new_month = false;
-				}
-				
-				if ($new_month) {
-				
-					?>
-					</table>				
-					<table id="cy_month_<?php echo $month.'_'.$year; ?>">
-					
-						<tr>
-							<th colspan="7"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
-						</tr>
-					
-					<?php
-				
-				} else {
-					
-				}
-		
-				$hours = floor($ride['minutes']/60);
-				$minutes = floor($ride['minutes']%60);
-				$h_text = ($hours == 1) ? 'hour' : 'hours';
-				$m_text = ($minutes == 1) ? 'minute' : 'minutes';
-				$bike = cy_get_bike($ride['bike_id']);
-				
-				if ($i%2 == 0) {
-					$c = '';
-				} else {
-					$c = 'alternate';
-				}
-			
-				?>
-				
-				<tr>
-					<td><strong><a href="?page=cyclopress/cyclopress.php&manage=1&cy_ride_id=<?php echo $ride['id']; ?>"><?php echo date('F j, Y g:ia', strtotime($ride['startdate'])); ?></a></strong></td>
-					<td><?php echo $ride['miles'] . ' ' . cy_distance_text(); ?></td>
-					<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
-					<td><?php echo $ride['max_speed'] . ' '. cy_speed_text(); ?></td>
-					<td><?php echo $ride['cadence']; ?> rpm</td>
-					<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' '.$h_text.', ' . $minutes . ' '.$m_text; ?></td>
-					<td><?php echo $bike->label; ?></td>
-				</tr>
-					
-				<?php
-		
-				$i++;
+				// add this ride to a day
+				if (!is_array($days[$ride_day])) $days[$ride_day] = array();
+				$days[$ride_day][] = $ride;
 		
 			}
 			
-			?></table><?php
+			$days_in_month = date('t', strtotime($month.'/1/'.$year));
+			$start_day_of_week = date('w', strtotime($month.'/1/'.$year));
+			$rows_in_month = ceil( ($start_day_of_week + $days_in_month) / 7);
+			
+			?>
+			<table id="cy_month_<?php echo $month.'_'.$year; ?>">
+				<tr>
+					<th colspan="7"><?php echo date('F Y', strtotime($month.'/1/'.$year)); ?></th>
+				</tr>
+				<?php
+				$current_day = 1;
+				for ($rows = 0; $rows < $rows_in_month; $rows++) {
+				
+					?>
+				
+					<tr>
+						<?php
+						for ($d = 0; $d < 7; $d++) {
+						
+							$day_index = $rows*7 + $d + $start_day_of_week;
+						
+							if ($day_index < $start_day_of_week || $day_index > ($start_day_of_week + $days_in_month)) {
+						
+								if (is_array($days[$day_index])) {
+									$td_content = '';
+									for ($r = 0; $r < sizeof($days[$day_index]); $r++) {
+										$day_ride = $days[$day_index][$r];
+										$td_content .= date('h:ia', strtotime($day_ride['startdate'])) . '<br />';
+									}
+									$td_content = trim($td_content, '<br />');
+									$class = 'has_ride';
+								} else {
+									$td_content = '&nbsp;';
+									$class = 'no_ride';
+								}
+							
+							} else {
+							
+								$td_content = '&nbsp;';
+								$class = 'filler';
+							
+							}
+							
+							?>
+							<td class=""><?php echo $td_content; ?></td>
+							
+						<?php
+						}
+						?>
+					</tr>
+					
+					<?php
+				
+				}
+				?>
+			</table>
+			<?php
 		
 		} else {
 		
