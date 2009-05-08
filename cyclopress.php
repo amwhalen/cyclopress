@@ -619,7 +619,7 @@ function cy_admin_navigation($current_page='', $current_subpage='') {
 					'title' => 'List',
 				),
 				'manage_calendar' => array(
-					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage=1',
+					'url' => $wp_url.'/wp-admin/plugins.php?page=cyclopress/cyclopress.php&manage_calendar=1',
 					'title' => 'Calendar',
 				),
 				'add' => array(
