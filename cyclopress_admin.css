@@ -124,6 +124,7 @@ table.cy_calendar th a:hover {
 }
 table.cy_calendar th.cy_calendar_nav {
 	font-weight: normal;
+	background: #557;
 }
 table.cy_calendar td {
 	width: 80px;
