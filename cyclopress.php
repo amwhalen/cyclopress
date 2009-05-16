@@ -191,6 +191,17 @@ class CYDBObject {
 };
 
 /**
+ * Returns a string with a brief overview of a ride.
+ */
+function cy_get_brief_ride($ride) {
+
+	$str = $ride['avg_speed'].' '.cy_speed_text($ride['avg_speed']) . ', ' . $ride['miles'].' '.cy_speed_text($ride['miles']) . ', ' . cy_minutes_human($ride['minutes']);
+
+	return $str;
+
+}
+
+/**
  * Returns an XHTML string with a brief stats overview.
  */
 function cy_get_brief_stats($before='<p>', $separator=', ', $after='</p>') {
@@ -1456,7 +1467,7 @@ function cy_manage_calendar_page() {
 								$td_content = '<span class="cy_calendar_day">'.$day_index.'</span>';
 								for ($r = 0; $r < sizeof($days[$day_index]); $r++) {
 									$day_ride = $days[$day_index][$r];
-									$td_content .= '<br /><a href="?page=cyclopress/cyclopress.php&manage=1&cy_ride_id='.$day_ride['id'].'">'.date('g:ia', strtotime($day_ride['startdate'])).'</a>';
+									$td_content .= '<br /><a href="?page=cyclopress/cyclopress.php&manage=1&cy_ride_id='.$day_ride['id'].'" title="'.htmlentities(cy_get_brief_ride($day_ride)).'">'.date('g:ia', strtotime($day_ride['startdate'])).'</a>';
 								}
 								$class = 'has_ride';
 							} else {
@@ -2234,17 +2245,25 @@ function cy_elevation_text($num=2) {
 /**
  * Converts minutes into a human readable format
  */
-function cy_minutes_human($minutes) {
+function cy_minutes_human($minutes, $short=false) {
 
 	$hrs = floor($minutes / 60);
 	$mins = $minutes % 60;
 	$time = '';
 	if ($hrs != 0) {
-		$time .= ($hrs != 1) ? $hrs . ' hours' : $hrs . ' hour';
+		if ($short) {
+			$time .= ($hrs != 1) ? $hrs . ' hrs' : $hrs . ' hr';
+		} else {
+			$time .= ($hrs != 1) ? $hrs . ' hours' : $hrs . ' hour';
+		}
 	}
 	if ($mins != 0) {
 		$time .= ($hrs != 0) ? ', ' : '';
-		$time .= ($mins != 1) ? $mins . ' minutes' : $mins . ' minute';
+		if ($short) {
+			$time .= ($mins != 1) ? $mins . ' mins' : $mins . ' min';
+		} else {
+			$time .= ($mins != 1) ? $mins . ' minutes' : $mins . ' minute';
+		}
 	}
 	
 	return $time;
