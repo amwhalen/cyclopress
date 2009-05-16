@@ -195,7 +195,7 @@ class CYDBObject {
  */
 function cy_get_brief_ride($ride) {
 
-	$str = $ride['avg_speed'].' '.cy_speed_text($ride['avg_speed']) . ', ' . $ride['miles'].' '.cy_distance_text($ride['miles']) . ', ' . cy_minutes_human($ride['minutes']);
+	$str = $ride['avg_speed'].' '.cy_speed_text($ride['avg_speed']) . ', ' . $ride['miles'].' '.cy_distance_text($ride['miles']) . ', ' . cy_minutes_human($ride['minutes'], true);
 
 	return $str;
 
