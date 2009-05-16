@@ -224,8 +224,8 @@ function cy_get_summary($compare=false,$year=false) {
 	$str .= '<dt>Total Rides</dt> <dd>'.$stats['total_rides'].'</dd>';
 	$str .= '<dt>Total Distance</dt> <dd>'.round($stats['total_miles'],2).' miles</dd>';
 	$str .= '<dt>Average Ride Distance</dt> <dd>'.round($stats['total_miles']/$stats['total_rides'],2).' miles</dd>';
-	$str .= '<dt>Total Riding Time</dt> <dd>'.round($stats['total_time']/60,2).' hours</dd>';
-	$str .= '<dt>Average Ride Time</dt> <dd>'.round($stats['total_time']/$stats['total_rides'],2).' minutes</dd>';
+	$str .= '<dt>Total Riding Time</dt> <dd>'.cy_minutes_human($stats['total_time']).'</dd>';
+	$str .= '<dt>Average Ride Time</dt> <dd>'.cy_minutes_human($stats['total_time']/$stats['total_rides']).'</dd>';
 	$str .= '<dt>Average Overall Speed</dt> <dd>'.round($stats['avg_avg_speed'],2).' mph</dd>';
 	$str .= '<dt>Maximum Speed</dt> <dd>'.round($stats['max_max_speed'],2).' mph</dd>';
 	$str .= '</dl>';
@@ -250,8 +250,8 @@ function cy_get_summary_compare($year=false) {
 	$str .= '<dt>Total Rides</dt> <dd>'.$stats['total_rides'].' <small>('.$stats_now['total_rides'].' this year)</small></dd>';
 	$str .= '<dt>Total Distance</dt> <dd>'.round($stats['total_miles'],2).' miles <small>('.round($stats_now['total_miles'],2).' this year)</small></dd>';
 	$str .= '<dt>Average Ride Distance</dt> <dd>'.round($stats['total_miles']/$stats['total_rides'],2).' miles <small>('.round($stats_now['total_miles']/$stats_now['total_rides'],2).' this year)</small></dd>';
-	$str .= '<dt>Total Riding Time</dt> <dd>'.round($stats['total_time']/60,2).' hours <small>('.round($stats_now['total_time']/60,2).' this year)</small></dd>';
-	$str .= '<dt>Average Ride Time</dt> <dd>'.round($stats['total_time']/$stats['total_rides'],2).' minutes <small>('.round($stats_now['total_time']/$stats_now['total_rides'],2).' this year)</small></dd>';
+	$str .= '<dt>Total Riding Time</dt> <dd>'.cy_minutes_human($stats['total_time']).' <small>('.round($stats_now['total_time']/60,2).' this year)</small></dd>';
+	$str .= '<dt>Average Ride Time</dt> <dd>'.cy_minutes_human($stats['total_time']/$stats['total_rides']).' <small>('.round($stats_now['total_time']/$stats_now['total_rides'],2).' this year)</small></dd>';
 	$str .= '<dt>Average Overall Speed</dt> <dd>'.round($stats['avg_avg_speed'],2).' mph <small>('.round($stats_now['avg_avg_speed'],2).' this year)</small></dd>';
 	$str .= '<dt>Maximum Speed</dt> <dd>'.round($stats['max_max_speed'],2).' mph <small>('.round($stats_now['max_max_speed'],2).' this year)</small></dd>';
 	$str .= '</dl>';
@@ -1285,10 +1285,6 @@ function cy_manage_page() {
 					
 					foreach ($rides as $ride) {
 				
-						$hours = floor($ride['minutes']/60);
-						$minutes = floor($ride['minutes']%60);
-						$h_text = ($hours == 1) ? 'hour' : 'hours';
-						$m_text = ($minutes == 1) ? 'minute' : 'minutes';
 						$bike = cy_get_bike($ride['bike_id']);
 						
 						if ($i%2 == 0) {
@@ -1305,7 +1301,7 @@ function cy_manage_page() {
 							<td><?php echo $ride['avg_speed'] . ' '. cy_speed_text(); ?></td>
 							<td><?php echo $ride['max_speed'] . ' '. cy_speed_text(); ?></td>
 							<td><?php echo $ride['cadence']; ?> rpm</td>
-							<td><?php echo ($hours == 0) ? $ride['minutes'] . ' minutes' : $hours . ' '.$h_text.', ' . $minutes . ' '.$m_text; ?></td>
+							<td><?php echo cy_minutes_human($ride['minutes']); ?></td>
 							<td><?php echo $bike->label; ?></td>
 							<td><?php echo (strlen(trim(strip_tags($ride['notes']))) > 50) ? substr(trim(strip_tags($ride['notes'])), 0, 50).'...' : trim(strip_tags($ride['notes'])); ?></td>
 						</tr>
@@ -2233,6 +2229,26 @@ function cy_elevation_text($num=2) {
 		return ($num != 1) ? 'feet': 'foot';
 	}
 	
+}
+
+/**
+ * Converts minutes into a human readable format
+ */
+function cy_minutes_human($minutes) {
+
+	$hrs = floor($minutes / 60);
+	$mins = $minutes % 60;
+	$time = '';
+	if ($hrs != 0) {
+		$time .= ($hrs != 1) ? $hrs . ' hours' : $hrs . ' hour';
+	}
+	if ($mins != 0) {
+		$time .= ($hrs != 0) ? ', ' : '';
+		$time .= ($mins != 1) ? $mins . ' minutes' : $mins . ' minute';
+	}
+	
+	return $time;
+
 }
 
 /**
