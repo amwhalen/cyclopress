@@ -1418,7 +1418,7 @@ function cy_manage_calendar_page() {
 								<strong>Max Speed:</strong> <?php echo round($stats['ms'],1) .' '.cy_speed_text(); ?>
 							</td>
 							<td align="left" valign="top" class="cy_stats_cell">
-								<strong>Time:</strong> <?php echo ($stats['min'] > 60) ? round($stats['min']/60 ,2).' hrs' : round($stats['min'],2).' min'; ?>
+								<strong>Time:</strong> <?php echo cy_minutes_human($stats['min']); ?>
 							</td>
 						</tr>
 					</table>
