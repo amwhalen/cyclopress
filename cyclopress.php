@@ -2696,7 +2696,6 @@ function cy_bikes_sql() {
 				make VARCHAR(255) NULL ,
 				model VARCHAR(255) NULL ,
 				year INT(4) UNSIGNED NULL ,
-				default INT(1) UNSIGNED NOT NULL ,
 				notes TEXT NULL
 			);';
 	
