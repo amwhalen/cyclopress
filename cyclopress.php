@@ -2655,7 +2655,7 @@ function cy_rides_sql() {
 	$table_name = $wpdb->prefix . "cy_rides";
 
 	$sql  = 'CREATE TABLE '.$table_name.' (
-				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
 				startdate DATETIME NOT NULL ,
 				miles DOUBLE(6,2) NOT NULL ,
 				avg_speed DOUBLE(4,2) NULL ,
@@ -2674,7 +2674,8 @@ function cy_rides_sql() {
 				est_calories INT(5) NULL ,
 				bike_id INT(10) UNSIGNED NULL ,
 				type_id INT(10) UNSIGNED NULL ,
-				notes TEXT NULL
+				notes TEXT NULL,
+				PRIMARY KEY (id)
 			);';
 	
 	return $sql;
@@ -2691,12 +2692,13 @@ function cy_bikes_sql() {
 	$table_name = $wpdb->prefix . "cy_bikes";
 
 	$sql  = 'CREATE TABLE '.$table_name.' (
-				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
 				label VARCHAR(255) NOT NULL ,
 				make VARCHAR(255) NULL ,
 				model VARCHAR(255) NULL ,
 				year INT(4) UNSIGNED NULL ,
-				notes TEXT NULL
+				notes TEXT NULL,
+				PRIMARY KEY (id)
 			);';
 	
 	return $sql;
@@ -2713,10 +2715,11 @@ function cy_types_sql() {
 	$table_name = $wpdb->prefix . "cy_types";
 
 	$sql  = "CREATE TABLE ".$table_name." (
-				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT  PRIMARY KEY ,
+				id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
 				type ENUM('bike', 'ride') NOT NULL,
 				label VARCHAR(255) NOT NULL,
-				description TEXT NULL
+				description TEXT NULL,
+				PRIMARY KEY (id)
 			);";
 	
 	return $sql;
