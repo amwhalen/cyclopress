@@ -1945,7 +1945,8 @@ function cy_cycling_page() {
 		
 		} else {
 		
-			$page = get_post(get_option('cy_page_id'));
+			// $opt here fixes the "Only variables can be passed by reference" bug
+			$page = get_post($opt = get_option('cy_page_id'));
 		
 			if(!$page) {
 			
