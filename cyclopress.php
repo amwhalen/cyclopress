@@ -261,7 +261,7 @@ function cy_get_summary_compare($year=false) {
 	$str .= '<dt>Total Rides</dt> <dd>'.$stats['total_rides'].' <small>('.$stats_now['total_rides'].' this year)</small></dd>';
 	$str .= '<dt>Total Distance</dt> <dd>'.round($stats['total_miles'],2).' miles <small>('.round($stats_now['total_miles'],2).' this year)</small></dd>';
 	$str .= '<dt>Average Ride Distance</dt> <dd>'.round($stats['total_miles']/$stats['total_rides'],2).' miles <small>('.round($stats_now['total_miles']/$stats_now['total_rides'],2).' this year)</small></dd>';
-	$str .= '<dt>Total Riding Time</dt> <dd>'.cy_minutes_human($stats['total_time']).' <small>('.round($stats_now['total_time']/60,2).' this year)</small></dd>';
+	$str .= '<dt>Total Riding Time</dt> <dd>'.cy_minutes_human($stats['total_time']).' <small>('.cy_minutes_human($stats_now['total_time']).' this year)</small></dd>';
 	$str .= '<dt>Average Ride Time</dt> <dd>'.cy_minutes_human($stats['total_time']/$stats['total_rides']).' <small>('.round($stats_now['total_time']/$stats_now['total_rides'],2).' this year)</small></dd>';
 	$str .= '<dt>Average Overall Speed</dt> <dd>'.round($stats['avg_avg_speed'],2).' mph <small>('.round($stats_now['avg_avg_speed'],2).' this year)</small></dd>';
 	$str .= '<dt>Maximum Speed</dt> <dd>'.round($stats['max_max_speed'],2).' mph <small>('.round($stats_now['max_max_speed'],2).' this year)</small></dd>';
@@ -1368,7 +1368,7 @@ function cy_manage_calendar_page() {
 	$rides = $wpdb->get_results($sql, ARRAY_A);
 
 	// sql for total miles this month
-	$sql  = 'select sum(miles) as m, avg(avg_speed) as s, avg(minutes) as min, sum(est_calories) as c, max(max_speed) as ms from '.$table_name.' where month(startdate)='.$month.' and year(startdate)='.$year;
+	$sql  = 'select sum(miles) as m, avg(avg_speed) as s, sum(minutes) as min, sum(est_calories) as c, max(max_speed) as ms from '.$table_name.' where month(startdate)='.$month.' and year(startdate)='.$year;
 	$stats_array = $wpdb->get_results($sql, ARRAY_A);
 
 	?>
