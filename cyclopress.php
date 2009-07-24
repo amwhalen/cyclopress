@@ -1010,7 +1010,7 @@ function cy_write_page($ride=false) {
 			  <tr>
 				<th width="33%" scope="row" style="text-align: right;">*Date:</th>
 				<td>
-					<select name="month">
+					<select name="month" tabindex="1">
 						<?PHP
 							for ($i = 1; $i <= 12; $i++) {
 								if ($i == $ride->month || $i == '0'.$ride->month) {
@@ -1027,7 +1027,7 @@ function cy_write_page($ride=false) {
 							}
 						?>
 					</select>
-					<select name="day">
+					<select name="day" tabindex="2">
 						<?PHP
 							for ($i = 1; $i <= 31; $i++) {
 								if ($i == $ride->day || $i == '0'.$ride->day) {
@@ -1044,7 +1044,7 @@ function cy_write_page($ride=false) {
 							}
 						?>
 					</select>
-					<select name="year">
+					<select name="year" tabindex="3">
 						<?PHP
 							for ($i = 2002; $i <= date('Y')+2; $i++) {
 								if ($i == $ride->year) {
@@ -1060,7 +1060,7 @@ function cy_write_page($ride=false) {
 			  </tr>
 			  <th width="33%" scope="row" style="text-align: right;">Time:</th>
 				<td>
-					<select name="hour">
+					<select name="hour" tabindex="4">
 						<option value=""></option>
 						<?PHP
 							for ($i = 1; $i <= 12; $i++) {
@@ -1073,7 +1073,7 @@ function cy_write_page($ride=false) {
 							}
 						?>
 					</select>
-					<select name="minute">
+					<select name="minute" tabindex="5">
 						<option value=""></option>
 						<?PHP
 							for ($i = 0; $i < 60; $i+=5) {
@@ -1091,7 +1091,7 @@ function cy_write_page($ride=false) {
 							}
 						?>
 					</select>
-					<select name="ampm">
+					<select name="ampm" tabindex="6">
 						<option value="am"<?php if ($ride->ampm=='am') { echo ' selected="selected"'; } ?>>am</option>
 						<option value="pm"<?php if ($ride->ampm=='pm') { echo ' selected="selected"'; } ?>>pm</option>
 					</select>
@@ -1100,7 +1100,7 @@ function cy_write_page($ride=false) {
 			  <tr>
 			  	<th width="33%" scope="row" style="text-align: right;">Bike:</th>
 			  	<td>
-			  		<select name="bike_id">
+			  		<select name="bike_id" tabindex="7">
 						<option value="">Unknown</option>
 						<?PHP
 							$b = new CYBike();
@@ -1119,70 +1119,70 @@ function cy_write_page($ride=false) {
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">*Distance:</th>
-				<td><input type="text" name="miles" id="miles" size="5" value="<?php echo htmlentities(stripslashes($ride->miles)); ?>" /> <?php echo cy_distance_text($ride->miles); ?></td>
+				<td><input type="text" tabindex="8" name="miles" id="miles" size="5" value="<?php echo htmlentities(stripslashes($ride->miles)); ?>" /> <?php echo cy_distance_text($ride->miles); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">*Time:</th>
-				<td><input type="text" name="minutes" id="minutes" size="5" value="<?php echo htmlentities(stripslashes($ride->minutes)); ?>" /> minutes</td>
+				<td><input type="text" tabindex="9" name="minutes" id="minutes" size="5" value="<?php echo htmlentities(stripslashes($ride->minutes)); ?>" /> minutes</td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Average Speed:</th>
-				<td><input type="text" name="avg_speed" id="avg_speed" size="5" value="<?php echo htmlentities(stripslashes($ride->avg_speed)); ?>" /> <?php echo cy_speed_text($ride->avg_speed); ?></td>
+				<td><input type="text" tabindex="10" name="avg_speed" id="avg_speed" size="5" value="<?php echo htmlentities(stripslashes($ride->avg_speed)); ?>" /> <?php echo cy_speed_text($ride->avg_speed); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Maximum Speed:</th>
-				<td><input type="text" name="max_speed" id="max_speed" size="5" value="<?php echo htmlentities(stripslashes($ride->max_speed)); ?>" /> <?php echo cy_speed_text($ride->avg_speed); ?></td>
+				<td><input type="text" tabindex="11" name="max_speed" id="max_speed" size="5" value="<?php echo htmlentities(stripslashes($ride->max_speed)); ?>" /> <?php echo cy_speed_text($ride->avg_speed); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Cadence:</th>
-				<td><input type="text" name="cadence" id="cadence" size="5" value="<?php echo htmlentities(stripslashes($ride->cadence)); ?>" /> rpm</td>
+				<td><input type="text" tabindex="12" name="cadence" id="cadence" size="5" value="<?php echo htmlentities(stripslashes($ride->cadence)); ?>" /> rpm</td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Average Heart Rate:</th>
-				<td><input type="text" name="avg_hr" id="avg_hr" size="5" value="<?php echo htmlentities(stripslashes($ride->avg_hr)); ?>" /> bpm</td>
+				<td><input type="text" tabindex="13" name="avg_hr" id="avg_hr" size="5" value="<?php echo htmlentities(stripslashes($ride->avg_hr)); ?>" /> bpm</td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Maximum Heart Rate:</th>
-				<td><input type="text" name="max_hr" id="max_hr" size="5" value="<?php echo htmlentities(stripslashes($ride->max_hr)); ?>" /> bpm</td>
+				<td><input type="text" tabindex="14" name="max_hr" id="max_hr" size="5" value="<?php echo htmlentities(stripslashes($ride->max_hr)); ?>" /> bpm</td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Average Watts:</th>
-				<td><input type="text" name="avg_watts" id="avg_watts" size="5" value="<?php echo htmlentities(stripslashes($ride->avg_watts)); ?>" /> watts</td>
+				<td><input type="text" tabindex="15" name="avg_watts" id="avg_watts" size="5" value="<?php echo htmlentities(stripslashes($ride->avg_watts)); ?>" /> watts</td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Maximum Watts:</th>
-				<td><input type="text" name="max_watts" id="max_watts" size="5" value="<?php echo htmlentities(stripslashes($ride->max_watts)); ?>" /> watts</td>
+				<td><input type="text" tabindex="16" name="max_watts" id="max_watts" size="5" value="<?php echo htmlentities(stripslashes($ride->max_watts)); ?>" /> watts</td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Elevation Gain:</th>
-				<td><input type="text" name="elevation_gain" id="elevation_gain" size="7" value="<?php echo htmlentities(stripslashes($ride->elevation_gain)); ?>" /> <?php echo cy_elevation_text($ride->elevation_gain); ?></td>
+				<td><input type="text" tabindex="17" name="elevation_gain" id="elevation_gain" size="7" value="<?php echo htmlentities(stripslashes($ride->elevation_gain)); ?>" /> <?php echo cy_elevation_text($ride->elevation_gain); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Elevation Loss:</th>
-				<td><input type="text" name="elevation_loss" id="elevation_loss" size="7" value="<?php echo htmlentities(stripslashes($ride->elevation_loss)); ?>" /> <?php echo cy_elevation_text($ride->elevation_loss); ?></td>
+				<td><input type="text" tabindex="18" name="elevation_loss" id="elevation_loss" size="7" value="<?php echo htmlentities(stripslashes($ride->elevation_loss)); ?>" /> <?php echo cy_elevation_text($ride->elevation_loss); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Max Elevation:</th>
-				<td><input type="text" name="max_elevation" id="max_elevation" size="7" value="<?php echo htmlentities(stripslashes($ride->max_elevation)); ?>" /> <?php echo cy_elevation_text($ride->max_elevation); ?></td>
+				<td><input type="text" tabindex="19" name="max_elevation" id="max_elevation" size="7" value="<?php echo htmlentities(stripslashes($ride->max_elevation)); ?>" /> <?php echo cy_elevation_text($ride->max_elevation); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Min Elevation:</th>
-				<td><input type="text" name="min_elevation" id="min_elevation" size="7" value="<?php echo htmlentities(stripslashes($ride->min_elevation)); ?>" /> <?php echo cy_elevation_text($ride->min_elevation); ?></td>
+				<td><input type="text" tabindex="20" name="min_elevation" id="min_elevation" size="7" value="<?php echo htmlentities(stripslashes($ride->min_elevation)); ?>" /> <?php echo cy_elevation_text($ride->min_elevation); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Weight:</th>
-				<td><input type="text" name="weight" id="weight" size="5" value="<?php echo htmlentities(stripslashes($ride->weight)); ?>" /> <?php echo cy_weight_text($ride->weight); ?></td>
+				<td><input type="text" tabindex="21" name="weight" id="weight" size="5" value="<?php echo htmlentities(stripslashes($ride->weight)); ?>" /> <?php echo cy_weight_text($ride->weight); ?></td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Estimated Calories Burned:</th>
-				<td><input type="text" name="est_calories" id="est_calories" size="5" value="<?php echo htmlentities(stripslashes($ride->est_calories)); ?>" /> kcal</td>
+				<td><input type="text" tabindex="22" name="est_calories" id="est_calories" size="5" value="<?php echo htmlentities(stripslashes($ride->est_calories)); ?>" /> kcal</td>
 			  </tr>
 			  <tr valign="top">
 				<th scope="row" style="text-align: right;">Notes:</th>
-				<td><textarea name="notes" rows="10" cols="50"><?php echo htmlentities(stripslashes($ride->notes)); ?></textarea></td>
+				<td><textarea tabindex="23" name="notes" rows="10" cols="50"><?php echo htmlentities(stripslashes($ride->notes)); ?></textarea></td>
 			  </tr>
 			</table>
-			<p class="submit"><input type="submit" name="Submit" value="Save" style="font-weight: bold;" /></p>
+			<p class="submit"><input tabindex="24" type="submit" name="Submit" value="Save" style="font-weight: bold;" /></p>
 		</form>
 		
 	</div>
