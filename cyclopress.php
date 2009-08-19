@@ -31,7 +31,7 @@ $cy_db_version = '2.0';
 //$cy_db_version = rand(0,1);
 $cy_graph_dir = 'graphs';
 $cy_graph_dir_full = dirname(__FILE__).'/'.$cy_graph_dir;
-$cy_dir = get_bloginfo('url').'/wp-content/plugins/'.basename(dirname(__FILE__));
+$cy_dir = get_option('siteurl').'/wp-content/plugins/'.basename(dirname(__FILE__));
 $cy_src_dir = $cy_dir.'/'.$cy_graph_dir;
 
 
@@ -632,7 +632,7 @@ function cy_admin_navigation($current_page='', $current_subpage='') {
 
 	cy_check_version();
 
-	$wp_url = get_bloginfo('url');
+	$wp_url = get_option('siteurl');
 
 	$links = array(
 		'manage' => array(
@@ -1974,7 +1974,7 @@ function cy_cycling_page() {
 			
 				?>
 				
-				<p><a href="<?php echo get_bloginfo('url').'/?p='.get_option('cy_page_id'); ?>">View cycling page &raquo;</a></p>
+				<p><a href="<?php echo get_option('siteurl').'/?p='.get_option('cy_page_id'); ?>">View cycling page &raquo;</a></p>
 				
 				<p><strong>Never modify your cycling page from elsewhere unless you know what you're doing.</strong> It contains some PHP to show your stats, and unless you have a PHP plugin for WordPress, you may garble the code by editing the page.</p>
 				
