@@ -2220,7 +2220,7 @@ function cy_speed_text($num=2) {
 	if (get_option('cy_unit') == 'mile') {
 		return 'mph';
 	} else if (get_option('cy_unit') == 'kilometer') {
-		return 'kmh';
+		return 'kph';
 	} else {
 		return 'mph';
 	}
