@@ -2,8 +2,8 @@
 Contributors: anukit
 Tags: cycling, graphs, sports, exercise, jpgraph, gd
 Requires at least: 2.5
-Tested up to: 2.8.2
-Stable tag: 1.4.6
+Tested up to: 2.8.4
+Stable tag: 1.4.7
 
 Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
