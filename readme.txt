@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: anukit
-Tags: cycling, graphs, sports, exercise, jpgraph, gd
+Tags: cycling, cyclocomputer, bike, bicycle, sports, exercise
 Requires at least: 2.5
 Tested up to: 2.8.4
-Stable tag: 1.4.8
+Stable tag: 1.4.9
 
 Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
@@ -11,6 +11,7 @@ Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
 CycloPress allows you to track your cycling statistics from a cyclocomputer with WordPress.
 You can even create a page in your blog to show your cycling stats and graphs.
+Store information about multiple bicycles and compare your progress from year to year.
 
 The GD library must be installed on your web server. After you activate CycloPress
 you can see what version of GD (if any) you have installed by checking the CycloPress Debug page.
