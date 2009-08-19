@@ -231,14 +231,19 @@ function cy_get_summary($compare=false,$year=false) {
 	
 	if (!$stats) return false;
 
+	$tot_dist = round($stats['total_miles'],2);
+	$avg_dist = round($stats['total_miles']/$stats['total_rides'],2);
+	$avg_speed = round($stats['avg_avg_speed'],2);
+	$max_speed = round($stats['max_max_speed'],2);
+
 	$str  = '<dl class="cy">';
 	$str .= '<dt>Total Rides</dt> <dd>'.$stats['total_rides'].'</dd>';
-	$str .= '<dt>Total Distance</dt> <dd>'.round($stats['total_miles'],2).' miles</dd>';
-	$str .= '<dt>Average Ride Distance</dt> <dd>'.round($stats['total_miles']/$stats['total_rides'],2).' miles</dd>';
+	$str .= '<dt>Total Distance</dt> <dd>'.$tot_dist.' '.cy_distance_text($tot_dist).'</dd>';
+	$str .= '<dt>Average Ride Distance</dt> <dd>'.$avg_dist.' '.cy_distance_text($avg_dist).'</dd>';
 	$str .= '<dt>Total Riding Time</dt> <dd>'.cy_minutes_human($stats['total_time']).'</dd>';
 	$str .= '<dt>Average Ride Time</dt> <dd>'.cy_minutes_human($stats['total_time']/$stats['total_rides']).'</dd>';
-	$str .= '<dt>Average Overall Speed</dt> <dd>'.round($stats['avg_avg_speed'],2).' mph</dd>';
-	$str .= '<dt>Maximum Speed</dt> <dd>'.round($stats['max_max_speed'],2).' mph</dd>';
+	$str .= '<dt>Average Overall Speed</dt> <dd>'.$avg_speed.' '.cy_speed_text($avg_speed).'</dd>';
+	$str .= '<dt>Maximum Speed</dt> <dd>'.$max_speed.' '.cy_speed_text($max_speed).'</dd>';
 	$str .= '</dl>';
 
 	return $str;
@@ -257,14 +262,23 @@ function cy_get_summary_compare($year=false) {
 	
 	if (!$stats) return false;
 
+	$tot_dist = round($stats['total_miles'],2);
+	$tot_dist_now = round($stats_now['total_miles'],2);
+	$avg_dist = round($stats['total_miles']/$stats['total_rides'],2);
+	$avg_dist_now = round($stats_now['total_miles']/$stats_now['total_rides'],2);
+	$avg_speed = round($stats['avg_avg_speed'],2);
+	$avg_speed_now = round($stats_now['avg_avg_speed'],2);
+	$max_speed = round($stats['max_max_speed'],2);
+	$max_speed_now = round($stats_now['max_max_speed'],2);
+
 	$str  = '<dl class="cy">';
 	$str .= '<dt>Total Rides</dt> <dd>'.$stats['total_rides'].' <small>('.$stats_now['total_rides'].' this year)</small></dd>';
-	$str .= '<dt>Total Distance</dt> <dd>'.round($stats['total_miles'],2).' miles <small>('.round($stats_now['total_miles'],2).' this year)</small></dd>';
-	$str .= '<dt>Average Ride Distance</dt> <dd>'.round($stats['total_miles']/$stats['total_rides'],2).' miles <small>('.round($stats_now['total_miles']/$stats_now['total_rides'],2).' this year)</small></dd>';
+	$str .= '<dt>Total Distance</dt> <dd>'.$tot_dist.' '.cy_distance_text($tot_dist).' <small>('.$tot_dist_now.' this year)</small></dd>';
+	$str .= '<dt>Average Ride Distance</dt> <dd>'.$avg_dist.' '.cy_distance_text($avg_dist_now).' <small>('.$avg_dist_now.' this year)</small></dd>';
 	$str .= '<dt>Total Riding Time</dt> <dd>'.cy_minutes_human($stats['total_time']).' <small>('.cy_minutes_human($stats_now['total_time']).' this year)</small></dd>';
 	$str .= '<dt>Average Ride Time</dt> <dd>'.cy_minutes_human($stats['total_time']/$stats['total_rides']).' <small>('.round($stats_now['total_time']/$stats_now['total_rides'],2).' this year)</small></dd>';
-	$str .= '<dt>Average Overall Speed</dt> <dd>'.round($stats['avg_avg_speed'],2).' mph <small>('.round($stats_now['avg_avg_speed'],2).' this year)</small></dd>';
-	$str .= '<dt>Maximum Speed</dt> <dd>'.round($stats['max_max_speed'],2).' mph <small>('.round($stats_now['max_max_speed'],2).' this year)</small></dd>';
+	$str .= '<dt>Average Overall Speed</dt> <dd>'.$avg_speed.' '.cy_speed_text($avg_speed).' <small>('.$avg_speed_now.' this year)</small></dd>';
+	$str .= '<dt>Maximum Speed</dt> <dd>'.$max_speed.' '.cy_speed_text($max_speed).' <small>('.$max_speed_now.' this year)</small></dd>';
 	$str .= '</dl>';
 
 	return $str;
