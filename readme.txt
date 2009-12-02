@@ -2,8 +2,8 @@
 Contributors: anukit
 Tags: cycling, cyclocomputer, bike, bicycle, sports, exercise
 Requires at least: 2.5
-Tested up to: 2.8.4
-Stable tag: 1.4.9
+Tested up to: 2.9
+Stable tag: 1.5.0
 
 Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
@@ -22,7 +22,7 @@ you can see what version of GD (if any) you have installed by checking the Cyclo
 
 * WordPress version 2.5 or higher. CycloPress may work with older versions, but it is not suggested.
 * PHP version 4.3.1 or higher.
-* GD Library.
+* GD Library for PHP.
 
 = Installation =
 
