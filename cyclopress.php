@@ -235,7 +235,7 @@ function cy_get_summary($compare=false,$year=false) {
 	$avg_dist = round($stats['total_miles']/$stats['total_rides'],2);
 	$avg_speed = round($stats['avg_avg_speed'],2);
 	$max_speed = round($stats['max_max_speed'],2);
-	$avg_time = ($stats['total_rides'] == 0) ? 0 : cy_minutes_human($stats['total_time']/$stats['total_rides']);
+	$avg_time = ($stats['total_rides'] == 0) ? cy_minutes_human(0) : cy_minutes_human($stats['total_time']/$stats['total_rides']);
 
 	$str  = '<dl class="cy">';
 	$str .= '<dt>Total Rides</dt> <dd>'.$stats['total_rides'].'</dd>';
@@ -271,8 +271,8 @@ function cy_get_summary_compare($year=false) {
 	$avg_speed_now = round($stats_now['avg_avg_speed'],2);
 	$max_speed = round($stats['max_max_speed'],2);
 	$max_speed_now = round($stats_now['max_max_speed'],2);
-	$average_ride_time = ($stats['total_rides'] == 0) ? 0 : cy_minutes_human($stats['total_time']/$stats['total_rides']);
-	$average_ride_time_now = ($stats_now['total_rides'] == 0) ? 0 : cy_minutes_human($stats_now['total_time']/$stats_now['total_rides']);
+	$average_ride_time = ($stats['total_rides'] == 0) ? cy_minutes_human(0) : cy_minutes_human($stats['total_time']/$stats['total_rides']);
+	$average_ride_time_now = ($stats_now['total_rides'] == 0) ? cy_minutes_human(0) : cy_minutes_human($stats_now['total_time']/$stats_now['total_rides']);
 
 	$str  = '<dl class="cy">';
 	$str .= '<dt>Total Rides</dt> <dd>'.$stats['total_rides'].' <small>('.$stats_now['total_rides'].' this year)</small></dd>';
