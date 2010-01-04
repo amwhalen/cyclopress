@@ -3,7 +3,7 @@ Contributors: anukit
 Tags: cycling, cyclocomputer, bike, bicycle, sports, exercise
 Requires at least: 2.5
 Tested up to: 2.9
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 
 Track cycling stats from your bike's cyclocomputer and make pretty graphs.
 
