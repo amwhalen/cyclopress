@@ -265,7 +265,7 @@ function cy_get_summary_compare($year=false) {
 
 	$tot_dist = round($stats['total_miles'],2);
 	$tot_dist_now = round($stats_now['total_miles'],2);
-	$avg_dist = ($stats_now['total_rides'] == 0) ? 0 : round($stats['total_miles']/$stats['total_rides'],2);
+	$avg_dist = ($stats['total_rides'] == 0) ? 0 : round($stats['total_miles']/$stats['total_rides'],2);
 	$avg_dist_now = ($stats_now['total_rides'] == 0) ? 0 : round($stats_now['total_miles']/$stats_now['total_rides'],2);
 	$avg_speed = round($stats['avg_avg_speed'],2);
 	$avg_speed_now = round($stats_now['avg_avg_speed'],2);
